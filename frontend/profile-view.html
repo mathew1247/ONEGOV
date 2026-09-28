@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="gov-tricolor-stripe"></div>
+
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="applications.html" class="nav-link">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link active">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; padding: 32px 0 60px;">
+    <div class="container container-narrow">
+
+      <!-- Profile Header Hero -->
+      <div class="card" style="margin-bottom: 28px; background: linear-gradient(135deg, #FFFFFF 0%, var(--bg-page) 100%);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div id="profile-large-avatar" style="width: 72px; height: 72px; border-radius: 50%; background: var(--civic-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; box-shadow: 0 4px 14px rgba(29, 78, 216, 0.3);">
+              J
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h1 id="view-profile-name" style="font-size: 1.85rem;">Jack Mathew</h1>
+                <span class="badge badge-emerald">✓ VERIFIED CITIZEN</span>
+              </div>
+              <p id="view-profile-category-tag" style="font-size: 0.95rem; font-weight: 600; color: var(--civic-blue); margin-top: 2px;">
+                Category: Student
+              </p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px;">
+            <a href="profile.html" class="btn btn-secondary btn-sm">
+              ✏️ Edit Profile
+            </a>
+            <a href="consent-management.html" class="btn btn-outline btn-sm">
+              🛡️ Manage Consent
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Information Section -->
+      <div class="card" style="margin-bottom: 24px;">
+        <h3 class="details-section-title">Personal Information</h3>
+        
+        <div class="form-grid-2" style="margin-top: 16px;">
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Full Name</div>
+            <div id="view-name" style="font-size: 1rem; font-weight: 600; color: var(--text-navy-primary); margin-top: 2px;">Jack Mathew</div>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Date of Birth</div>
+            <div id="view-dob" style="font-size: 1rem; font-weight: 600; color: var(--text-navy-primary); margin-top: 2px;">2003-05-14</div>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Mobile Number</div>
+            <div id="view-mobile" style="font-size: 1rem; font-weight: 600; color: var(--text-navy-primary); margin-top: 2px;">+91 98765 43210</div>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Email Address</div>
+            <div id="view-email" style="font-size: 1rem; font-weight: 600; color: var(--text-navy-primary); margin-top: 2px;">jack.mathew@demo.onegov.in</div>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">State & District</div>
+            <div id="view-location" style="font-size: 1rem; font-weight: 600; color: var(--text-navy-primary); margin-top: 2px;">Tamil Nadu, Chennai</div>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Pincode</div>
+            <div id="view-pincode" style="font-size: 1rem; font-weight: 600; color: var(--text-navy-primary); margin-top: 2px;">600025</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Specific Information Section -->
+      <div class="card" style="margin-bottom: 24px;">
+        <h3 class="details-section-title" id="view-category-section-title">Education & Academic Information</h3>
+        <div id="view-category-details-container" style="margin-top: 16px;">
+          <!-- Rendered by profile-view.js -->
+        </div>
+      </div>
+
+      <!-- Skills & Interests Section -->
+      <div class="card">
+        <h3 class="details-section-title">Skills & Interests</h3>
+        <div id="view-skills-container" style="margin-top: 16px;">
+          <!-- Rendered by profile-view.js -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/profile-view.js"></script>
+</body>
+</html>

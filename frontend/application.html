@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Review — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="gov-tricolor-stripe"></div>
+
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link active">Services</a></li>
+          <li><a href="applications.html" class="nav-link">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; padding: 32px 0 60px;">
+    <div class="container container-narrow">
+
+      <!-- Step Progress Indicator -->
+      <div class="step-progress-wrapper">
+        <div class="step-progress-header">
+          <span class="step-count">Step 4 of 4 &bull; Final Submission</span>
+          <span class="badge badge-emerald">Ready to Submit</span>
+        </div>
+        <div class="step-progress-bar">
+          <div class="step-progress-fill" style="width: 100%;"></div>
+        </div>
+        <ul class="step-indicators-list">
+          <li class="step-item completed">
+            <span class="step-bullet">✓</span>
+            <span>Category</span>
+          </li>
+          <li class="step-item completed">
+            <span class="step-bullet">✓</span>
+            <span>Profile Details</span>
+          </li>
+          <li class="step-item completed">
+            <span class="step-bullet">✓</span>
+            <span>Consent</span>
+          </li>
+          <li class="step-item active">
+            <span class="step-bullet">4</span>
+            <span>Application</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Application Review Card -->
+      <div class="card">
+        
+        <div class="page-header" style="padding-top: 0; padding-bottom: 20px;">
+          <h1 class="page-title" style="font-size: 1.85rem;">Application Summary</h1>
+          <p class="page-subtitle">Review your unified application details before launching cross-department verification.</p>
+        </div>
+
+        <!-- Applicant & Service Summary Details -->
+        <div style="background: var(--bg-page); border: 1px solid #E2E8F0; border-radius: var(--radius-md); padding: 24px; margin-bottom: 24px;">
+          <div class="form-grid-2">
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Applicant Name</div>
+              <div id="app-applicant-name" style="font-size: 1.15rem; font-weight: 800; color: var(--text-navy-primary); margin-top: 2px;">Jack Mathew</div>
+              <div id="app-applicant-state" style="font-size: 0.88rem; color: var(--text-muted);">Tamil Nadu &bull; Chennai (600025)</div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Target Service</div>
+              <div id="app-service-name" style="font-size: 1.15rem; font-weight: 800; color: var(--civic-blue); margin-top: 2px;">Scholarship Assistance (NSP)</div>
+              <div id="app-category-name" style="font-size: 0.88rem; color: var(--text-muted);">Category: Student Welfare</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-System Verification Sequence Checklist -->
+        <h3 style="font-size: 1.1rem; margin-bottom: 16px;">Automated Interoperability Verification Checklist:</h3>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: var(--radius-sm);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="color: var(--accent-emerald); font-weight: 800;">✓</span>
+              <span style="font-size: 0.95rem; font-weight: 600; color: #065F46;">Profile Demographics & Digital Identifier Match</span>
+            </div>
+            <span class="badge badge-emerald">Verified</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: var(--radius-sm);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="color: var(--civic-blue); font-weight: 800;">⏳</span>
+              <span style="font-size: 0.95rem; font-weight: 600; color: #1E3A8A;">Education System Verification (NAD Academic Depository)</span>
+            </div>
+            <span class="badge badge-blue">Ready to Dispatch</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: var(--radius-sm);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="color: var(--civic-blue); font-weight: 800;">⏳</span>
+              <span style="font-size: 0.95rem; font-weight: 600; color: #1E3A8A;">Income & Revenue System Assessment Check</span>
+            </div>
+            <span class="badge badge-blue">Ready to Dispatch</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-sm);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="color: var(--text-muted); font-weight: 800;">○</span>
+              <span style="font-size: 0.95rem; font-weight: 600; color: var(--text-navy-secondary);">Scheme Eligibility Rules Engine Evaluation</span>
+            </div>
+            <span class="badge badge-muted">Pending Previous Stages</span>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid #E2E8F0;">
+          <a href="consent.html" class="btn btn-secondary">
+            ← Back to Consent
+          </a>
+          <button id="submit-application-btn" class="btn btn-primary btn-lg">
+            🚀 Submit Application & Launch Verifications
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/application.js"></script>
+</body>
+</html>

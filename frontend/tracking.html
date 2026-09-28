@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Tracking — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="gov-tricolor-stripe"></div>
+
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="applications.html" class="nav-link active">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; padding: 32px 0 60px;">
+    <div class="container">
+
+      <!-- Breadcrumbs -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <a href="applications.html" style="font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+          ← Back to All Applications
+        </a>
+        <span class="badge badge-blue">Simulated Department System Telemetry</span>
+      </div>
+
+      <!-- Application Tracking Header Card -->
+      <div class="card" style="margin-bottom: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Tracking Reference ID</div>
+            <h1 id="track-app-id" style="font-size: 1.85rem; font-family: monospace; color: var(--civic-blue); margin: 2px 0 6px;">ONE-2026-00124</h1>
+            <p id="track-service-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-navy-primary);">Scholarship Assistance (NSP)</p>
+          </div>
+
+          <div style="text-align: right;">
+            <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Current Overall Status</div>
+            <div id="track-overall-status" style="margin-top: 4px;">
+              <span class="badge badge-amber" style="font-size: 0.9rem; padding: 6px 14px;">⏳ IN PROGRESS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 Column Layout: Pipeline & Connected Systems -->
+      <div class="service-details-layout">
+        
+        <!-- Left: Vertical Timeline -->
+        <div>
+          <div class="card">
+            <h3 style="font-size: 1.25rem; margin-bottom: 20px;">Cross-System Verification Pipeline</h3>
+
+            <div class="tracking-timeline" id="tracking-timeline-container">
+              <!-- Rendered by tracking.js -->
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 1px solid #E2E8F0;">
+              <button id="simulate-step-forward-btn" class="btn btn-secondary btn-sm">
+                ⚡ Simulate Next Verification Step
+              </button>
+              <button id="refresh-track-btn" class="btn btn-outline btn-sm">
+                🔄 Refresh Status
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Connected Systems Health Box -->
+        <div>
+          <div class="card">
+            <h3 style="font-size: 1.15rem; margin-bottom: 16px;">Connected Systems</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+              Real-time adapter polling across participating government registries.
+            </p>
+
+            <div id="connected-systems-list" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+              <!-- Rendered by tracking.js -->
+            </div>
+
+            <div class="alert alert-info" style="margin-bottom: 0; font-size: 0.82rem;">
+              <span>ℹ️</span>
+              <div>
+                <strong>Interoperability Layer Note:</strong> ONEGOV middleware automatically checks schema mappings and handles circuit breaker retries if any department registry experiences latency.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/tracking.js"></script>
+</body>
+</html>

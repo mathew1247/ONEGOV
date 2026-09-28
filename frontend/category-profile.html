@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category Details — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="gov-tricolor-stripe"></div>
+
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="applications.html" class="nav-link">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; padding: 32px 0 60px;">
+    <div class="container container-narrow">
+
+      <!-- Step Progress Indicator -->
+      <div class="step-progress-wrapper">
+        <div class="step-progress-header">
+          <span class="step-count">Step 2 of 4 &bull; Category Details</span>
+          <span class="badge badge-blue" id="category-type-pill">Student</span>
+        </div>
+        <div class="step-progress-bar">
+          <div class="step-progress-fill" style="width: 50%;"></div>
+        </div>
+        <ul class="step-indicators-list">
+          <li class="step-item completed">
+            <span class="step-bullet">✓</span>
+            <span>Category</span>
+          </li>
+          <li class="step-item active">
+            <span class="step-bullet">2</span>
+            <span>Profile Details</span>
+          </li>
+          <li class="step-item">
+            <span class="step-bullet">3</span>
+            <span>Services</span>
+          </li>
+          <li class="step-item">
+            <span class="step-bullet">4</span>
+            <span>Application</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Dynamic Form Card -->
+      <div class="card">
+        <div class="page-header" style="padding-top: 0; padding-bottom: 20px;">
+          <h1 class="page-title" id="category-page-title" style="font-size: 1.85rem;">Academic & Career Details</h1>
+          <p class="page-subtitle" id="category-page-subtitle">These details help the ONEGOV middleware automatically match grants and schemes.</p>
+        </div>
+
+        <form id="dynamic-category-form">
+          <!-- Dynamic Content Rendered by category-profile.js -->
+          <div id="dynamic-fields-container"></div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 20px; border-top: 1px solid #E2E8F0;">
+            <a href="profile.html" class="btn btn-secondary">
+              ← Back to Basic Profile
+            </a>
+            <button type="submit" class="btn btn-primary btn-lg">
+              Explore Matched Services →
+            </button>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/category-profile.js"></script>
+</body>
+</html>

@@ -10,5 +10,12 @@ backend/.env
 .DS_Store
 *.log
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+backend/__pycache__/
+
 # Credentials and secrets
 backend/Notifications/*.json

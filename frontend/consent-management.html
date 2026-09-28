@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consent Management — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="gov-tricolor-stripe"></div>
+
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="applications.html" class="nav-link">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; padding: 32px 0 60px;">
+    <div class="container container-narrow">
+
+      <div class="page-header" style="padding-top: 0; padding-bottom: 24px;">
+        <span class="badge badge-emerald" style="margin-bottom: 8px;">DPDP ACT 2023 PRIVACY DASHBOARD</span>
+        <h1 class="page-title">Consent Management</h1>
+        <p class="page-subtitle">You have sovereign control over which government department systems can access your personal data tokens.</p>
+      </div>
+
+      <div class="alert alert-info" style="margin-bottom: 28px;">
+        <span>🛡️</span>
+        <div>
+          <strong>Granular Data Revocation:</strong> Revoking consent immediately cuts off the ONEGOV middleware connector from requesting fresh data items from that specific department system.
+        </div>
+      </div>
+
+      <div id="consent-managers-list" style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- Rendered by consent-management.js -->
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/consent-management.js"></script>
+</body>
+</html>

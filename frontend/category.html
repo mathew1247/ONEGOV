@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Category — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="gov-tricolor-stripe"></div>
+  
+  <!-- Global Header Navigation -->
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="applications.html" class="nav-link">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; padding: 40px 0 60px;">
+    <div class="container">
+      
+      <!-- Page Header -->
+      <div class="page-header" style="text-align: center; padding-top: 10px;">
+        <h1 class="page-title">How can we help you today?</h1>
+        <p class="page-subtitle" style="margin: 0 auto;">Select your profile to discover services relevant to you.</p>
+      </div>
+
+      <!-- 4 Category Selection Cards -->
+      <div class="category-grid">
+        
+        <!-- 1. Students -->
+        <div class="category-card student" data-category="student">
+          <div class="category-header">
+            <div class="category-icon-box">🎓</div>
+            <span class="category-tag">Students & Scholars</span>
+          </div>
+          <h3 class="category-title">Students</h3>
+          <p class="category-desc">
+            Education, scholarships, training, academic depository synchronization and career placement services.
+          </p>
+          <div class="category-footer-action">
+            <span>Explore Student Services</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- 2. Employed -->
+        <div class="category-card employed" data-category="employed">
+          <div class="category-header">
+            <div class="category-icon-box">💼</div>
+            <span class="category-tag">Employed & Professionals</span>
+          </div>
+          <h3 class="category-title">Employed</h3>
+          <p class="category-desc">
+            Employee welfare, upskilling grants, healthcare benefits, EPF linkage, and entrepreneurship venture support.
+          </p>
+          <div class="category-footer-action">
+            <span>Explore Employee Services</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- 3. Unemployed -->
+        <div class="category-card unemployed" data-category="unemployed">
+          <div class="category-header">
+            <div class="category-icon-box">🌱</div>
+            <span class="category-tag">Job Seekers</span>
+          </div>
+          <h3 class="category-title">Unemployed</h3>
+          <p class="category-desc">
+            Jobs, employment schemes, vocational skill training, financial livelihood allowances and placement support.
+          </p>
+          <div class="category-footer-action">
+            <span>Explore Job Seeker Services</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- 4. Common Services -->
+        <div class="category-card common" data-category="common">
+          <div class="category-header">
+            <div class="category-icon-box">📜</div>
+            <span class="category-tag">All Citizens</span>
+          </div>
+          <h3 class="category-title">Common Services</h3>
+          <p class="category-desc">
+            Certificates, government documents, public grievances, land records, and general civic municipal services.
+          </p>
+          <div class="category-footer-action">
+            <span>Explore Common Services</span>
+            <span>→</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/category.js"></script>
+</body>
+</html>

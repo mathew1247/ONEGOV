@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services For You — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="gov-tricolor-stripe"></div>
+
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link active">Services</a></li>
+          <li><a href="applications.html" class="nav-link">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; padding: 32px 0 60px;">
+    <div class="container">
+      
+      <!-- Welcome Header -->
+      <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; padding-bottom: 24px;">
+        <div>
+          <span class="badge badge-blue" id="user-category-tag" style="margin-bottom: 10px;">STUDENT PROFILE</span>
+          <h1 class="page-title" id="welcome-user-title">Welcome, Jack</h1>
+          <p class="page-subtitle">Based on your verified profile, here are the government schemes and welfare programs matched for you.</p>
+        </div>
+
+        <a href="category.html" class="btn btn-secondary btn-sm">
+          🔄 Switch Profile Category
+        </a>
+      </div>
+
+      <!-- Filter Toolbar -->
+      <div class="services-toolbar">
+        <div class="services-filter-pills" id="category-filter-pills">
+          <button class="filter-pill active" data-filter="all">All Matched Services</button>
+          <button class="filter-pill" data-filter="student">Students</button>
+          <button class="filter-pill" data-filter="employed">Employed</button>
+          <button class="filter-pill" data-filter="unemployed">Unemployed</button>
+          <button class="filter-pill" data-filter="common">Common Services</button>
+        </div>
+
+        <div style="font-size: 0.88rem; color: var(--text-muted);">
+          Showing <strong id="services-count" style="color: var(--text-navy-primary);">0</strong> services
+        </div>
+      </div>
+
+      <!-- Dynamic Services Grid -->
+      <div class="services-grid" id="services-grid-container">
+        <!-- Rendered by services.js -->
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/services.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Citizen Profile — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="gov-tricolor-stripe"></div>
+
+  <!-- Global Header Navigation -->
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="applications.html" class="nav-link">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; padding: 32px 0 60px;">
+    <div class="container container-narrow">
+
+      <!-- Step Progress Indicator -->
+      <div class="step-progress-wrapper">
+        <div class="step-progress-header">
+          <span class="step-count">Step 1 of 4 &bull; Basic Profile</span>
+          <span class="badge badge-blue" id="active-category-badge">Category: Student</span>
+        </div>
+        <div class="step-progress-bar">
+          <div class="step-progress-fill" style="width: 25%;"></div>
+        </div>
+        <ul class="step-indicators-list">
+          <li class="step-item completed">
+            <span class="step-bullet">✓</span>
+            <span>Category</span>
+          </li>
+          <li class="step-item active">
+            <span class="step-bullet">1</span>
+            <span>Profile</span>
+          </li>
+          <li class="step-item">
+            <span class="step-bullet">2</span>
+            <span>Services</span>
+          </li>
+          <li class="step-item">
+            <span class="step-bullet">3</span>
+            <span>Application</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Profile Card -->
+      <div class="card">
+        <div class="page-header" style="padding-top: 0; padding-bottom: 20px;">
+          <h1 class="page-title" style="font-size: 1.85rem;">Tell us about yourself</h1>
+          <p class="page-subtitle">Your common citizen profile enables cross-department services without repeated data entry.</p>
+        </div>
+
+        <div class="alert alert-info">
+          <span>🔒</span>
+          <div>
+            <strong>Privacy-Preserving Intake:</strong> ONEGOV only requests necessary demographic information. Sensitive credentials (such as Aadhaar numbers, OTPs, or passwords) are never stored on this frontend.
+          </div>
+        </div>
+
+        <form id="basic-profile-form">
+          
+          <div class="form-group">
+            <label class="form-label" for="full-name">Full Name <span class="required">*</span></label>
+            <input type="text" class="form-control" id="full-name" placeholder="e.g. Jack Mathew" required>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="dob">Date of Birth <span class="required">*</span></label>
+              <input type="date" class="form-control" id="dob" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="mobile">Mobile Number <span class="required">*</span></label>
+              <input type="tel" class="form-control" id="mobile" placeholder="+91 98765 43210" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address <span class="required">*</span></label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+          </div>
+
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label class="form-label" for="state">State / UT <span class="required">*</span></label>
+              <select class="form-control form-select" id="state" required>
+                <option value="">Select State</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Delhi">Delhi NCR</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Telangana">Telangana</option>
+                <option value="West Bengal">West Bengal</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="district">District <span class="required">*</span></label>
+              <input type="text" class="form-control" id="district" placeholder="e.g. Chennai" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="pincode">Pincode <span class="required">*</span></label>
+              <input type="text" class="form-control" id="pincode" placeholder="600025" maxlength="6" required>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 20px; border-top: 1px solid #E2E8F0;">
+            <a href="category.html" class="btn btn-secondary">
+              ← Change Category
+            </a>
+            <button type="submit" class="btn btn-primary btn-lg">
+              Save & Continue to Category Details →
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

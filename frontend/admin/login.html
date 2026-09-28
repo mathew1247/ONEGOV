@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Officer & Admin Portal Login — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body style="background: #0F172A; display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+
+  <div style="width: 100%; max-width: 440px; padding: 24px;">
+    
+    <div style="text-align: center; margin-bottom: 28px;">
+      <div style="display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: linear-gradient(135deg, #38BDF8 0%, #1D4ED8 100%); border-radius: 14px; font-size: 1.8rem; margin-bottom: 12px; box-shadow: 0 4px 16px rgba(56, 189, 248, 0.3);">
+        🏛️
+      </div>
+      <h1 style="color: #FFFFFF; font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px;">ONEGOV Officer Portal</h1>
+      <p style="color: #94A3B8; font-size: 0.9rem; margin-top: 4px;">National Interoperability Middleware Administration</p>
+    </div>
+
+    <div class="card" style="background: #1E293B; border-color: #334155; padding: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+      
+      <div class="alert alert-info" style="background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.3); color: #38BDF8; font-size: 0.85rem; margin-bottom: 20px;">
+        <span>ℹ️</span>
+        <div>
+          <strong>Demo Mode Active:</strong> Click <strong>Sign In</strong> directly to access the live administrative console with pre-filled credentials.
+        </div>
+      </div>
+
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label class="form-label" style="color: #CBD5E1;" for="admin-user">Officer Username</label>
+          <input type="text" class="form-control" id="admin-user" value="officer.national@onegov.gov.in" style="background: #0F172A; border-color: #475569; color: #FFFFFF;" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" style="color: #CBD5E1;" for="admin-pass">Access PIN / Password</label>
+          <input type="password" class="form-control" id="admin-pass" value="••••••••••••" style="background: #0F172A; border-color: #475569; color: #FFFFFF;" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" style="color: #CBD5E1;" for="admin-dept">Department Authority</label>
+          <select class="form-control form-select" id="admin-dept" style="background-color: #0F172A; border-color: #475569; color: #FFFFFF;">
+            <option value="all">National Unified Operations Command (All Systems)</option>
+            <option value="education">Department of Higher Education (NAD)</option>
+            <option value="revenue">Central Board of Direct Taxes & Revenue</option>
+            <option value="employment">Ministry of Labour & Employment (NCS)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" style="background: #38BDF8; color: #0F172A; font-weight: 800; border: none; margin-top: 24px;">
+          Authorize & Access Dashboard →
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #334155;">
+        <a href="../index.html" style="color: #94A3B8; font-size: 0.85rem; font-weight: 600;">
+          ← Return to Citizen Public Portal
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/admin/login.js"></script>
+</body>
+</html>

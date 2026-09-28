@@ -1385,11 +1385,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       // Fallback mock application
       openApplicationTracker(refId, "National Scholarship Portal (NSP)", "Ministry of Education", [
-        {"id": 1, "name": "Identity Verification", "status": "VERIFIED", "authority": "DigiLocker / UIDAI", "icon": "✓"},
-        {"id": 2, "name": "Academic Credential Check", "status": "VERIFIED", "authority": "Academic Bank of Credits", "icon": "✓"},
-        {"id": 3, "name": "Income / Revenue Verification", "status": "IN_PROGRESS", "authority": "CBDT Revenue Gateway", "icon": "⏳"},
-        {"id": 4, "name": "Autonomous Rules Engine", "status": "PENDING", "authority": "ONEGOV Engine", "icon": "○"},
-        {"id": 5, "name": "Single Sign-off & Disbursement", "status": "PENDING", "authority": "National Registry", "icon": "○"}
+        { "id": 1, "name": "Identity Verification", "status": "VERIFIED", "authority": "DigiLocker / UIDAI", "icon": "✓" },
+        { "id": 2, "name": "Academic Credential Check", "status": "VERIFIED", "authority": "Academic Bank of Credits", "icon": "✓" },
+        { "id": 3, "name": "Income / Revenue Verification", "status": "IN_PROGRESS", "authority": "CBDT Revenue Gateway", "icon": "⏳" },
+        { "id": 4, "name": "Autonomous Rules Engine", "status": "PENDING", "authority": "ONEGOV Engine", "icon": "○" },
+        { "id": 5, "name": "Single Sign-off & Disbursement", "status": "PENDING", "authority": "National Registry", "icon": "○" }
       ]);
     }
   });
@@ -2124,6 +2124,250 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadAdminDashboardData();
   });
 
+  // ============================================================================
+  // 8. DIGITAL SANCTION CERTIFICATE CONTROLLER
+  // ============================================================================
+  const certModal = document.getElementById("sanction-certificate-modal");
+  const btnCloseCert = document.getElementById("btn-close-cert");
+  const certBackdrop = document.getElementById("cert-modal-backdrop");
+  const btnPrintCert = document.getElementById("btn-print-certificate");
+  const btnViewSanctionCert = document.getElementById("btn-view-sanction-cert");
+
+  async function openSanctionCertificate(refId) {
+    let certData = null;
+    try {
+      const res = await fetch(`/api/certificate/${refId}`);
+      if (res.ok) {
+        const json = await res.json();
+        certData = json.certificate;
+      }
+    } catch (e) {
+      console.warn("Certificate fetch fallback", e);
+    }
+
+    if (!certData) {
+      const p = AppState.currentUserProfile;
+      certData = {
+        certificateNumber: `SANCTION-${refId}`,
+        refId: refId,
+        issueDate: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }),
+        beneficiaryName: p.fullName || "Aarav Sharma",
+        citizenId: p.userId || "IND-8842",
+        serviceName: "National Scholarship Portal (NSP)",
+        ministry: "Ministry of Education",
+        digitalSeal: `0xSEAL_${Math.random().toString(16).substring(2, 10).toUpperCase()}${Math.random().toString(16).substring(2, 10).toUpperCase()}`
+      };
+    }
+
+    document.getElementById("cert-number").textContent = certData.certificateNumber;
+    document.getElementById("cert-ref-id").textContent = certData.refId;
+    document.getElementById("cert-date").textContent = certData.issueDate;
+    document.getElementById("cert-digital-seal").textContent = certData.digitalSeal;
+    document.getElementById("cert-beneficiary-name").textContent = certData.beneficiaryName;
+    document.getElementById("cert-citizen-id").textContent = certData.citizenId;
+    document.getElementById("cert-service-name").textContent = certData.serviceName;
+    document.getElementById("cert-ministry").textContent = certData.ministry;
+
+    certModal.classList.add("active");
+    certModal.setAttribute("aria-hidden", "false");
+    showToast("Official Digital Sanction Order loaded!");
+  }
+
+  function closeSanctionCertificate() {
+    certModal.classList.remove("active");
+    certModal.setAttribute("aria-hidden", "true");
+  }
+
+  if (btnViewSanctionCert) {
+    btnViewSanctionCert.addEventListener("click", () => {
+      const refId = document.getElementById("tracker-ref-id").textContent || "OG-2026-IND-8842";
+      openSanctionCertificate(refId);
+    });
+  }
+
+  if (btnCloseCert) btnCloseCert.addEventListener("click", closeSanctionCertificate);
+  if (certBackdrop) certBackdrop.addEventListener("click", closeSanctionCertificate);
+  if (btnPrintCert) {
+    btnPrintCert.addEventListener("click", () => {
+      window.print();
+    });
+  }
+
+  // Check if stage 5 complete in tracker
+  const originalAdvanceHandler = btnAdvanceSimulation.onclick;
+  btnAdvanceSimulation.addEventListener("click", () => {
+    setTimeout(() => {
+      const overallStatus = document.getElementById("tracker-overall-status").textContent;
+      if (overallStatus.includes("Approved") || overallStatus.includes("SUBMITTED") || overallStatus.includes("APPROVED")) {
+        btnViewSanctionCert.style.display = "inline-flex";
+      }
+    }, 400);
+  });
+
+  // ============================================================================
+  // 9. FLOATING MULTILINGUAL AI ASSISTANT & VOICE CO-PILOT
+  // ============================================================================
+  const aiLauncher = document.getElementById("ai-copilot-launcher");
+  const aiDrawer = document.getElementById("ai-copilot-drawer");
+  const btnCloseAi = document.getElementById("btn-close-ai");
+  const aiChatMessages = document.getElementById("ai-chat-messages");
+  const aiChatInput = document.getElementById("ai-chat-input");
+  const aiSendBtn = document.getElementById("ai-send-btn");
+  const aiVoiceBtn = document.getElementById("ai-voice-btn");
+  const aiLangPills = document.querySelectorAll(".ai-lang-pill");
+  const aiQuickPrompts = document.querySelectorAll(".ai-chip-btn");
+
+  let activeAiLang = "en";
+  let chatHistory = [];
+
+  function toggleAiDrawer() {
+    const isHidden = aiDrawer.style.display === "none" || !aiDrawer.style.display;
+    aiDrawer.style.display = isHidden ? "flex" : "none";
+    if (isHidden) {
+      aiChatInput.focus();
+    }
+  }
+
+  if (aiLauncher) aiLauncher.addEventListener("click", toggleAiDrawer);
+  if (btnCloseAi) btnCloseAi.addEventListener("click", toggleAiDrawer);
+
+  aiLangPills.forEach(pill => {
+    pill.addEventListener("click", () => {
+      aiLangPills.forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+      activeAiLang = pill.getAttribute("data-lang");
+
+      let greeting = "Namaste! 🙏 I am your ONEGOV AI Co-Pilot. How can I help you today?";
+      if (activeAiLang === "hi") greeting = "नमस्ते! 🙏 मैं आपका ONEGOV AI सहायक हूँ। आज मैं आपकी क्या सहायता कर सकता हूँ?";
+      if (activeAiLang === "ta") greeting = "வணக்கம்! 🙏 நான் உங்கள் ONEGOV AI வழிகாட்டி. அரசு சேவைகளில் உங்களுக்கு எப்படி உதவ வேண்டும்?";
+
+      appendAiMessage(greeting, "bot");
+    });
+  });
+
+  aiQuickPrompts.forEach(chip => {
+    chip.addEventListener("click", () => {
+      const prompt = chip.getAttribute("data-prompt");
+      aiChatInput.value = prompt;
+      sendAiMessage();
+    });
+  });
+
+  function appendAiMessage(text, sender = "bot") {
+    const msgDiv = document.createElement("div");
+    msgDiv.className = `ai-msg ai-msg-${sender}`;
+    msgDiv.innerHTML = `
+      <div class="ai-msg-bubble">
+        <p>${text.replace(/\n/g, '<br>')}</p>
+      </div>
+    `;
+    aiChatMessages.appendChild(msgDiv);
+    aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+  }
+
+  async function sendAiMessage() {
+    const text = aiChatInput.value.trim();
+    if (!text) return;
+
+    appendAiMessage(text, "user");
+    aiChatInput.value = "";
+    chatHistory.push({ role: "user", content: text });
+
+    // Typing indicator
+    const typingIndicator = document.createElement("div");
+    typingIndicator.className = "ai-msg ai-msg-bot typing-indicator-msg";
+    typingIndicator.innerHTML = `<div class="ai-msg-bubble"><p><em>ONEGOV AI is processing across national registries... ⚡</em></p></div>`;
+    aiChatMessages.appendChild(typingIndicator);
+    aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: chatHistory,
+          language: activeAiLang
+        })
+      });
+
+      if (typingIndicator.parentNode) typingIndicator.parentNode.removeChild(typingIndicator);
+
+      if (res.ok) {
+        const json = await res.json();
+        const replyText = json.reply?.content || "Thank you. Verified across ONEGOV Interoperability Gateways.";
+        appendAiMessage(replyText, "bot");
+        chatHistory.push({ role: "assistant", content: replyText });
+
+        // Optional speech synthesis if audio voice is active
+        if ('speechSynthesis' in window && aiVoiceBtn.classList.contains("voice-active")) {
+          const utterance = new SpeechSynthesisUtterance(replyText.substring(0, 180));
+          if (activeAiLang === "hi") utterance.lang = "hi-IN";
+          else if (activeAiLang === "ta") utterance.lang = "ta-IN";
+          else utterance.lang = "en-IN";
+          window.speechSynthesis.speak(utterance);
+        }
+      } else {
+        appendAiMessage("I am connected to the ONEGOV Interoperability Core. You can verify schemes, check eligibility, and track multi-department applications anytime.", "bot");
+      }
+    } catch (e) {
+      if (typingIndicator.parentNode) typingIndicator.parentNode.removeChild(typingIndicator);
+      appendAiMessage("ONEGOV AI Assistant is ready. Discover schemes matching your profile in Students, Employed, and Unemployed pathways.", "bot");
+    }
+  }
+
+  if (aiSendBtn) aiSendBtn.addEventListener("click", sendAiMessage);
+  if (aiChatInput) {
+    aiChatInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        sendAiMessage();
+      }
+    });
+  }
+
+  // Voice Input Speech Recognition
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SpeechRecognition && aiVoiceBtn) {
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    aiVoiceBtn.addEventListener("click", () => {
+      if (aiVoiceBtn.classList.contains("listening")) {
+        recognition.stop();
+        aiVoiceBtn.classList.remove("listening");
+      } else {
+        if (activeAiLang === "hi") recognition.lang = "hi-IN";
+        else if (activeAiLang === "ta") recognition.lang = "ta-IN";
+        else recognition.lang = "en-IN";
+
+        recognition.start();
+        aiVoiceBtn.classList.add("listening");
+        showToast("🎙️ Listening... Speak your query now.");
+      }
+    });
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      aiChatInput.value = transcript;
+      aiVoiceBtn.classList.remove("listening");
+      aiVoiceBtn.classList.add("voice-active");
+      sendAiMessage();
+    };
+
+    recognition.onerror = () => {
+      aiVoiceBtn.classList.remove("listening");
+      showToast("Could not recognize voice input. Please type your query.");
+    };
+
+    recognition.onend = () => {
+      aiVoiceBtn.classList.remove("listening");
+    };
+  } else if (aiVoiceBtn) {
+    aiVoiceBtn.addEventListener("click", () => {
+      showToast("Speech Recognition is supported in modern Chrome & Edge browsers.");
+    });
+  }
+
   // Nav brand logo home click
   navBrandLogo.addEventListener("click", (e) => {
     e.preventDefault();
@@ -2187,3 +2431,4 @@ function showToast(message) {
     }, 300);
   }, 3400);
 }
+

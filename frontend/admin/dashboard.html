@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-shell">
+    
+    <!-- Admin Sidebar Navigation -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <div class="brand-emblem" style="width: 32px; height: 32px; font-size: 1rem;">🏛️</div>
+        <div class="brand-text">
+          <span class="brand-title" style="font-size: 1.1rem;">ONEGOV</span>
+          <span class="brand-subtitle" style="font-size: 0.7rem;">Admin Console</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav">
+        <li class="admin-nav-item active"><a href="dashboard.html">📊 Dashboard</a></li>
+        <li class="admin-nav-item"><a href="integrations.html">🔌 Integrations</a></li>
+        <li class="admin-nav-item"><a href="systems.html">🏛️ Systems</a></li>
+        <li class="admin-nav-item"><a href="data-mapping.html">🔄 Data Mapping</a></li>
+        <li class="admin-nav-item"><a href="workflow.html">⚡ Workflow</a></li>
+        <li class="admin-nav-item"><a href="errors.html">⚠️ Errors & Exceptions</a></li>
+        <li class="admin-nav-item"><a href="audit-logs.html">📜 Audit Logs</a></li>
+      </ul>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-info">
+          <div class="admin-avatar">K</div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: #FFFFFF;">Officer Console</div>
+            <div style="font-size: 0.72rem; color: #94A3B8;">National Node</div>
+          </div>
+        </div>
+        <a href="login.html" title="Sign Out" style="color: #94A3B8; font-size: 1.1rem;">🚪</a>
+      </div>
+    </aside>
+
+    <!-- Admin Main Body -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="admin-breadcrumb">
+          <span>ONEGOV Administration</span>
+          <span>/</span>
+          <span class="admin-breadcrumb-active">Executive Dashboard</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <a href="../index.html" class="btn btn-secondary btn-sm" target="_blank">
+            🌐 Open Citizen Portal
+          </a>
+          <span class="badge badge-emerald">● Gateway Online (99.98%)</span>
+        </div>
+      </header>
+
+      <div class="admin-body">
+        
+        <!-- KPI Metrics Grid -->
+        <div class="admin-kpi-grid">
+          
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-label">Connected Systems</div>
+              <div class="kpi-value" id="kpi-systems">5</div>
+              <div style="font-size: 0.78rem; color: var(--accent-emerald); font-weight: 600;">✓ 100% Operational</div>
+            </div>
+            <div class="kpi-icon-box kpi-blue">🏛️</div>
+          </div>
+
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-label">Active Applications</div>
+              <div class="kpi-value" id="kpi-applications">128</div>
+              <div style="font-size: 0.78rem; color: var(--civic-blue); font-weight: 600;">Across 4 Categories</div>
+            </div>
+            <div class="kpi-icon-box kpi-emerald">📈</div>
+          </div>
+
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-label">Pending Requests</div>
+              <div class="kpi-value" id="kpi-pending">14</div>
+              <div style="font-size: 0.78rem; color: var(--accent-amber); font-weight: 600;">Avg Latency: 240ms</div>
+            </div>
+            <div class="kpi-icon-box kpi-amber">⏳</div>
+          </div>
+
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-label">Failed Integrations</div>
+              <div class="kpi-value" id="kpi-failed">3</div>
+              <div style="font-size: 0.78rem; color: var(--accent-rose); font-weight: 600;">Auto-Circuit Retrying</div>
+            </div>
+            <div class="kpi-icon-box kpi-rose">⚠️</div>
+          </div>
+
+        </div>
+
+        <!-- Recent Cross-System Interoperability Telemetry -->
+        <div class="card" style="margin-bottom: 32px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h3 style="font-size: 1.25rem;">Live Multi-Department Query Telemetry</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">Real-time transaction stream across transformed OCDS adapters.</p>
+            </div>
+            <a href="integrations.html" class="btn btn-outline btn-sm">
+              View Detailed Metrics →
+            </a>
+          </div>
+
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Source / Adapter</th>
+                  <th>Target Department</th>
+                  <th>Protocol / Format</th>
+                  <th>Latency</th>
+                  <th>Breaker State</th>
+                </tr>
+              </thead>
+              <tbody id="telemetry-table-body">
+                <!-- Rendered by dashboard.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/admin/dashboard.js"></script>
+</body>
+</html>

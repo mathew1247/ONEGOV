@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Mapping & Schema Transformation — ONEGOV Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-shell">
+    
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <div class="brand-emblem" style="width: 32px; height: 32px; font-size: 1rem;">🏛️</div>
+        <div class="brand-text">
+          <span class="brand-title" style="font-size: 1.1rem;">ONEGOV</span>
+          <span class="brand-subtitle" style="font-size: 0.7rem;">Admin Console</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav">
+        <li class="admin-nav-item"><a href="dashboard.html">📊 Dashboard</a></li>
+        <li class="admin-nav-item"><a href="integrations.html">🔌 Integrations</a></li>
+        <li class="admin-nav-item"><a href="systems.html">🏛️ Systems</a></li>
+        <li class="admin-nav-item active"><a href="data-mapping.html">🔄 Data Mapping</a></li>
+        <li class="admin-nav-item"><a href="workflow.html">⚡ Workflow</a></li>
+        <li class="admin-nav-item"><a href="errors.html">⚠️ Errors & Exceptions</a></li>
+        <li class="admin-nav-item"><a href="audit-logs.html">📜 Audit Logs</a></li>
+      </ul>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-info">
+          <div class="admin-avatar">K</div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: #FFFFFF;">Officer Console</div>
+            <div style="font-size: 0.72rem; color: #94A3B8;">National Node</div>
+          </div>
+        </div>
+        <a href="login.html" title="Sign Out" style="color: #94A3B8; font-size: 1.1rem;">🚪</a>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      
+      <header class="admin-topbar">
+        <div class="admin-breadcrumb">
+          <span>ONEGOV Administration</span>
+          <span>/</span>
+          <span class="admin-breadcrumb-active">OCDS Data Mapping & Schema Engine</span>
+        </div>
+        <span class="badge badge-blue">OCDS Schema Standard v2.4</span>
+      </header>
+
+      <div class="admin-body">
+        
+        <div class="page-header" style="padding-top: 0; padding-bottom: 24px;">
+          <h1 class="page-title" style="font-size: 1.85rem;">Schema Transformation Mapping</h1>
+          <p class="page-subtitle">Demonstrating how heterogeneous legacy departmental field names are normalized into the OneGov Common Data Schema (OCDS) JSON structure.</p>
+        </div>
+
+        <div class="mapping-board">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E2E8F0;">
+            <div style="font-weight: 800; color: var(--text-navy-primary); font-size: 1.1rem;">
+              🏛️ Department Legacy / Raw Schema
+            </div>
+            <div style="font-weight: 800; color: var(--accent-emerald); font-size: 1.1rem;">
+              ⚡ ONEGOV Unified Canonical Field (OCDS)
+            </div>
+          </div>
+
+          <div id="mapping-rows-container">
+            <!-- Rendered by data-mapping.js -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/admin/data-mapping.js"></script>
+</body>
+</html>

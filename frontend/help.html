@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help & Support — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="gov-tricolor-stripe"></div>
+
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="applications.html" class="nav-link">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; padding: 32px 0 60px;">
+    <div class="container container-narrow">
+
+      <div class="page-header" style="text-align: center; padding-top: 0; padding-bottom: 32px;">
+        <h1 class="page-title">Help & Support</h1>
+        <p class="page-subtitle" style="margin: 0 auto;">Everything you need to know about the ONEGOV National Interoperability Middleware platform.</p>
+      </div>
+
+      <!-- How It Works Architecture Overview -->
+      <div class="card" style="margin-bottom: 32px;">
+        <h2 style="font-size: 1.4rem; margin-bottom: 14px;">How ONEGOV Works</h2>
+        <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">
+          Government departments in India maintain independent portals, registries, and databases. ONEGOV acts as a secure, decentralized <strong>middleware integration layer</strong> that standardizes data formats (JSON, SOAP/XML, Flat SQL) without replacing existing departmental infrastructure.
+        </p>
+
+        <div style="background: var(--bg-page); border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem;">
+          <div><strong>1. Single Demographic Intake:</strong> Enter verified basic demographic data once.</div>
+          <div><strong>2. Explicit Digital Consent:</strong> Authorize each target department system individually.</div>
+          <div><strong>3. Automated Multi-Protocol Adapters:</strong> Real-time cross-verification across education, revenue, and employment registries.</div>
+          <div><strong>4. End-to-End Traceability:</strong> Track lifecycle progress with instant cryptographic sanction orders.</div>
+        </div>
+      </div>
+
+      <!-- FAQs -->
+      <div class="card" style="margin-bottom: 32px;">
+        <h2 style="font-size: 1.4rem; margin-bottom: 20px;">Frequently Asked Questions</h2>
+
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          
+          <div style="border-bottom: 1px solid #F1F5F9; padding-bottom: 16px;">
+            <h4 style="font-size: 1.05rem; color: var(--text-navy-primary); margin-bottom: 6px;">
+              How does ONEGOV work?
+            </h4>
+            <p style="font-size: 0.92rem; color: var(--text-muted);">
+              ONEGOV orchestrates API data exchange between citizen frontend requests and participating government databases. Instead of requiring manual document uploads, the platform uses protocol adapters to fetch and verify credentials directly.
+            </p>
+          </div>
+
+          <div style="border-bottom: 1px solid #F1F5F9; padding-bottom: 16px;">
+            <h4 style="font-size: 1.05rem; color: var(--text-navy-primary); margin-bottom: 6px;">
+              How is my personal information shared?
+            </h4>
+            <p style="font-size: 0.92rem; color: var(--text-muted);">
+              Data is exchanged only when you explicitly grant consent for a specific service. Data tokens are fetched on-demand, validated against the OneGov Common Data Schema (OCDS), and are not sold or retained for advertising.
+            </p>
+          </div>
+
+          <div style="border-bottom: 1px solid #F1F5F9; padding-bottom: 16px;">
+            <h4 style="font-size: 1.05rem; color: var(--text-navy-primary); margin-bottom: 6px;">
+              What is digital consent?
+            </h4>
+            <p style="font-size: 0.92rem; color: var(--text-muted);">
+              Under the Digital Personal Data Protection (DPDP) Act 2023, digital consent is your sovereign permission granting access to specific parameters (such as degree completion or income slab) for a declared purpose. You can revoke this anytime.
+            </p>
+          </div>
+
+          <div style="border-bottom: 1px solid #F1F5F9; padding-bottom: 16px;">
+            <h4 style="font-size: 1.05rem; color: var(--text-navy-primary); margin-bottom: 6px;">
+              How can I track my application?
+            </h4>
+            <p style="font-size: 0.92rem; color: var(--text-muted);">
+              Every submitted application generates a unique tracking reference (e.g. <code>ONE-2026-00124</code>). You can visit the <strong>My Applications</strong> page or paste your ID into the tracking portal to see live telemetry across all connected systems.
+            </p>
+          </div>
+
+          <div>
+            <h4 style="font-size: 1.05rem; color: var(--text-navy-primary); margin-bottom: 6px;">
+              What happens if a department system is unavailable?
+            </h4>
+            <p style="font-size: 0.92rem; color: var(--text-muted);">
+              The ONEGOV middleware incorporates automated Circuit Breakers (Closed/Open/Half-Open) and Dead-Letter Queues (DLQ). If a department server times out, the system automatically retries with exponential backoff without losing your application progress.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Contact Support Box -->
+      <div class="card" style="background: var(--civic-blue-light); border-color: var(--civic-blue-border); text-align: center; padding: 32px;">
+        <h3 style="color: var(--civic-blue); margin-bottom: 8px;">Need Further Assistance?</h3>
+        <p style="color: var(--text-navy-secondary); font-size: 0.95rem; margin-bottom: 20px;">
+          Our National Citizen Helpdesk operates 24x7 to assist with interoperability and verification inquiries.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+          <a href="mailto:support@onegov.gov.in" class="btn btn-primary">
+            📧 Email Helpdesk
+          </a>
+          <a href="tel:1800111222" class="btn btn-secondary">
+            📞 Toll-Free: 1800-111-222
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/help.js"></script>
+</body>
+</html>

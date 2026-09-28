@@ -361,15 +361,24 @@ def record_audit_log(event, service, status, details=None):
 def serve_index():
     return send_file(str(PROJECT_DIR / "index.html"))
 
-@app.route("/<path:filename>")
-def serve_root_files(filename):
-    file_path = PROJECT_DIR / filename
-    if file_path.exists() and file_path.is_file():
-        return send_file(str(file_path))
-    frontend_file = FRONTEND_DIR / filename
-    if frontend_file.exists() and frontend_file.is_file():
-        return send_file(str(frontend_file))
-    return send_file(str(PROJECT_DIR / "index.html"))
+@app.route("/style.css")
+def serve_css():
+    return send_file(str(PROJECT_DIR / "style.css"))
+
+@app.route("/script.js")
+def serve_js():
+    return send_file(str(PROJECT_DIR / "script.js"))
+
+@app.route("/frontend/")
+@app.route("/frontend/index.html")
+def serve_frontend_root():
+    return send_from_directory(str(FRONTEND_DIR), "index.html")
+
+@app.route("/frontend/<path:filename>")
+def serve_frontend_files(filename):
+    return send_from_directory(str(FRONTEND_DIR), filename)
+
+
 
 
 # ============================================================================
@@ -1032,30 +1041,118 @@ def health_check():
         }
     })
 
-# AI Assistant Chat
+# AI Assistant Chat (Multilingual: English, Hindi, Tamil)
 @app.route("/api/chat", methods=["POST"])
 def chat():
     data = request.get_json() or {}
     messages = data.get("messages", [])
+    language = data.get("language", "en") # en, hi, ta
     if not messages or not isinstance(messages, list):
         return jsonify({"error": "messages array is required"}), 400
 
+    user_query = messages[-1].get("content", "") if messages else ""
+
     if groq_client:
         try:
+            system_prompt = (
+                "You are ONEGOV AI Co-Pilot, an intelligent, empathetic national citizen services assistant for India. "
+                "You provide precise guidance on scholarships, jobs, welfare schemes, DigiLocker e-KYC, and multi-department interoperability. "
+                f"Respond clearly and helpfully in the requested language: {language.upper()} (English, Hindi, or Tamil). "
+                "Keep answers concise, structured, and informative with bullet points where appropriate."
+            )
             chat_completion = groq_client.chat.completions.create(
-                messages=messages,
-                model="llama-3.3-70b-versatile"
+                messages=[{"role": "system", "content": system_prompt}, *messages],
+                model="llama-3.3-70b-versatile",
+                temperature=0.2
             )
             reply = chat_completion.choices[0].message
             return jsonify({"reply": {"role": reply.role, "content": reply.content}})
         except Exception as e:
             print(f"Groq Chat API error: {e}")
 
+    # Rich Multilingual Rule-Based Fallback
+    query_lower = user_query.lower()
+    if language == "hi" or "नमस्ते" in user_query or "योजना" in user_query:
+        if "scholarship" in query_lower or "छात्रवृत्ति" in user_query:
+            content = "नमस्ते! राष्ट्रीय छात्रवृत्ति पोर्टल (NSP) के तहत केंद्र और राज्य सरकार की छात्रवृत्तियां उपलब्ध हैं। ONEGOV आपके डिजीलॉकर और शैक्षणिक बैंक ऑफ क्रेडिट्स (ABC) से सीधे सत्यापन करके आपको तुरंत पात्र योजनाओं से जोड़ता है।"
+        else:
+            content = "नमस्ते! मैं ONEGOV AI सहायक हूँ। मैं आपको राष्ट्रीय छात्रवृत्ति, रोजगार योजनाओं और प्रमाण पत्र सत्यापन में मदद कर सकता हूँ।"
+    elif language == "ta" or "வணக்கம்" in user_query or "திட்டம்" in user_query:
+        if "scholarship" in query_lower or "கல்வி" in user_query:
+            content = "வணக்கம்! தேசிய உதவித்தொகை போர்டல் (NSP) மூலம் நீங்கள் கல்வி உதவித்தொகைக்கு விண்ணப்பிக்கலாம். ONEGOV உங்கள் கல்வி மற்றும் வருமான சான்றிதழ்களை நேரடி API மூலம் தானாகவே சரிபார்க்கிறது."
+        else:
+            content = "வணக்கம்! நான் ONEGOV AI வழிகாட்டி. அரசு திட்டங்கள், வேலைவாய்ப்புகள் மற்றும் சான்றிதழ் விவரங்களை சரிபார்க்க நான் உங்களுக்கு உதவுகிறேன்."
+    else:
+        if "scholarship" in query_lower or "student" in query_lower:
+            content = "ONEGOV connects directly with the National Scholarship Portal (NSP) and Academic Bank of Credits (ABC). With 1-Click DigiLocker verification, your academic marksheets and family income are cross-verified across ministries without repetitive document uploads."
+        elif "digilocker" in query_lower or "sso" in query_lower or "login" in query_lower:
+            content = "With DigiLocker / MeriPehchan Federated SSO on ONEGOV, you authenticate once using your Aadhaar-linked identity. All participating government platforms receive cryptographically signed DPDP tokens without exposing raw passwords."
+        elif "track" in query_lower or "status" in query_lower:
+            content = "You can track your application anytime using your Unified Reference ID (e.g., OG-2026-IND-8842) on the homepage. It displays live verification milestones across DigiLocker, ABC Depository, and the Revenue Gateway."
+        else:
+            content = "I am your ONEGOV AI Assistant! I can help you discover personalized government schemes, explain eligibility criteria, guide your DigiLocker verification, and track cross-department applications in real-time."
+
     return jsonify({
         "reply": {
             "role": "assistant",
-            "content": "I am ONEGOV AI Assistant. I can help you verify your eligibility across national scholarships, welfare schemes, and job opportunities with real-time multi-department API integration."
+            "content": content
         }
+    })
+
+# Digital Sanction Certificate Verification & Download
+@app.route("/api/certificate/<ref_id>", methods=["GET"])
+def get_sanction_certificate(ref_id):
+    app_record = in_memory_store["applications"].get(ref_id)
+    if not app_record:
+        app_record = {
+            "refId": ref_id,
+            "serviceName": "National Scholarship Portal (NSP)",
+            "dept": "Ministry of Education",
+            "citizenId": "IND-8842",
+            "citizenName": "Aarav Sharma",
+            "createdAt": datetime.datetime.now(datetime.timezone.utc).isoformat()
+        }
+
+    cert_no = f"SANCTION-{ref_id}"
+    verification_hash = hashlib.sha256(f"{ref_id}:{app_record.get('citizenId')}:{app_record.get('serviceName')}".encode()).hexdigest()
+    qr_payload = f"https://oneg.gov.in/verify/{cert_no}?hash=0x{verification_hash[:16]}"
+
+    certificate = {
+        "certificateNumber": cert_no,
+        "refId": ref_id,
+        "issueDate": datetime.datetime.now(datetime.timezone.utc).strftime("%d %B %Y, %H:%M UTC"),
+        "beneficiaryName": app_record.get("citizenName", "Aarav Sharma"),
+        "citizenId": app_record.get("citizenId", "IND-8842"),
+        "serviceName": app_record.get("serviceName", "National Scholarship Portal (NSP)"),
+        "ministry": app_record.get("dept", "Ministry of Education"),
+        "digitalSeal": f"0xSEAL_{verification_hash[:24].upper()}",
+        "verificationUrl": qr_payload,
+        "status": "SANCTIONED & DISBURSED",
+        "signatories": [
+            {"authority": "National Informatics Centre (NIC)", "role": "Interoperability Gateway Root", "status": "CRYPTOGRAPHICALLY_SIGNED"},
+            {"authority": "Academic Bank of Credits (ABC)", "role": "Academic Depository Verifier", "status": "RECORD_AUTHENTICATED"},
+            {"authority": "Central Board of Direct Taxes (CBDT)", "role": "Revenue & Income Verification", "status": "INCOME_CONFIRMED"},
+            {"authority": "Ministry of Finance - DBT Bharat", "role": "Public Financial Management System", "status": "DISBURSEMENT_SANCTIONED"}
+        ]
+    }
+
+    record_audit_log("SANCTION_CERTIFICATE_GENERATED", "Digital Certificate Engine", "SUCCESS", {
+        "certNo": cert_no,
+        "refId": ref_id
+    })
+
+    return jsonify({
+        "success": True,
+        "certificate": certificate
+    })
+
+# Audit Vault & Telemetry Logs
+@app.route("/api/audit-logs", methods=["GET"])
+def get_audit_logs():
+    return jsonify({
+        "success": True,
+        "totalLogs": len(in_memory_store["audit_logs"]),
+        "logs": in_memory_store["audit_logs"]
     })
 
 # AI Profile Eligibility Analyzer
@@ -1310,17 +1407,33 @@ def get_workflow_status(ref_id):
         return jsonify({"success": True, "application": app_record})
     return jsonify({"success": False, "message": f"Application {ref_id} not found"}), 404
 
-# Audit Vault & Telemetry Logs
-@app.route("/api/audit-logs", methods=["GET"])
-def get_audit_logs():
-    return jsonify({
-        "success": True,
-        "totalLogs": len(in_memory_store["audit_logs"]),
-        "logs": in_memory_store["audit_logs"]
-    })
+
+# ============================================================================
+# UNIFIED MULTI-PAGE & STATIC RESOURCE RESOLVER (Catch-all after APIs)
+# ============================================================================
+@app.route("/<path:filename>")
+
+def serve_any_file(filename):
+    # 1. Check if file exists directly in frontend directory
+    frontend_path = FRONTEND_DIR / filename
+    if frontend_path.is_file():
+        return send_from_directory(str(FRONTEND_DIR), filename)
+    
+    # 2. Check if file exists in project root directory
+    root_path = PROJECT_DIR / filename
+    if root_path.is_file():
+        return send_from_directory(str(PROJECT_DIR), filename)
+    
+    # 3. Check for HTML fallback (e.g. /category -> /category.html)
+    frontend_html = FRONTEND_DIR / f"{filename}.html"
+    if frontend_html.is_file():
+        return send_from_directory(str(FRONTEND_DIR), f"{filename}.html")
+
+    return jsonify({"error": f"File '{filename}' not found", "status": 404}), 404
 
 
 if __name__ == "__main__":
+
     port = int(os.getenv("PORT", 5000))
     print("=======================================================")
     print(f">> ONEGOV National Interoperability Middleware Platform")

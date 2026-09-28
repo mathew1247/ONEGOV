@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Details — ONEGOV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="gov-tricolor-stripe"></div>
+
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link active">Services</a></li>
+          <li><a href="applications.html" class="nav-link">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; padding: 32px 0 60px;">
+    <div class="container">
+
+      <!-- Breadcrumbs & Back -->
+      <div style="margin-bottom: 24px;">
+        <a href="services.html" style="font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+          ← Back to Services Catalog
+        </a>
+      </div>
+
+      <!-- Main Layout -->
+      <div class="service-details-layout">
+        
+        <!-- Left Column: Detailed Service Specifications -->
+        <div>
+          <div class="card" style="margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+              <div class="service-icon" id="detail-icon" style="width: 56px; height: 56px; font-size: 1.8rem;">🎓</div>
+              <div>
+                <span class="badge badge-blue" id="detail-category-badge">STUDENT WELFARE</span>
+                <h1 id="detail-title" style="font-size: 1.85rem; margin-top: 4px;">Scholarship Assistance</h1>
+              </div>
+            </div>
+
+            <p id="detail-desc" style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 24px;">
+              National merit & pre-matric financial scholarship disbursed directly through interoperable cross-department verification.
+            </p>
+
+            <div class="details-section">
+              <h3 class="details-section-title">Eligibility Criteria</h3>
+              <p id="detail-eligibility" style="font-size: 0.95rem; color: var(--text-navy-secondary);">
+                Enrolled in recognized higher education institution with family annual income below prescribed threshold.
+              </p>
+            </div>
+
+            <div class="details-section">
+              <h3 class="details-section-title">Required Information Extracted</h3>
+              <ul id="detail-required-info" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 0.92rem;">
+                  <span style="color: var(--accent-emerald);">✓</span>
+                  <span>Citizen Basic Profile & Permanent Residence</span>
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 0.92rem;">
+                  <span style="color: var(--accent-emerald);">✓</span>
+                  <span>Academic Depository & Enrollment Credentials</span>
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 0.92rem;">
+                  <span style="color: var(--accent-emerald);">✓</span>
+                  <span>Income & Tax Return Assessment Verification</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="details-section" style="margin-bottom: 0;">
+              <h3 class="details-section-title">Automated Processing Pipeline</h3>
+              <div class="workflow-pipeline">
+                <div class="workflow-node">
+                  <span class="workflow-node-icon">👤</span>
+                  <span class="workflow-node-text">1. Citizen Verified Profile Submission</span>
+                </div>
+                <div class="workflow-node">
+                  <span class="workflow-node-icon">🎓</span>
+                  <span class="workflow-node-text">2. Education System Verification (Academic Records)</span>
+                </div>
+                <div class="workflow-node">
+                  <span class="workflow-node-icon">💰</span>
+                  <span class="workflow-node-text">3. Income & Revenue Database Check</span>
+                </div>
+                <div class="workflow-node">
+                  <span class="workflow-node-icon">⚖️</span>
+                  <span class="workflow-node-text">4. Automated Eligibility Rule Engine Assessment</span>
+                </div>
+                <div class="workflow-node">
+                  <span class="workflow-node-icon">📜</span>
+                  <span class="workflow-node-text">5. Final Sanction Order & Direct Benefit Transfer (DBT)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Required Systems & Action Card -->
+        <div>
+          <div class="card" style="position: sticky; top: 96px;">
+            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Required Systems</h3>
+            
+            <div id="detail-systems-list" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+              <!-- Rendered by JS -->
+            </div>
+
+            <div style="background: var(--bg-page); border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 14px; margin-bottom: 24px;">
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Expected Turnaround</div>
+              <div id="detail-processing-time" style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald);">Instant Verification (< 3s)</div>
+            </div>
+
+            <button id="apply-service-btn" class="btn btn-primary btn-lg btn-block">
+              Apply Now (Give Consent) →
+            </button>
+            <p style="font-size: 0.78rem; text-align: center; color: var(--text-light); margin-top: 10px;">
+              Next step: Review data items and authorize access.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/service-details.js"></script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONEGOV — National Unified Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Official Government Top Indicator Bar -->
+  <div class="gov-tricolor-stripe"></div>
+  <div class="gov-official-bar">
+    <div class="container">
+      <div class="gov-official-badge">
+        <span>🏛️</span>
+        <span>Government of India &bull; National Interoperability Middleware Initiative</span>
+      </div>
+      <div class="gov-official-links">
+        <a href="admin/login.html">🏛️ Officer & Admin Portal</a>
+        <a href="help.html">Help & FAQ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Header Navigation -->
+  <header class="site-navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-emblem">🇮🇳</div>
+          <div class="brand-text">
+            <span class="brand-title">ONEGOV</span>
+            <span class="brand-subtitle">National Unified Services</span>
+          </div>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="applications.html" class="nav-link">My Applications</a></li>
+          <li><a href="notifications.html" class="nav-link">Notifications</a></li>
+          <li><a href="profile-view.html" class="nav-link">Profile</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="profile-view.html" class="profile-pill">
+            <div class="profile-avatar" id="nav-user-avatar">J</div>
+            <span class="profile-name" id="nav-user-name">Jack Mathew</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section" style="padding: 64px 0 48px; background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-page) 100%);">
+      <div class="container">
+        <div style="max-width: 820px; margin: 0 auto; text-align: center;">
+          <div class="badge badge-blue" style="margin-bottom: 20px; font-size: 0.85rem; padding: 6px 16px;">
+            ⚡ Next-Generation Citizen Interoperability Layer
+          </div>
+          <h1 style="font-size: 3rem; font-weight: 800; color: var(--text-navy-primary); letter-spacing: -1px; margin-bottom: 20px; line-height: 1.15;">
+            One Platform. Many Services.<br><span style="color: var(--civic-blue);">All For You.</span>
+          </h1>
+          <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 36px;">
+            ONEGOV connects fragmented government digital services through a unified interoperability layer, helping citizens access, apply for and track services through one platform.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+            <a href="category.html" class="btn btn-primary btn-lg">
+              <span>🚀 Get Started</span>
+            </a>
+            <a href="#how-it-works" class="btn btn-secondary btn-lg">
+              <span>📖 How It Works</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How ONEGOV Works Section -->
+    <section id="how-it-works" style="padding: 60px 0; background: #FFFFFF; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0;">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 48px;">
+          <h2 style="font-size: 2rem; margin-bottom: 12px;">How ONEGOV Works</h2>
+          <p>Connecting citizens to multiple government registries with zero friction and explicit consent.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative;">
+          <div class="card" style="text-align: center; padding: 24px;">
+            <div style="width: 50px; height: 50px; border-radius: 50%; background: #EFF6FF; color: var(--civic-blue); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.4rem;">
+              👤
+            </div>
+            <h4 style="margin-bottom: 8px;">1. Citizen</h4>
+            <p style="font-size: 0.88rem;">Selects category & inputs verified basic profile once.</p>
+          </div>
+
+          <div class="card" style="text-align: center; padding: 24px; border: 2px solid var(--civic-blue-border); background: var(--civic-blue-light);">
+            <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--civic-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.4rem;">
+              ⚡
+            </div>
+            <h4 style="margin-bottom: 8px; color: var(--civic-blue);">2. ONEGOV</h4>
+            <p style="font-size: 0.88rem; color: var(--text-navy-secondary);">Interoperability middleware transforms schemas & manages consent.</p>
+          </div>
+
+          <div class="card" style="text-align: center; padding: 24px;">
+            <div style="width: 50px; height: 50px; border-radius: 50%; background: #FEF3C7; color: #D97706; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.4rem;">
+              🏛️
+            </div>
+            <h4 style="margin-bottom: 8px;">3. Govt Systems</h4>
+            <p style="font-size: 0.88rem;">Education, Revenue, and Employment systems verify data.</p>
+          </div>
+
+          <div class="card" style="text-align: center; padding: 24px;">
+            <div style="width: 50px; height: 50px; border-radius: 50%; background: #ECFDF5; color: var(--accent-emerald); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.4rem;">
+              🎯
+            </div>
+            <h4 style="margin-bottom: 8px;">4. Unified Service</h4>
+            <p style="font-size: 0.88rem;">Instant sanction order and single-window tracking token.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section style="padding: 64px 0;">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 48px;">
+          <h2 style="font-size: 2rem; margin-bottom: 12px;">Core Architecture Capabilities</h2>
+          <p>Engineered to bridge legacy, modern, and distributed public digital platforms.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+          <div class="card card-hover">
+            <div style="font-size: 2rem; margin-bottom: 14px;">🌐</div>
+            <h3 style="margin-bottom: 10px;">Unified Service Access</h3>
+            <p>Access hundreds of welfare schemes and certificates from one unified digital front-door.</p>
+          </div>
+
+          <div class="card card-hover">
+            <div style="font-size: 2rem; margin-bottom: 14px;">🔄</div>
+            <h3 style="margin-bottom: 10px;">API-Based Data Exchange</h3>
+            <p>Direct system-to-system verification without requiring citizens to manually upload scanned PDFs.</p>
+          </div>
+
+          <div class="card card-hover">
+            <div style="font-size: 2rem; margin-bottom: 14px;">🛡️</div>
+            <h3 style="margin-bottom: 10px;">Consent-Based Data Sharing</h3>
+            <p>Full control over data sharing in accordance with DPDP Act 2023 principles and audit trails.</p>
+          </div>
+
+          <div class="card card-hover">
+            <div style="font-size: 2rem; margin-bottom: 14px;">🔍</div>
+            <h3 style="margin-bottom: 10px;">Cross-System Verification</h3>
+            <p>Instant interoperable validation across education, tax, municipal, and labor databases.</p>
+          </div>
+
+          <div class="card card-hover">
+            <div style="font-size: 2rem; margin-bottom: 14px;">📊</div>
+            <h3 style="margin-bottom: 10px;">Unified Application Tracking</h3>
+            <p>Real-time cross-departmental lifecycle tracking from submission to digital disbursement.</p>
+          </div>
+
+          <div class="card card-hover">
+            <div style="font-size: 2rem; margin-bottom: 14px;">⏱️</div>
+            <h3 style="margin-bottom: 10px;">Audit & Monitoring</h3>
+            <p>Enterprise telemetry, circuit breaker resilience, and tamper-evident audit logs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connected Government Systems -->
+    <section style="padding: 60px 0; background: #FFFFFF; border-top: 1px solid #E2E8F0;">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 40px;">
+          <div class="badge badge-muted" style="margin-bottom: 12px;">Interoperability Connectors</div>
+          <h2 style="font-size: 2rem; margin-bottom: 12px;">Connected Department Systems</h2>
+          <p>Configured connectors bridging heterogeneous government systems via standardized adapters.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <strong>🎓 Education System</strong>
+              <span class="badge badge-emerald">Online</span>
+            </div>
+            <p style="font-size: 0.85rem;">Prototype Department System (NAD / Academic Registry) &bull; Protocol: REST / JSON</p>
+          </div>
+
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <strong>💰 Revenue System</strong>
+              <span class="badge badge-emerald">Online</span>
+            </div>
+            <p style="font-size: 0.85rem;">Prototype Department System (Income & Land Registry) &bull; Protocol: Direct SQL DB</p>
+          </div>
+
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <strong>🏢 Employment System</strong>
+              <span class="badge badge-emerald">Online</span>
+            </div>
+            <p style="font-size: 0.85rem;">Prototype Department System (NCS / Labour Exchange) &bull; Protocol: Legacy SOAP/XML</p>
+          </div>
+
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <strong>🏥 Health Registry</strong>
+              <span class="badge badge-emerald">Online</span>
+            </div>
+            <p style="font-size: 0.85rem;">Prototype Department System (ABDM / Health IDs) &bull; Protocol: REST / FHIR</p>
+          </div>
+
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <strong>🏘️ Municipal Registry</strong>
+              <span class="badge badge-emerald">Online</span>
+            </div>
+            <p style="font-size: 0.85rem;">Prototype Department System (Urban Local Bodies) &bull; Protocol: REST / JSON</p>
+          </div>
+
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <strong>🚗 Transport Registry</strong>
+              <span class="badge badge-emerald">Online</span>
+            </div>
+            <p style="font-size: 0.85rem;">Prototype Department System (Sarathi / Vahan Sync) &bull; Protocol: REST / JSON</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Citizen Call to Action -->
+    <section style="padding: 64px 0; text-align: center;">
+      <div class="container container-narrow">
+        <div class="card" style="background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%); color: #FFFFFF; padding: 48px 32px;">
+          <h2 style="color: #FFFFFF; font-size: 2.2rem; margin-bottom: 16px;">Ready to explore services tailored for you?</h2>
+          <p style="color: #DBEAFE; font-size: 1.05rem; margin-bottom: 28px;">
+            Discover education grants, employment schemes, employee welfare, and official certificates in minutes.
+          </p>
+          <a href="category.html" class="btn btn-secondary btn-lg" style="color: var(--civic-blue); font-weight: 700;">
+            Select Your Profile Category →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-emblem">🇮🇳</div>
+            <div class="brand-text">
+              <span class="brand-title">ONEGOV</span>
+              <span class="brand-subtitle">National Unified Services</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            An open interoperability middleware architecture providing single-window citizen welfare access and cross-departmental data normalization.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">CITIZEN PORTAL</h4>
+          <ul class="footer-links">
+            <li><a href="category.html">Select Category</a></li>
+            <li><a href="services.html">Services Catalog</a></li>
+            <li><a href="applications.html">Track Applications</a></li>
+            <li><a href="notifications.html">Notifications</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">ADMIN & DEPT</h4>
+          <ul class="footer-links">
+            <li><a href="admin/login.html">Officer Login</a></li>
+            <li><a href="admin/dashboard.html">Admin Dashboard</a></li>
+            <li><a href="admin/integrations.html">Integrations</a></li>
+            <li><a href="admin/systems.html">Department Systems</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">GOVERNANCE & TRUST</h4>
+          <ul class="footer-links">
+            <li><a href="consent-management.html">Consent Manager</a></li>
+            <li><a href="help.html">Help & FAQs</a></li>
+            <li><a href="admin/audit-logs.html">Audit Logs</a></li>
+            <li><a href="admin/data-mapping.html">Data Mapping</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 ONEGOV National Initiative. All Rights Reserved.</span>
+        <span class="footer-disclaimer-pill">Simulated Prototype Environment &bull; No Real Sensitive Credentials Required</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/landing.js"></script>
+</body>
+</html>
