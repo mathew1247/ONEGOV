@@ -86,8 +86,8 @@ const ONEGOV_API = {
     return { success: false, error: "Service not found" };
   },
 
-  // POST /api/consent/grant - Record DPDP citizen consent
-  async grantConsent(serviceId, citizenId, requiredSystems) {
+  // POST /api/consent/grant - Record DPDP citizen consent grant
+  async grantConsent(serviceId, citizenId, requiredSystems, serviceName, requestingDept) {
     try {
       const res = await fetch(`${this.baseUrl}/consent/grant`, {
         method: "POST",
@@ -95,7 +95,10 @@ const ONEGOV_API = {
         body: JSON.stringify({
           service_id: serviceId,
           citizen_id: citizenId,
-          required_systems: requiredSystems
+          requesting_dept: requestingDept || "Government Department",
+          required_systems: requiredSystems,
+          purpose: `Automated entitlement determination & multi-department verification for ${serviceName || serviceId}`,
+          data_requested: "Aadhaar e-KYC Token (UIDAI), Academic Marksheet Token (ABC NAD), Family Income Tier (CBDT)"
         })
       });
       if (res.ok) return await res.json();
@@ -107,11 +110,79 @@ const ONEGOV_API = {
       consent_id: "CNS-" + Math.floor(100000 + Math.random() * 900000),
       service_id: serviceId,
       citizen_id: citizenId,
+      requesting_dept: requestingDept || "Ministry of Education",
       systems_authorized: requiredSystems,
+      purpose: `Automated entitlement determination for ${serviceName || serviceId}`,
+      data_requested: "Aadhaar e-KYC Token, Academic Marksheet, Family Income Tier",
+      status: "GRANTED",
       timestamp: new Date().toISOString(),
       legal_framework: "DPDP Act 2023 Compliant"
     };
     return { success: true, consent: consentRecord };
+  },
+
+  // POST /api/consent/deny - Record DPDP citizen consent denial
+  async denyConsent(serviceId, citizenId, purpose, requestingDept) {
+    try {
+      const res = await fetch(`${this.baseUrl}/consent/deny`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: serviceId,
+          citizen_id: citizenId,
+          requesting_dept: requestingDept || "Government Department",
+          purpose: purpose || "Service Application Data Access"
+        })
+      });
+      if (res.ok) return await res.json();
+    } catch (e) {
+      console.warn("ONEGOV_API: denyConsent fallback", e);
+    }
+
+    const consentRecord = {
+      consent_id: "CNS-DENIED-" + Math.floor(100000 + Math.random() * 900000),
+      service_id: serviceId,
+      citizen_id: citizenId,
+      requesting_dept: requestingDept || "Government Department",
+      systems_authorized: [],
+      purpose: purpose || "Service Application Data Access",
+      data_requested: "Verified Credentials",
+      status: "DENIED",
+      timestamp: new Date().toISOString(),
+      legal_framework: "DPDP Act 2023 Compliant"
+    };
+    return { success: true, consent: consentRecord };
+  },
+
+  // GET /api/consent/history - Fetch citizen consent history audit trail
+  async getConsentHistory() {
+    try {
+      const res = await fetch(`${this.baseUrl}/consent/history`);
+      if (res.ok) return await res.json();
+    } catch (e) {
+      console.warn("ONEGOV_API: getConsentHistory fallback", e);
+    }
+    return {
+      success: true,
+      history: [
+        {
+          consent_id: "CNS-881021",
+          purpose: "National Scholarship Eligibility Verification",
+          requesting_dept: "Ministry of Education",
+          data_requested: "Aadhaar e-KYC, Academic Marksheet, Income Tier",
+          status: "GRANTED",
+          timestamp: new Date(Date.now() - 7200000).toISOString()
+        },
+        {
+          consent_id: "CNS-541092",
+          purpose: "PMKVY Skill Certification Enrollment",
+          requesting_dept: "Min. of Skill Development",
+          data_requested: "Identity Token, Educational Credential",
+          status: "GRANTED",
+          timestamp: new Date(Date.now() - 18000000).toISOString()
+        }
+      ]
+    };
   },
 
   // POST /api/interop/query - Query Interoperability Middleware
@@ -463,6 +534,168 @@ const SERVICES_CATALOG = {
 };
 
 // ============================================================================
+// 2.1 Multi-Language Dictionary (I18N)
+// ============================================================================
+const I18N_DICTIONARY = {
+  en: {
+    nav_track: "Track Application",
+    nav_consent_history: "Consent History",
+    nav_sso: "DigiLocker SSO",
+    nav_officer: "🏛️ Officer Portal",
+    consent_header: "Digital Personal Data Protection (DPDP) Consent Request",
+    consent_subtext: "Your explicit consent is required before accessing or sharing department credentials.",
+    consent_purpose: "Purpose:",
+    consent_dept: "Requesting Department:",
+    consent_data_req: "Data Requested:",
+    consent_status_lbl: "Consent Status:",
+    consent_timestamp: "Timestamp:",
+    systems_involved: "🏛️ Government Systems Authorized Upon Consent",
+    btn_grant: "✓ Grant Consent & Apply →",
+    btn_deny: "✕ Deny Consent",
+    tracker_subtitle: "Unified Multi-Department Interoperability Application Workflow",
+    ref_id_label: "Unified Application Reference ID:",
+    timeline_title: "Application Milestone Progress",
+    mile_1: "Submitted",
+    mile_2: "Verification",
+    mile_3: "Dept Processing",
+    mile_4: "Approval",
+    mile_5: "Completed",
+    pipeline_heading: "Detailed Interoperability Verification Stages",
+    sec_note: "🔒 Single Reference ID across connected government departments",
+    btn_close: "Close View",
+    btn_advance: "Simulate Next Verification Step ⚡",
+    tag_verified: "✓ Verified Citizen Profile (DEMO)",
+    btn_inspector: "🔬 Inspect OCDS & Adapters",
+    btn_edit_profile: "✏️ Edit Profile",
+    btn_switch_cat: "🔄 Switch Category",
+    mdm_title: "Unified Citizen Profile (Master Data Management)",
+    mdm_subtitle: "Reused verified credentials across departments. All data marked SIMULATED DEMO DATA.",
+    demo_watermark: "DEMO / SIMULATED IDENTITY",
+    mdm_identity_title: "Identity & Demographics",
+    mdm_edu_title: "Education & Academic Record",
+    mdm_income_title: "Income & Revenue Verification",
+    mdm_welfare_title: "Welfare & Schemes Entitlement",
+    consent_audit_badge: "DPDP Act 2023 Compliance Vault",
+    consent_history_title: "📜 Citizen Data Sharing Consent Audit History",
+    consent_history_sub: "Immutable session record of all granted and denied inter-department data access requests.",
+    th_consent_id: "Consent ID",
+    th_purpose: "Purpose",
+    th_requesting_dept: "Requesting Dept",
+    th_data_requested: "Data Requested",
+    th_status: "Status",
+    th_timestamp: "Timestamp",
+    notif_center_title: "Notification Center",
+    notif_center_sub: "Real-time workflow & consent events",
+    btn_mark_read: "✓ Mark All as Read",
+    btn_clear_all: "Clear All"
+  },
+  ta: {
+    nav_track: "விண்ணப்பத்தைக் கண்காணிக்கவும்",
+    nav_consent_history: "ஒப்புதல் வரலாறு",
+    nav_sso: "டிஜிலாக்கர் உள்நுழைவு",
+    nav_officer: "🏛️ அரசு அதிகாரி போர்ட்டல்",
+    consent_header: "டிஜிட்டல் தனிநபர் தரவு பாதுகாப்பு (DPDP) ஒப்புதல் கோரிக்கை",
+    consent_subtext: "துறை விவரங்களை அணுகும் முன் உங்கள் வெளிப்படையான ஒப்புதல் தேவை.",
+    consent_purpose: "நோக்கம்:",
+    consent_dept: "கோரும் துறை:",
+    consent_data_req: "கோரப்பட்ட தரவு:",
+    consent_status_lbl: "ஒப்புதல் நிலை:",
+    consent_timestamp: "நேரம்:",
+    systems_involved: "🏛️ ஒப்புதலின் கீழ் அனுமதிக்கப்பட்ட அரசு அமைப்புகள்",
+    btn_grant: "✓ ஒப்புதல் அளித்து விண்ணப்பிக்கவும் →",
+    btn_deny: "✕ நிராகரிக்கவும்",
+    tracker_subtitle: "ஒருங்கிணைந்த பல-துறை செயல்பாட்டு பணிப்பாய்வு",
+    ref_id_label: "ஒருங்கிணைந்த விண்ணப்பக் குறிப்பு எண்:",
+    timeline_title: "விண்ணப்ப மைல்கல் முன்னேற்றம்",
+    mile_1: "சமர்ப்பிக்கப்பட்டது",
+    mile_2: "சரிபார்ப்பு",
+    mile_3: "துறை செயல்முறை",
+    mile_4: "ஒப்புதல்",
+    mile_5: "நிறைவடைந்தது",
+    pipeline_heading: "விரிவான சரிபார்ப்பு நிலைகள்",
+    sec_note: "🔒 அனைத்து துறைகளுக்கும் ஒரே குறிப்பு எண்",
+    btn_close: "மூடு",
+    btn_advance: "அடுத்த நிலையை இயக்கு ⚡",
+    tag_verified: "✓ சரிபார்க்கப்பட்ட சுயவிவரம் (மாதிரி)",
+    btn_inspector: "🔬 அடாப்டர்களை ஆய்வு செய்",
+    btn_edit_profile: "✏️ சுயவிவரத்தைத் திருத்து",
+    btn_switch_cat: "🔄 பிரிவை மாற்று",
+    mdm_title: "ஒருங்கிணைந்த குடிமகன் சுயவிவரம் (MDM)",
+    mdm_subtitle: "துறைகளில் மீண்டும் பயன்படுத்தப்பட்ட சரிபார்க்கப்பட்ட சான்றுகள். அனைத்தும் மாதிரி தரவு.",
+    demo_watermark: "மாதிரி / போலி அடையாளம்",
+    mdm_identity_title: "அடையாளம் மற்றும் விவரங்கள்",
+    mdm_edu_title: "கல்வி மற்றும் கல்வி பதிவு",
+    mdm_income_title: "வருமானம் மற்றும் வருவாய் சரிபார்ப்பு",
+    mdm_welfare_title: "நலத்திட்டங்கள் மற்றும் உரிமைகள்",
+    consent_audit_badge: "DPDP சட்டம் 2023 தணிக்கை",
+    consent_history_title: "📜 தரவு பகிர்வு ஒப்புதல் வரலாறு",
+    consent_history_sub: "அனுமதிக்கப்பட்ட மற்றும் நிராகரிக்கப்பட்ட தரவு அணுகல் கோரிக்கைகளின் பதிவு.",
+    th_consent_id: "ஒப்புதல் ID",
+    th_purpose: "நோக்கம்",
+    th_requesting_dept: "கோரும் துறை",
+    th_data_requested: "கோரப்பட்ட தரவு",
+    th_status: "நிலை",
+    th_timestamp: "நேரம்",
+    notif_center_title: "அறிவிப்பு மையம்",
+    notif_center_sub: "நிகழ்நேர அறிவிப்புகள்",
+    btn_mark_read: "✓ அனைத்தையும் படித்ததாகக் குறி",
+    btn_clear_all: "அனைத்தையும் நீக்கு"
+  },
+  hi: {
+    nav_track: "आवेदन ट्रैक करें",
+    nav_consent_history: "सहमति इतिहास",
+    nav_sso: "डिजीलॉकर एसएसओ",
+    nav_officer: "🏛️ अधिकारी पोर्टल",
+    consent_header: "डिजिटल व्यक्तिगत डेटा संरक्षण (DPDP) सहमति अनुरोध",
+    consent_subtext: "विभागीय क्रेडेंशियल एक्सेस करने से पहले आपकी स्पष्ट सहमति आवश्यक है।",
+    consent_purpose: "उद्देश्य:",
+    consent_dept: "अनुरोधकर्ता विभाग:",
+    consent_data_req: "अनुरोधित डेटा:",
+    consent_status_lbl: "सहमति स्थिति:",
+    consent_timestamp: "समय:",
+    systems_involved: "🏛️ सहमति पर अधिकृत सरकारी प्रणालियां",
+    btn_grant: "✓ सहमति दें और आवेदन करें →",
+    btn_deny: "✕ अस्वीकार करें",
+    tracker_subtitle: "एककीकृत बहु-विभागीय इंटरऑपरेबिलिटी आवेदन कार्यप्रवाह",
+    ref_id_label: "एककीकृत आवेदन संदर्भ आईडी:",
+    timeline_title: "आवेदन मील का पत्थर प्रगति",
+    mile_1: "प्रस्तुत",
+    mile_2: "सत्यापन",
+    mile_3: "विभागीय प्रक्रिया",
+    mile_4: "स्वीकृति",
+    mile_5: "पूर्ण",
+    pipeline_heading: "विस्तृत इंटरऑपरेबिलिटी सत्यापन चरण",
+    sec_note: "🔒 सभी जुड़े विभागों में एकल संदर्भ आईडी",
+    btn_close: "बंद करें",
+    btn_advance: "अगला चरण सिम्युलेट करें ⚡",
+    tag_verified: "✓ सत्यापित नागरिक प्रोफ़ाइल (डेमो)",
+    btn_inspector: "🔬 एडेप्टर का निरीक्षण करें",
+    btn_edit_profile: "✏️ प्रोफ़ाइल संपादित करें",
+    btn_switch_cat: "🔄 श्रेणी बदलें",
+    mdm_title: "एककीकृत नागरिक प्रोफ़ाइल (मास्टर डेटा प्रबंधन)",
+    mdm_subtitle: "विभागों में पुनः उपयोग किए गए क्रेडेंशियल। सभी डेटा सिम्युलेटेड डेमो डेटा है।",
+    demo_watermark: "डेमो / सिम्युलेटेड पहचान",
+    mdm_identity_title: "पहचान और जनसांख्यिकी",
+    mdm_edu_title: "शिक्षा और शैक्षणिक रिकॉर्ड",
+    mdm_income_title: "आय और राजस्व सत्यापन",
+    mdm_welfare_title: "कल्याण और योजना पात्रता",
+    consent_audit_badge: "DPDP अधिनियम 2023 ऑडिट",
+    consent_history_title: "📜 नागरिक डेटा साझाकरण सहमति ऑडिट इतिहास",
+    consent_history_sub: "स्वीकृत और अस्वीकृत डेटा एक्सेस अनुरोधों का रिकॉर्ड।",
+    th_consent_id: "सहमति आईडी",
+    th_purpose: "उद्देश्य",
+    th_requesting_dept: "अनुरोधकर्ता विभाग",
+    th_data_requested: "अनुरोधित डेटा",
+    th_status: "स्थिति",
+    th_timestamp: "समय",
+    notif_center_title: "अधिसूचना केंद्र",
+    notif_center_sub: "वास्तविक समय कार्यप्रवाह और सहमति कार्यक्रम",
+    btn_mark_read: "✓ सभी को पढ़ा हुआ चिह्नित करें",
+    btn_clear_all: "सभी साफ़ करें"
+  }
+};
+
+// ============================================================================
 // 3. Application State & Orchestration
 // ============================================================================
 const AppState = {
@@ -470,6 +703,30 @@ const AppState = {
   currentStep: 1,
   activeView: "page-category",
   ssoToken: null,
+  currentLanguage: "en",
+  notifications: [
+    {
+      id: "NTF-8801",
+      type: "success",
+      message: "✓ Citizen Profile registered with ONEGOV Master Data Management (MDM)",
+      timestamp: new Date(Date.now() - 3600000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      read: false
+    },
+    {
+      id: "NTF-8802",
+      type: "info",
+      message: "✓ Academic Bank of Credits (ABC) SOAP XML credential linked",
+      timestamp: new Date(Date.now() - 2700000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      read: false
+    },
+    {
+      id: "NTF-8803",
+      type: "warn",
+      message: "⚠ Department consent required for NSP Scholarship application",
+      timestamp: new Date(Date.now() - 900000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      read: false
+    }
+  ],
   currentUserProfile: {
     userId: "IND-8842",
     fullName: "Aarav Sharma",
@@ -679,6 +936,158 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  // ============================================================================
+  // Multi-Language (I18N) UI Translation System
+  // ============================================================================
+  const langSelect = document.getElementById("lang-select");
+
+  function applyLanguage(langKey) {
+    if (!I18N_DICTIONARY[langKey]) langKey = "en";
+    AppState.currentLanguage = langKey;
+    const dict = I18N_DICTIONARY[langKey];
+
+    document.querySelectorAll("[data-i18n]").forEach((elem) => {
+      const key = elem.getAttribute("data-i18n");
+      if (dict[key]) {
+        elem.textContent = dict[key];
+      }
+    });
+
+    showToast(langKey === "ta" ? "மொழி தமிழிற்கு மாற்றப்பட்டது." : (langKey === "hi" ? "भाषा बदलकर हिंदी की गई।" : "Language set to English."));
+  }
+
+  if (langSelect) {
+    langSelect.addEventListener("change", (e) => {
+      applyLanguage(e.target.value);
+    });
+  }
+
+  // ============================================================================
+  // Notification Center (Session Drawer & Event Bus)
+  // ============================================================================
+  const navNotificationBtn = document.getElementById("nav-notification-btn");
+  const navNotificationBadge = document.getElementById("nav-notification-badge");
+  const notificationDrawer = document.getElementById("notification-drawer");
+  const btnCloseNotificationDrawer = document.getElementById("btn-close-notification-drawer");
+  const notificationDrawerBackdrop = document.getElementById("notification-drawer-backdrop");
+  const btnMarkAllRead = document.getElementById("btn-mark-all-read");
+  const btnClearNotifications = document.getElementById("btn-clear-notifications");
+  const notificationItemsContainer = document.getElementById("notification-items-container");
+
+  function addNotification(type, message) {
+    const notif = {
+      id: "NTF-" + Math.floor(10000 + Math.random() * 90000),
+      type: type, // success, warn, danger, info
+      message: message,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      read: false
+    };
+    AppState.notifications.unshift(notif);
+    renderNotifications();
+  }
+
+  function renderNotifications() {
+    if (!notificationItemsContainer) return;
+    const unreadCount = AppState.notifications.filter(n => !n.read).length;
+    if (navNotificationBadge) {
+      navNotificationBadge.textContent = unreadCount;
+      navNotificationBadge.style.display = unreadCount > 0 ? "inline-block" : "none";
+    }
+
+    if (AppState.notifications.length === 0) {
+      notificationItemsContainer.innerHTML = `<div class="table-empty-note">No notifications in session.</div>`;
+      return;
+    }
+
+    notificationItemsContainer.innerHTML = AppState.notifications.map(n => `
+      <div class="notification-item ${n.read ? '' : 'unread'}" data-id="${n.id}">
+        <div class="notif-top-row">
+          <span class="notif-type-tag ${n.type}">${n.type}</span>
+          <span class="notif-time">${n.timestamp}</span>
+        </div>
+        <div class="notif-msg">${n.message}</div>
+      </div>
+    `).join("");
+  }
+
+  function toggleNotificationDrawer(show) {
+    if (!notificationDrawer) return;
+    if (show) {
+      notificationDrawer.classList.add("active");
+      notificationDrawer.setAttribute("aria-hidden", "false");
+    } else {
+      notificationDrawer.classList.remove("active");
+      notificationDrawer.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  if (navNotificationBtn) navNotificationBtn.addEventListener("click", () => toggleNotificationDrawer(true));
+  if (btnCloseNotificationDrawer) btnCloseNotificationDrawer.addEventListener("click", () => toggleNotificationDrawer(false));
+  if (notificationDrawerBackdrop) notificationDrawerBackdrop.addEventListener("click", () => toggleNotificationDrawer(false));
+
+  if (btnMarkAllRead) {
+    btnMarkAllRead.addEventListener("click", () => {
+      AppState.notifications.forEach(n => n.read = true);
+      renderNotifications();
+      showToast("All notifications marked as read.");
+    });
+  }
+
+  if (btnClearNotifications) {
+    btnClearNotifications.addEventListener("click", () => {
+      AppState.notifications = [];
+      renderNotifications();
+      showToast("Notifications cleared.");
+    });
+  }
+
+  renderNotifications();
+
+  // ============================================================================
+  // Consent History Modal Controller
+  // ============================================================================
+  const navBtnConsentHistory = document.getElementById("nav-btn-consent-history");
+  const consentHistoryModal = document.getElementById("consent-history-modal");
+  const btnCloseConsentHistory = document.getElementById("btn-close-consent-history");
+  const btnCloseConsentHistoryFooter = document.getElementById("btn-close-consent-history-footer");
+  const consentHistoryBackdrop = document.getElementById("consent-history-backdrop");
+  const consentHistoryTbody = document.getElementById("consent-history-tbody");
+
+  async function openConsentHistoryModal() {
+    if (!consentHistoryModal) return;
+    consentHistoryModal.classList.add("active");
+    consentHistoryModal.setAttribute("aria-hidden", "false");
+
+    const res = await ONEGOV_API.getConsentHistory();
+    if (res && res.history) {
+      consentHistoryTbody.innerHTML = res.history.map(item => `
+        <tr>
+          <td><strong>${item.consent_id}</strong></td>
+          <td>${item.purpose || 'Service Eligibility Access'}</td>
+          <td>${item.requesting_dept || 'Ministry of Education'}</td>
+          <td><span class="detail-text-sm">${item.data_requested || 'Identity & Academic Tokens'}</span></td>
+          <td>
+            <span class="v-status-badge ${item.status === 'GRANTED' ? 'badge-green' : 'tag-red'}">
+              ${item.status === 'GRANTED' ? '✓ GRANTED' : '✕ DENIED'}
+            </span>
+          </td>
+          <td class="code-font">${new Date(item.timestamp).toLocaleTimeString()}</td>
+        </tr>
+      `).join("");
+    }
+  }
+
+  function closeConsentHistoryModal() {
+    if (!consentHistoryModal) return;
+    consentHistoryModal.classList.remove("active");
+    consentHistoryModal.setAttribute("aria-hidden", "true");
+  }
+
+  if (navBtnConsentHistory) navBtnConsentHistory.addEventListener("click", openConsentHistoryModal);
+  if (btnCloseConsentHistory) btnCloseConsentHistory.addEventListener("click", closeConsentHistoryModal);
+  if (btnCloseConsentHistoryFooter) btnCloseConsentHistoryFooter.addEventListener("click", closeConsentHistoryModal);
+  if (consentHistoryBackdrop) consentHistoryBackdrop.addEventListener("click", closeConsentHistoryModal);
+
   // Form Validation & Navigation
   btnStep1Continue.addEventListener("click", () => {
     const fullName = document.getElementById("input-fullname").value.trim();
@@ -730,6 +1139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     AppState.currentUserProfile = profile;
     await ONEGOV_API.saveProfile(profile);
 
+    addNotification("success", "✓ Unified Citizen Profile updated in ONEGOV MDM");
     showToast("Profile registered with ONEGOV Interoperability Core!");
     navigateTo("page-dashboard");
   });
@@ -740,6 +1150,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("dash-citizen-name").textContent = p.fullName || "Aarav Sharma";
     document.getElementById("dash-avatar").textContent = (p.fullName || "AS").substring(0, 2).toUpperCase();
     document.getElementById("dash-citizen-subline").textContent = `${p.category.toUpperCase()} Pathway • ${p.state || "Delhi"} • Interoperability ID: ${p.userId || "IND-8842"}`;
+
+    // Populate MDM Unified Citizen Profile Card
+    const mdmIdentity = document.getElementById("mdm-val-identity");
+    const mdmEdu = document.getElementById("mdm-val-education");
+    const mdmIncome = document.getElementById("mdm-val-income");
+    const mdmWelfare = document.getElementById("mdm-val-welfare");
+
+    if (mdmIdentity) mdmIdentity.textContent = `${p.fullName || "Aarav Sharma"} • Masked Aadhaar: XXXX-XXXX-8842 • DOB: ${p.dob || "2003-08-14"}`;
+    if (mdmEdu) mdmEdu.textContent = `${p.course || "B.Tech Computer Science"} (${p.college || "Delhi Technological University"}) • ${p.eduLevel || "UG"}`;
+    if (mdmIncome) mdmIncome.textContent = `Family Income: ${p.familyIncome || "₹2.5 Lakhs - ₹5 Lakhs"} (Tier-1 Priority Beneficiary)`;
+    if (mdmWelfare) mdmWelfare.textContent = `Eligible for National Merit-cum-Means Scholarship & Educational Fee Waiver`;
 
     const catKey = (p.category || "student").toLowerCase();
     const services = SERVICES_CATALOG[catKey] || SERVICES_CATALOG.student;
@@ -773,7 +1194,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Service Details Modal & Consent Flow
+  // Service Details Modal & DPDP Consent Flow
   async function openServiceDetails(serviceId) {
     const srv = await ONEGOV_API.getServiceDetails(serviceId);
     if (!srv.success) return;
@@ -783,9 +1204,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("detail-modal-title").textContent = s.service_name;
     document.getElementById("detail-service-dept").textContent = s.dept;
     document.getElementById("detail-service-tag").textContent = s.tag;
-    document.getElementById("detail-service-desc").textContent = s.desc;
-    document.getElementById("detail-service-eligibility").textContent = s.eligibility;
-    document.getElementById("detail-service-info-req").textContent = s.info_required;
+
+    // Populate DPDP Consent Details Table
+    const purposeElem = document.getElementById("consent-val-purpose");
+    const deptElem = document.getElementById("consent-val-dept");
+    const dataElem = document.getElementById("consent-val-data");
+    const statusElem = document.getElementById("consent-val-status");
+    const timeElem = document.getElementById("consent-val-time");
+
+    if (purposeElem) purposeElem.textContent = `Automated eligibility verification & direct benefit transfer for ${s.service_name}`;
+    if (deptElem) deptElem.textContent = s.dept;
+    if (dataElem) dataElem.textContent = `Aadhaar e-KYC Token (UIDAI), Academic Marksheet Token (${s.dept}), Family Income Tier (CBDT)`;
+    if (statusElem) statusElem.innerHTML = `<span class="badge-amber">PENDING CITIZEN DECISION</span>`;
+    if (timeElem) timeElem.textContent = new Date().toISOString();
 
     const sysContainer = document.getElementById("detail-systems-container");
     sysContainer.innerHTML = s.required_systems.map(sys => `<div class="sys-chip-lg">🏛️ <strong>${sys}</strong> <span>(API Direct Query)</span></div>`).join("");
@@ -800,53 +1231,123 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   btnCloseDetail.addEventListener("click", closeServiceDetails);
-  btnCancelDetail.addEventListener("click", closeServiceDetails);
   detailModalBackdrop.addEventListener("click", closeServiceDetails);
 
-  // Give Consent & Apply
-  btnConsentApply.addEventListener("click", async () => {
-    const srv = AppState.activeServiceForConsent;
-    if (!srv) return;
+  // Grant Consent Handler
+  const btnConsentGrant = document.getElementById("btn-consent-grant");
+  const btnConsentDeny = document.getElementById("btn-consent-deny");
 
-    closeServiceDetails();
+  if (btnConsentGrant) {
+    btnConsentGrant.addEventListener("click", async () => {
+      const srv = AppState.activeServiceForConsent;
+      if (!srv) return;
 
-    // 1. Grant DPDP Consent
-    const consentRes = await ONEGOV_API.grantConsent(srv.service_id, AppState.currentUserProfile.userId, srv.required_systems);
-    showToast(`Consent CNS-${consentRes.consent.consent_id.split('-')[1]} logged under DPDP Act.`);
+      closeServiceDetails();
 
-    // 2. Query Interoperability Gateway
-    await ONEGOV_API.queryInterop(AppState.currentUserProfile.userId, srv.required_systems, consentRes.consent.consent_id);
+      // 1. Grant DPDP Consent
+      const consentRes = await ONEGOV_API.grantConsent(srv.service_id, AppState.currentUserProfile.userId, srv.required_systems, srv.service_name, srv.dept);
+      showToast(`✓ DPDP Consent ${consentRes.consent.consent_id} Granted!`);
+      addNotification("success", `✓ Consent ${consentRes.consent.consent_id} granted to ${srv.dept}`);
 
-    // 3. Submit Multi-Department Workflow Application
-    const appRes = await ONEGOV_API.saveApplication(srv.service_id, srv.service_name, srv.dept, AppState.currentUserProfile);
+      // 2. Query Interoperability Gateway
+      await ONEGOV_API.queryInterop(AppState.currentUserProfile.userId, srv.required_systems, consentRes.consent.consent_id);
 
-    // 4. Open Live Multi-Stage Tracker
-    openApplicationTracker(appRes.refId, srv.service_name, srv.dept, appRes.stages || []);
-  });
+      // 3. Submit Multi-Department Workflow Application
+      const appRes = await ONEGOV_API.saveApplication(srv.service_id, srv.service_name, srv.dept, AppState.currentUserProfile);
+      addNotification("info", `✓ Application ${appRes.refId} submitted to ${srv.dept}`);
 
-  // Application Tracker Modal Controller
+      // 4. Open Live Multi-Stage Tracker with 5-milestone timeline
+      openApplicationTracker(appRes.refId, srv.service_name, srv.dept, appRes.stages || []);
+    });
+  }
+
+  // Deny Consent Handler
+  if (btnConsentDeny) {
+    btnConsentDeny.addEventListener("click", async () => {
+      const srv = AppState.activeServiceForConsent;
+      if (!srv) return;
+
+      closeServiceDetails();
+
+      const consentRes = await ONEGOV_API.denyConsent(srv.service_id, AppState.currentUserProfile.userId, `Access for ${srv.service_name}`, srv.dept);
+      showToast(`✕ Consent Denied. Data sharing stopped.`);
+      addNotification("danger", `✕ Consent DENIED by Citizen for ${srv.service_name}. Data-sharing halted.`);
+    });
+  }
+
+  // Application Tracker Modal & 5-Milestone Timeline Controller
+  function updateMilestoneTimeline(currentStageIndex) {
+    // 1: Submitted (0)
+    // 2: Verification (1-3)
+    // 3: Dept Processing (3-4)
+    // 4: Approval (4-5)
+    // 5: Completed (6)
+    for (let i = 1; i <= 5; i++) {
+      const step = document.getElementById(`mile-step-${i}`);
+      const line = document.getElementById(`mile-line-${i}`);
+      if (!step) continue;
+      step.classList.remove("completed", "active");
+      if (line) line.classList.remove("completed");
+
+      if (i === 1) {
+        step.classList.add("completed");
+        if (line) line.classList.add("completed");
+      } else if (i === 2) {
+        if (currentStageIndex >= 1 && currentStageIndex <= 3) {
+          step.classList.add(currentStageIndex >= 3 ? "completed" : "active");
+          if (currentStageIndex >= 3 && line) line.classList.add("completed");
+        } else if (currentStageIndex > 3) {
+          step.classList.add("completed");
+          if (line) line.classList.add("completed");
+        }
+      } else if (i === 3) {
+        if (currentStageIndex >= 3 && currentStageIndex <= 4) {
+          step.classList.add(currentStageIndex >= 4 ? "completed" : "active");
+          if (currentStageIndex >= 4 && line) line.classList.add("completed");
+        } else if (currentStageIndex > 4) {
+          step.classList.add("completed");
+          if (line) line.classList.add("completed");
+        }
+      } else if (i === 4) {
+        if (currentStageIndex === 4) {
+          step.classList.add("active");
+        } else if (currentStageIndex >= 5) {
+          step.classList.add("completed");
+          if (line) line.classList.add("completed");
+        }
+      } else if (i === 5) {
+        if (currentStageIndex >= 5) {
+          step.classList.add("completed");
+        }
+      }
+    }
+  }
+
   function openApplicationTracker(refId, serviceName, dept, stages) {
     document.getElementById("tracker-ref-id").textContent = refId;
     document.getElementById("tracker-modal-title").textContent = serviceName;
     document.getElementById("tracker-service-dept").textContent = dept;
 
+    const currentIdx = stages.findIndex(s => s.status === 'IN_PROGRESS');
+    updateMilestoneTimeline(currentIdx !== -1 ? currentIdx : 2);
+
     const stagesList = document.getElementById("verification-stages-list");
-    stagesList.innerHTML = stages.map((st, idx) => `
+    stagesList.innerHTML = stages.map((st) => `
       <div class="v-stage ${st.status === 'VERIFIED' ? 'stage-completed' : (st.status === 'IN_PROGRESS' ? 'stage-progress' : 'stage-pending')}" id="v-stage-${st.id}">
         <div class="v-stage-icon">${st.icon}</div>
         <div class="v-stage-info">
           <div class="v-stage-title-row">
-            <h4>${st.name}</h4>
+            <h4>Stage ${st.id}: ${st.name}</h4>
             <span class="v-status-badge ${st.status === 'VERIFIED' ? 'badge-green' : (st.status === 'IN_PROGRESS' ? 'badge-amber' : 'badge-gray')}">
-              ${st.status === 'VERIFIED' ? '✓ Verified' : (st.status === 'IN_PROGRESS' ? '⏳ In Progress' : '○ Pending')} (${st.authority})
+              ${st.status === 'VERIFIED' ? '✓ Completed' : (st.status === 'IN_PROGRESS' ? '⏳ Processing' : '○ Pending')} (${st.dept})
             </span>
           </div>
-          <p class="v-stage-desc">Verified via ONEGOV National Gateway with DPDP token encryption.</p>
+          <p class="v-stage-desc">Authority: <strong>${st.authority}</strong> • Status: ${st.time}</p>
         </div>
       </div>
     `).join("");
 
-    AppState.activeApplicationSimulation = { refId, currentStep: 2, totalStages: stages.length };
+    AppState.activeApplicationSimulation = { refId, currentStep: currentIdx !== -1 ? currentIdx : 2, totalStages: stages.length };
     trackerModal.classList.add("active");
     trackerModal.setAttribute("aria-hidden", "false");
   }
@@ -868,6 +1369,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (res && res.application) {
       openApplicationTracker(refId, res.application.serviceName, res.application.dept, res.application.stages);
       showToast(`Advanced Stage: ${res.application.overallStatus}`);
+      addNotification("info", `Workflow ${refId} advanced: ${res.application.overallStatus}`);
     }
   });
 
@@ -904,20 +1406,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   let selectedCitizenType = "student";
 
   function openSsoModal() {
+    if (!ssoModal) return;
     ssoModal.classList.add("active");
     ssoModal.setAttribute("aria-hidden", "false");
   }
 
   function closeSsoModal() {
+    if (!ssoModal) return;
     ssoModal.classList.remove("active");
     ssoModal.setAttribute("aria-hidden", "true");
   }
 
-  navBtnSso.addEventListener("click", openSsoModal);
+  if (navBtnSso) navBtnSso.addEventListener("click", openSsoModal);
   if (btnSsoFill) btnSsoFill.addEventListener("click", openSsoModal);
-  btnCloseSso.addEventListener("click", closeSsoModal);
-  btnCancelSso.addEventListener("click", closeSsoModal);
-  ssoBackdrop.addEventListener("click", closeSsoModal);
+  if (btnCloseSso) btnCloseSso.addEventListener("click", closeSsoModal);
+  if (btnCancelSso) btnCancelSso.addEventListener("click", closeSsoModal);
+  if (ssoBackdrop) ssoBackdrop.addEventListener("click", closeSsoModal);
 
   ssoCitizenCards.forEach((card) => {
     card.addEventListener("click", () => {
@@ -927,49 +1431,62 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  btnConfirmSso.addEventListener("click", async () => {
-    closeSsoModal();
-    const tokenRes = await ONEGOV_API.requestOidcToken(selectedCitizenType);
-    if (tokenRes && tokenRes.access_token) {
-      AppState.ssoToken = tokenRes.access_token;
-      AppState.currentUserProfile = { ...tokenRes.citizen_claims, verifiedSSO: true };
-      
-      // Update Navbar Verified State
-      document.getElementById("nav-sso-label").textContent = `✓ ${tokenRes.citizen_claims.name.split(' ')[0]}`;
-      document.getElementById("nav-sso-dot").style.display = "inline-block";
-      
-      showToast(`✓ OIDC JWT Token Issued for ${tokenRes.citizen_claims.name}! Masked Aadhaar: ${tokenRes.citizen_claims.aadhaar_masked}`);
-      
-      // If currently on profile page, populate
-      if (AppState.activeView === "page-profile") {
-        document.getElementById("input-fullname").value = tokenRes.citizen_claims.name;
-        document.getElementById("input-dob").value = tokenRes.citizen_claims.dob;
-        document.getElementById("input-mobile").value = tokenRes.citizen_claims.mobile;
-        document.getElementById("input-email").value = tokenRes.citizen_claims.email;
-        document.getElementById("input-state").value = tokenRes.citizen_claims.state;
-        document.getElementById("input-district").value = tokenRes.citizen_claims.district;
-        document.getElementById("input-pincode").value = tokenRes.citizen_claims.pincode;
+  if (btnConfirmSso) {
+    btnConfirmSso.addEventListener("click", async () => {
+      closeSsoModal();
+      const tokenRes = await ONEGOV_API.requestOidcToken(selectedCitizenType);
+      if (tokenRes && tokenRes.access_token) {
+        AppState.ssoToken = tokenRes.access_token;
+        AppState.currentUserProfile = { ...tokenRes.citizen_claims, verifiedSSO: true };
+        
+        // Update Navbar Verified State
+        const ssoLabel = document.getElementById("nav-sso-label");
+        const ssoDot = document.getElementById("nav-sso-dot");
+        if (ssoLabel) ssoLabel.textContent = `✓ ${tokenRes.citizen_claims.name.split(' ')[0]}`;
+        if (ssoDot) ssoDot.style.display = "inline-block";
+        
+        showToast(`✓ OIDC JWT Token Issued for ${tokenRes.citizen_claims.name}! Masked Aadhaar: ${tokenRes.citizen_claims.aadhaar_masked}`);
+        
+        // If currently on profile page, populate
+        if (AppState.activeView === "page-profile") {
+          const fn = document.getElementById("input-fullname");
+          const dob = document.getElementById("input-dob");
+          const mob = document.getElementById("input-mobile");
+          const em = document.getElementById("input-email");
+          const st = document.getElementById("input-state");
+          const dt = document.getElementById("input-district");
+          const pc = document.getElementById("input-pincode");
+          if (fn) fn.value = tokenRes.citizen_claims.name;
+          if (dob) dob.value = tokenRes.citizen_claims.dob;
+          if (mob) mob.value = tokenRes.citizen_claims.mobile;
+          if (em) em.value = tokenRes.citizen_claims.email;
+          if (st) st.value = tokenRes.citizen_claims.state;
+          if (dt) dt.value = tokenRes.citizen_claims.district;
+          if (pc) pc.value = tokenRes.citizen_claims.pincode;
+        }
       }
-    }
-  });
+    });
+  }
 
   // ============================================================================
   // 6. ADAPTER & OCDS SCHEMA INSPECTOR MODAL
   // ============================================================================
   function openInspectorModal() {
+    if (!inspectorModal) return;
     inspectorModal.classList.add("active");
     inspectorModal.setAttribute("aria-hidden", "false");
   }
 
   function closeInspectorModal() {
+    if (!inspectorModal) return;
     inspectorModal.classList.remove("active");
     inspectorModal.setAttribute("aria-hidden", "true");
   }
 
   if (btnOpenInspector) btnOpenInspector.addEventListener("click", openInspectorModal);
-  btnCloseInspector.addEventListener("click", closeInspectorModal);
-  btnCloseInspectorFooter.addEventListener("click", closeInspectorModal);
-  inspectorBackdrop.addEventListener("click", closeInspectorModal);
+  if (btnCloseInspector) btnCloseInspector.addEventListener("click", closeInspectorModal);
+  if (btnCloseInspectorFooter) btnCloseInspectorFooter.addEventListener("click", closeInspectorModal);
+  if (inspectorBackdrop) inspectorBackdrop.addEventListener("click", closeInspectorModal);
 
   inspectorTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -977,46 +1494,433 @@ document.addEventListener("DOMContentLoaded", async () => {
       tab.classList.add("active");
       const targetTab = tab.getAttribute("data-tab");
 
-      document.getElementById("tab-content-soap").style.display = targetTab === "soap" ? "block" : "none";
-      document.getElementById("tab-content-sql").style.display = targetTab === "sql" ? "block" : "none";
-      document.getElementById("tab-content-ocds").style.display = targetTab === "ocds" ? "block" : "none";
+      const tSoap = document.getElementById("tab-content-soap");
+      const tSql = document.getElementById("tab-content-sql");
+      const tOcds = document.getElementById("tab-content-ocds");
+      if (tSoap) tSoap.style.display = targetTab === "soap" ? "block" : "none";
+      if (tSql) tSql.style.display = targetTab === "sql" ? "block" : "none";
+      if (tOcds) tOcds.style.display = targetTab === "ocds" ? "block" : "none";
     });
   });
 
-  btnRunAdapterTest.addEventListener("click", async () => {
-    btnRunAdapterTest.textContent = "⏳ Executing Transformation...";
-    const res = await ONEGOV_API.testAdapters();
-    if (res && res.adapters_tested) {
-      document.getElementById("code-soap-view").textContent = res.adapters_tested.soap_xml_adapter.raw_envelope_preview;
-      document.getElementById("code-sql-view").textContent = JSON.stringify(res.adapters_tested.legacy_sql_adapter.raw_row, null, 2);
-      document.getElementById("code-ocds-view").textContent = JSON.stringify(res.adapters_tested.soap_xml_adapter.normalized_ocds, null, 2);
-      showToast("Multi-Protocol transformation benchmark executed (Avg execution: 24ms)!");
-    }
-    btnRunAdapterTest.textContent = "⚡ Execute Live Adapter Benchmark";
-  });
+  if (btnRunAdapterTest) {
+    btnRunAdapterTest.addEventListener("click", async () => {
+      btnRunAdapterTest.textContent = "⏳ Executing Transformation...";
+      const res = await ONEGOV_API.testAdapters();
+      if (res && res.adapters_tested) {
+        const cSoap = document.getElementById("code-soap-view");
+        const cSql = document.getElementById("code-sql-view");
+        const cOcds = document.getElementById("code-ocds-view");
+        if (cSoap) cSoap.textContent = res.adapters_tested.soap_xml_adapter.raw_envelope_preview;
+        if (cSql) cSql.textContent = JSON.stringify(res.adapters_tested.legacy_sql_adapter.raw_row, null, 2);
+        if (cOcds) cOcds.textContent = JSON.stringify(res.adapters_tested.soap_xml_adapter.normalized_ocds, null, 2);
+        showToast("Multi-Protocol transformation benchmark executed (Avg execution: 24ms)!");
+      }
+      btnRunAdapterTest.textContent = "⚡ Execute Live Adapter Benchmark";
+    });
+  }
 
   // ============================================================================
-  // 7. GOVERNMENT OFFICER & ADMIN PORTAL CONTROLLER
+  // 7. RBAC, GOVERNMENT OFFICER PORTAL & ADMIN AUDIT VAULT CONTROLLER
   // ============================================================================
-  let isAdminMode = false;
+  const demoRoleSelect = document.getElementById("demo-role-select");
+  const btnOfficerRefresh = document.getElementById("btn-officer-refresh");
 
-  navBtnAdminToggle.addEventListener("click", () => {
-    isAdminMode = !isAdminMode;
-    if (isAdminMode) {
-      navBtnAdminToggle.innerHTML = "<span>👤 Citizen Portal</span>";
-      navigateTo("page-admin");
-    } else {
-      navBtnAdminToggle.innerHTML = "<span>🏛️ Officer Portal</span>";
+  function applyRolePermissions(role) {
+    AppState.currentRole = role || "CITIZEN";
+    if (demoRoleSelect) demoRoleSelect.value = AppState.currentRole;
+
+    const btnOpenInspector = document.getElementById("btn-open-inspector");
+    const tabsCitizen = document.getElementById("nav-tabs-citizen");
+    const tabsOfficer = document.getElementById("nav-tabs-officer");
+    const tabsAdmin = document.getElementById("nav-tabs-admin");
+
+    if (tabsCitizen) tabsCitizen.style.display = role === "CITIZEN" ? "flex" : "none";
+    if (tabsOfficer) tabsOfficer.style.display = role === "OFFICER" ? "flex" : "none";
+    if (tabsAdmin) tabsAdmin.style.display = role === "ADMINISTRATOR" ? "flex" : "none";
+
+    if (role === "CITIZEN") {
+      if (btnOpenInspector) btnOpenInspector.style.display = "none";
       navigateTo("page-category");
+      showToast("DEMO ROLE: CITIZEN (Access: Unified Profile, Services, Consent, Tracking)");
+    } else if (role === "OFFICER") {
+      if (btnOpenInspector) btnOpenInspector.style.display = "none";
+      navigateTo("page-officer");
+      renderOfficerQueue();
+      showToast("DEMO ROLE: GOVERNMENT OFFICER (Access: Application Queue, Verification, Approve/Reject)");
+    } else if (role === "ADMINISTRATOR") {
+      if (btnOpenInspector) btnOpenInspector.style.display = "inline-block";
+      navigateTo("page-admin");
+      loadAdminDashboardData();
+      showToast("DEMO ROLE: ADMINISTRATOR (Access: Full Telemetry, Circuit Breakers, Audit Vault)");
     }
+
+    // Record Login audit log entry
+    fetch("/api/audit-logs/record", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        event: "LOGIN",
+        actor: `${role} User`,
+        role: role,
+        service: "ONEGOV RBAC Access Control",
+        status: "SUCCESS",
+        details: { action: `Role login switched to ${role}` }
+      })
+    }).catch(() => {});
+  }
+
+  if (demoRoleSelect) {
+    demoRoleSelect.addEventListener("change", (e) => {
+      applyRolePermissions(e.target.value);
+    });
+  }
+
+  // Sub-Navigation Tab Click Handlers
+  document.querySelectorAll(".nav-tab-item").forEach(tab => {
+    tab.addEventListener("click", () => {
+      const navTarget = tab.getAttribute("data-nav-target");
+      const adminAnchor = tab.getAttribute("data-admin-anchor");
+
+      if (navTarget) {
+        document.querySelectorAll(".nav-tab-item").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        navigateTo(navTarget);
+      } else if (adminAnchor) {
+        document.querySelectorAll(".nav-tab-item").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        const el = document.getElementById(adminAnchor);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }
+    });
   });
 
-  btnExitAdmin.addEventListener("click", () => {
-    isAdminMode = false;
-    navBtnAdminToggle.innerHTML = "<span>🏛️ Officer Portal</span>";
-    navigateTo("page-category");
-  });
+  const subnavBtnTrack = document.getElementById("subnav-btn-track");
+  if (subnavBtnTrack) {
+    subnavBtnTrack.addEventListener("click", () => {
+      navigateTo("page-category");
+      const input = document.getElementById("quick-track-input");
+      if (input) { input.focus(); input.select(); }
+    });
+  }
 
+  const subnavBtnConsent = document.getElementById("subnav-btn-consent");
+  if (subnavBtnConsent) {
+    subnavBtnConsent.addEventListener("click", openConsentHistoryModal);
+  }
+
+  const subnavOfficerRefresh = document.getElementById("subnav-officer-refresh");
+  if (subnavOfficerRefresh) {
+    subnavOfficerRefresh.addEventListener("click", () => {
+      renderOfficerQueue();
+      showToast("Officer Queue refreshed.");
+    });
+  }
+
+  // Officer Application Queue Renderer
+  async function renderOfficerQueue() {
+    const appData = await ONEGOV_API.getAdminApplications();
+    const tbody = document.getElementById("officer-queue-tbody");
+    if (!tbody) return;
+
+    if (appData && appData.applications && appData.applications.length > 0) {
+      const appsList = appData.applications;
+      const pendingCount = appsList.length;
+      const processingCount = appsList.filter(a => !a.overallStatus.includes("APPROVED") && !a.overallStatus.includes("SANCTIONED") && !a.overallStatus.includes("REJECTED")).length;
+      const approvedCount = appsList.filter(a => a.overallStatus.includes("APPROVED") || a.overallStatus.includes("SANCTIONED")).length;
+      const rejectedCount = appsList.filter(a => a.overallStatus.includes("REJECTED")).length;
+
+      const kpiPending = document.getElementById("officer-kpi-pending");
+      const kpiProcessing = document.getElementById("officer-kpi-processing");
+      const kpiApproved = document.getElementById("officer-kpi-approved");
+      const kpiRejected = document.getElementById("officer-kpi-rejected");
+
+      if (kpiPending) kpiPending.textContent = pendingCount;
+      if (kpiProcessing) kpiProcessing.textContent = processingCount;
+      if (kpiApproved) kpiApproved.textContent = approvedCount;
+      if (kpiRejected) kpiRejected.textContent = rejectedCount;
+
+      document.getElementById("officer-queue-count").textContent = `${appData.total} Applications Pending`;
+      tbody.innerHTML = appData.applications.map((app) => {
+        const currentStage = app.stages ? app.stages[app.currentStageIndex] : null;
+        const deptName = currentStage ? currentStage.dept : app.dept;
+        const stageName = currentStage ? currentStage.name : "Final Approval";
+        const submittedDate = app.createdAt ? new Date(app.createdAt).toLocaleDateString("en-GB", { day: '2-digit', month: 'short', year: 'numeric' }) : "28 Sep 2026";
+        const citizenDemoId = app.citizenId ? `CIT-DEMO-${app.citizenId.replace('IND-', '')}` : "CIT-DEMO-001";
+        
+        let statusBadge = "badge-amber";
+        if (app.overallStatus.includes("REJECTED")) statusBadge = "badge-red";
+        else if (app.overallStatus.includes("APPROVED") || app.overallStatus.includes("SANCTIONED")) statusBadge = "badge-green";
+
+        return `
+          <tr>
+            <td><strong>${app.refId}</strong></td>
+            <td><span class="code-font">${citizenDemoId}</span></td>
+            <td>${app.serviceName}</td>
+            <td>${deptName}</td>
+            <td><span class="tag-blue">${stageName}</span></td>
+            <td><span class="v-status-badge ${statusBadge}">${app.overallStatus}</span></td>
+            <td>${submittedDate}</td>
+            <td>
+              <button type="button" class="btn-primary-sm btn-view-app" data-ref-id="${app.refId}">View</button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      document.querySelectorAll(".btn-view-app").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const refId = btn.getAttribute("data-ref-id");
+          openOfficerAppDetailsModal(refId);
+        });
+      });
+    } else {
+      tbody.innerHTML = `<tr><td colspan="8" class="table-empty-note">No applications in queue.</td></tr>`;
+    }
+  }
+
+  if (btnOfficerRefresh) {
+    btnOfficerRefresh.addEventListener("click", () => {
+      renderOfficerQueue();
+      showToast("Officer Queue refreshed.");
+    });
+  }
+
+  // Helper to render 6-Stage Workflow state inside Officer Application Details Modal
+  function renderOfficer6StageWorkflow(app) {
+    const container = document.getElementById("officer-6stage-container");
+    if (!container || !app || !app.stages) return;
+
+    container.innerHTML = app.stages.map((st) => {
+      let statusLabel = "○ PENDING";
+      let statusClass = "badge-gray";
+      if (st.status === "VERIFIED") {
+        statusLabel = "✓ COMPLETED";
+        statusClass = "badge-green";
+      } else if (st.status === "IN_PROGRESS") {
+        statusLabel = "⏳ PROCESSING";
+        statusClass = "badge-amber";
+      } else if (st.status === "FAILED") {
+        statusLabel = "✕ FAILED";
+        statusClass = "badge-red";
+      }
+
+      return `
+        <div class="v-stage ${st.status === 'VERIFIED' ? 'stage-completed' : (st.status === 'IN_PROGRESS' ? 'stage-progress' : (st.status === 'FAILED' ? 'stage-failed' : 'stage-pending'))}" style="padding: 10px 14px; margin-bottom: 8px; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 16px; font-weight: bold;">${st.icon}</span>
+            <div>
+              <strong style="font-size: 14px;">Stage ${st.id}: ${st.name}</strong>
+              <div style="font-size: 12px; color: #64748b;">Department: <strong>${st.dept}</strong> • Authority: ${st.authority}</div>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <span class="v-status-badge ${statusClass}">${statusLabel}</span>
+            <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">Timestamp: ${st.time || 'Queued'}</div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  // Officer Application Details Modal
+  async function openOfficerAppDetailsModal(refId) {
+    const modal = document.getElementById("officer-app-details-modal");
+    if (!modal) return;
+
+    const appData = await ONEGOV_API.getWorkflowStatus(refId);
+    const app = appData && appData.application ? appData.application : null;
+
+    if (app) {
+      AppState.activeOfficerRefId = refId;
+      document.getElementById("officer-app-ref-badge").textContent = app.refId;
+      document.getElementById("officer-app-dept").textContent = app.dept || "Ministry of Education";
+      document.getElementById("officer-cit-name").textContent = app.citizenName || "Aarav Sharma";
+      document.getElementById("officer-cit-id").textContent = app.citizenId || "IND-8842";
+      document.getElementById("officer-app-service").textContent = app.serviceName;
+
+      const currentStage = app.stages ? app.stages[app.currentStageIndex] : null;
+      document.getElementById("officer-app-curr-stage").textContent = currentStage ? `Stage ${app.currentStageIndex + 1}: ${currentStage.name}` : app.overallStatus;
+
+      const verStatus = currentStage ? currentStage.status : "IN_PROGRESS";
+      const verBadge = verStatus === "VERIFIED" ? "badge-green" : (verStatus === "FAILED" ? "badge-red" : "badge-amber");
+      document.getElementById("officer-app-ver-status").innerHTML = `<span class="${verBadge}">${verStatus}</span>`;
+      document.getElementById("officer-app-last-updated").textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+      // Render 6-Stage Workflow inside modal
+      renderOfficer6StageWorkflow(app);
+
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+    } else {
+      showToast(`Application ${refId} details not found`);
+    }
+  }
+
+  // Officer [ VERIFY ] Button Action
+  const btnOfficerVerifyStage = document.getElementById("btn-officer-verify-stage");
+  if (btnOfficerVerifyStage) {
+    btnOfficerVerifyStage.addEventListener("click", async () => {
+      const refId = AppState.activeOfficerRefId;
+      if (!refId) return;
+
+      const res = await ONEGOV_API.adminAction(refId, "VERIFY_STAGE", "Officer verified current department stage.", null, "VERIFIED");
+      if (res && res.application) {
+        const updatedApp = res.application;
+        const stageName = updatedApp.stages && updatedApp.stages[updatedApp.currentStageIndex - 1] ? updatedApp.stages[updatedApp.currentStageIndex - 1].name : "Stage Verification";
+        
+        addNotification("success", `✓ ${stageName} completed for application ${refId}.`);
+        showToast(`✓ ${stageName} marked VERIFIED!`);
+        openOfficerAppDetailsModal(refId);
+        renderOfficerQueue();
+      }
+    });
+  }
+
+  // Officer [ MARK FAILED ] Button Action
+  const btnOfficerMarkFailed = document.getElementById("btn-officer-mark-failed");
+  if (btnOfficerMarkFailed) {
+    btnOfficerMarkFailed.addEventListener("click", async () => {
+      const refId = AppState.activeOfficerRefId;
+      if (!refId) return;
+
+      const res = await ONEGOV_API.adminAction(refId, "VERIFY_STAGE", "Officer marked stage verification as FAILED.", null, "FAILED");
+      if (res && res.application) {
+        addNotification("danger", `✕ Verification failed for application ${refId}.`);
+        showToast(`✕ Stage marked FAILED for ${refId}`);
+        openOfficerAppDetailsModal(refId);
+        renderOfficerQueue();
+      }
+    });
+  }
+
+  // Officer [ APPROVE APPLICATION ] Trigger Action -> Opens Approval Confirmation Modal
+  const btnOfficerModalApprove = document.getElementById("btn-officer-modal-approve");
+  const approveModal = document.getElementById("officer-approve-modal");
+  const btnCloseApproveModal = document.getElementById("btn-close-approve-modal");
+  const btnCancelApprove = document.getElementById("btn-cancel-approve");
+  const btnConfirmApprove = document.getElementById("btn-confirm-approve");
+
+  if (btnOfficerModalApprove) {
+    btnOfficerModalApprove.addEventListener("click", async () => {
+      const refId = AppState.activeOfficerRefId;
+      if (!refId) return;
+
+      const appData = await ONEGOV_API.getWorkflowStatus(refId);
+      const app = appData && appData.application ? appData.application : null;
+
+      document.getElementById("approve-modal-ref-id").textContent = `Ref: ${refId}`;
+      document.getElementById("approve-modal-app-id").textContent = refId;
+      document.getElementById("approve-modal-service").textContent = app ? app.serviceName : "Government Service";
+      document.getElementById("approve-modal-stage").textContent = app && app.stages ? (app.stages[app.currentStageIndex] ? app.stages[app.currentStageIndex].name : "Final Sanction") : "Final Sanction";
+
+      if (approveModal) {
+        approveModal.classList.add("active");
+        approveModal.setAttribute("aria-hidden", "false");
+      }
+    });
+  }
+
+  function closeApproveModal() {
+    if (approveModal) {
+      approveModal.classList.remove("active");
+      approveModal.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  if (btnCloseApproveModal) btnCloseApproveModal.addEventListener("click", closeApproveModal);
+  if (btnCancelApprove) btnCancelApprove.addEventListener("click", closeApproveModal);
+
+  if (btnConfirmApprove) {
+    btnConfirmApprove.addEventListener("click", async () => {
+      const refId = AppState.activeOfficerRefId;
+      closeApproveModal();
+
+      const res = await ONEGOV_API.adminAction(refId, "APPROVE_FINAL", "Approved by Government Officer after verified multi-department checks.");
+      if (res && res.application) {
+        addNotification("success", `Your application ${refId} has been approved.`);
+        showToast(`✓ Application ${refId} Approved!`);
+        document.getElementById("officer-app-details-modal").classList.remove("active");
+        renderOfficerQueue();
+      }
+    });
+  }
+
+  // Officer [ REJECT APPLICATION ] Trigger Action -> Opens Rejection Dialog Modal
+  const btnOfficerModalReject = document.getElementById("btn-officer-modal-reject");
+  if (btnOfficerModalReject) {
+    btnOfficerModalReject.addEventListener("click", () => {
+      const refId = AppState.activeOfficerRefId;
+      document.getElementById("officer-app-details-modal").classList.remove("active");
+      openOfficerRejectModal(refId);
+    });
+  }
+
+  // Officer Reject Modal handlers
+  function openOfficerRejectModal(refId) {
+    const modal = document.getElementById("officer-reject-modal");
+    if (!modal) return;
+    AppState.activeOfficerRefId = refId;
+    document.getElementById("reject-modal-ref-id").textContent = `Ref: ${refId}`;
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+  }
+
+  const officerRejectForm = document.getElementById("officer-reject-form");
+  if (officerRejectForm) {
+    officerRejectForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const refId = AppState.activeOfficerRefId;
+      const preset = document.getElementById("reject-preset-select").value;
+      const custom = document.getElementById("officer-rejection-reason").value;
+      const reason = preset === "Other" ? custom : preset;
+
+      if (!reason || !reason.trim()) {
+        showToast("Please specify a valid rejection reason.");
+        return;
+      }
+
+      const res = await ONEGOV_API.adminAction(refId, "REJECT", `Rejected by Officer`, reason);
+      if (res && res.application) {
+        addNotification("danger", `Your application ${refId} has been rejected. Reason: ${reason}`);
+        showToast(`Application ${refId} rejected: ${reason}`);
+        document.getElementById("officer-reject-modal").classList.remove("active");
+        renderOfficerQueue();
+      }
+    });
+  }
+
+  const btnCloseOfficerModal = document.getElementById("btn-close-officer-modal");
+  if (btnCloseOfficerModal) {
+    btnCloseOfficerModal.addEventListener("click", () => {
+      document.getElementById("officer-app-details-modal").classList.remove("active");
+    });
+  }
+
+  const btnCloseRejectModal = document.getElementById("btn-close-reject-modal");
+  const btnCancelReject = document.getElementById("btn-cancel-reject");
+  if (btnCloseRejectModal) {
+    btnCloseRejectModal.addEventListener("click", () => {
+      document.getElementById("officer-reject-modal").classList.remove("active");
+    });
+  }
+  if (btnCancelReject) {
+    btnCancelReject.addEventListener("click", () => {
+      document.getElementById("officer-reject-modal").classList.remove("active");
+    });
+  }
+
+  const rejectPresetSelect = document.getElementById("reject-preset-select");
+  if (rejectPresetSelect) {
+    rejectPresetSelect.addEventListener("change", (e) => {
+      const customGrp = document.getElementById("reject-custom-group");
+      if (customGrp) {
+        customGrp.style.display = e.target.value === "Other" ? "block" : "none";
+      }
+    });
+  }
+
+  // Admin Dashboard Telemetry & Audit Vault Loader
   async function loadAdminDashboardData() {
     const overview = await ONEGOV_API.getAdminOverview();
     if (overview) {
@@ -1025,90 +1929,181 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("cb-summary-badge").textContent = overview.metrics.active_gateways;
     }
 
-    // Load Applications
-    const appData = await ONEGOV_API.getAdminApplications();
-    const tbody = document.getElementById("admin-applications-tbody");
-    if (appData && appData.applications) {
-      document.getElementById("admin-app-count").textContent = `${appData.total} Applications`;
-      tbody.innerHTML = appData.applications.map((app) => `
-        <tr>
-          <td><strong>${app.refId}</strong></td>
-          <td>${app.citizenName || 'Aarav Sharma'}</td>
-          <td>${app.serviceName}</td>
-          <td><span class="tag-blue">Stage ${app.currentStageIndex + 1}: ${app.stages[app.currentStageIndex]?.name || 'Complete'}</span></td>
-          <td>${app.stages[app.currentStageIndex]?.authority || 'ONEGOV Engine'}</td>
-          <td><span class="v-status-badge badge-green">${app.overallStatus}</span></td>
-          <td>
-            <div class="table-action-btns">
-              <button type="button" class="btn-table-approve" data-ref-id="${app.refId}">✓ Approve</button>
-              <button type="button" class="btn-table-reject" data-ref-id="${app.refId}">✗ Reject</button>
-            </div>
-          </td>
-        </tr>
-      `).join("");
+    // Load Audit Logs into Admin Audit Vault Table
+    try {
+      const auditRes = await fetch("/api/audit-logs");
+      if (auditRes.ok) {
+        const auditData = await auditRes.json();
+        const vaultTbody = document.getElementById("admin-audit-vault-tbody");
+        if (vaultTbody && auditData.logs) {
+          document.getElementById("admin-audit-vault-count").textContent = `${auditData.totalLogs} Recorded Audit Logs`;
+          vaultTbody.innerHTML = auditData.logs.map((log) => {
+            const timeStr = new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            let badgeClass = "tag-green";
+            if (log.status === "WARN") badgeClass = "tag-amber";
+            else if (log.status === "FAILED") badgeClass = "tag-red";
 
-      document.querySelectorAll(".btn-table-approve").forEach(b => {
-        b.addEventListener("click", async () => {
-          const rId = b.getAttribute("data-ref-id");
-          await ONEGOV_API.adminAction(rId, "APPROVE_STAGE", "Officer verified via National Depository");
-          showToast(`✓ Application ${rId} Stage Approved!`);
-          loadAdminDashboardData();
-        });
-      });
-
-      document.querySelectorAll(".btn-table-reject").forEach(b => {
-        b.addEventListener("click", async () => {
-          const rId = b.getAttribute("data-ref-id");
-          await ONEGOV_API.adminAction(rId, "REJECT", "Documentation mismatch");
-          showToast(`Application ${rId} Rejected.`);
-          loadAdminDashboardData();
-        });
-      });
+            return `
+              <tr>
+                <td><span class="code-font">${timeStr}</span></td>
+                <td><strong>${log.event || 'API_REQUEST'}</strong></td>
+                <td>${log.actor || 'System Engine'}</td>
+                <td><span class="tag-blue">${log.role || 'SYSTEM'}</span></td>
+                <td><span class="code-font">${log.refId || 'N/A'}</span></td>
+                <td>${log.action || log.service}</td>
+                <td><span class="v-status-badge ${badgeClass}">${log.status || 'SUCCESS'}</span></td>
+                <td><span class="code-font hash-code">${log.hash ? log.hash.substring(0, 12) + '...' : '0x88f2a1...'}</span></td>
+              </tr>
+            `;
+          }).join("");
+        }
+      }
+    } catch (e) {
+      console.warn("Failed to load audit logs", e);
     }
 
     // Load Resilience & Circuit Breakers Status
     const resilience = await ONEGOV_API.getResilienceStatus();
     if (resilience && resilience.circuit_breakers) {
       const chips = document.getElementById("cb-chips-container");
-      chips.innerHTML = Object.entries(resilience.circuit_breakers).map(([k, cb]) => `
-        <div class="cb-chip-row">
-          <span><strong>${cb.name}</strong></span>
-          <span class="${cb.raw_state === 'OPEN' ? 'tag-red' : 'tag-green'}">${cb.state}</span>
-        </div>
-      `).join("");
+      if (chips) {
+        chips.innerHTML = Object.entries(resilience.circuit_breakers).map(([k, cb]) => `
+          <div class="cb-chip-row">
+            <span><strong>${cb.name}</strong></span>
+            <span class="${cb.raw_state === 'OPEN' ? 'tag-red' : 'tag-green'}">${cb.state}</span>
+          </div>
+        `).join("");
+      }
 
       // DLQ Table
       const dlqBody = document.getElementById("admin-dlq-tbody");
-      document.getElementById("dlq-count-badge").textContent = `${resilience.dlq_count} Pending Failures`;
-      if (resilience.dlq_items && resilience.dlq_items.length > 0) {
-        dlqBody.innerHTML = resilience.dlq_items.map((item) => `
-          <tr>
-            <td><strong>${item.id}</strong></td>
-            <td>${new Date(item.timestamp).toLocaleTimeString()}</td>
-            <td>${item.service}</td>
-            <td><span class="tag-red">${item.error}</span></td>
-            <td><button type="button" class="btn-primary-sm btn-retry-dlq" data-dlq-id="${item.id}">Reprocess ➔</button></td>
-          </tr>
-        `).join("");
+      if (dlqBody) {
+        document.getElementById("dlq-count-badge").textContent = `${resilience.dlq_count} Pending Failures`;
+        if (resilience.dlq_items && resilience.dlq_items.length > 0) {
+          dlqBody.innerHTML = resilience.dlq_items.map((item) => `
+            <tr>
+              <td><strong>${item.id}</strong></td>
+              <td>${new Date(item.timestamp).toLocaleTimeString()}</td>
+              <td>${item.service}</td>
+              <td><span class="tag-red">${item.error}</span></td>
+              <td><button type="button" class="btn-primary-sm btn-retry-dlq" data-dlq-id="${item.id}">Reprocess ➔</button></td>
+            </tr>
+          `).join("");
 
-        document.querySelectorAll(".btn-retry-dlq").forEach(btn => {
-          btn.addEventListener("click", async () => {
-            const dId = btn.getAttribute("data-dlq-id");
-            await ONEGOV_API.retryDlq(dId);
-            showToast(`Message ${dId} reprocessed successfully.`);
-            loadAdminDashboardData();
+          document.querySelectorAll(".btn-retry-dlq").forEach(btn => {
+            btn.addEventListener("click", async () => {
+              const dId = btn.getAttribute("data-dlq-id");
+              await ONEGOV_API.retryDlq(dId);
+              showToast(`Message ${dId} reprocessed successfully.`);
+              loadAdminDashboardData();
+            });
           });
-        });
-      } else {
-        dlqBody.innerHTML = `<tr><td colspan="5" class="table-empty-note">No failed requests in DLQ. All department gateways are operating smoothly.</td></tr>`;
+        } else {
+          dlqBody.innerHTML = `<tr><td colspan="5" class="table-empty-note">No failed requests in DLQ. All department gateways are operating smoothly.</td></tr>`;
+        }
+      }
+    }
+  }PresetSelect = document.getElementById("reject-preset-select");
+  if (rejectPresetSelect) {
+    rejectPresetSelect.addEventListener("change", (e) => {
+      const customGrp = document.getElementById("reject-custom-group");
+      if (customGrp) {
+        customGrp.style.display = e.target.value === "CUSTOM" ? "block" : "none";
+      }
+    });
+  }
+
+  // Admin Dashboard Telemetry & Audit Vault Loader
+  async function loadAdminDashboardData() {
+    const overview = await ONEGOV_API.getAdminOverview();
+    if (overview) {
+      document.getElementById("kpi-inquiries").textContent = overview.metrics.total_applications * 710 || "1,420";
+      document.getElementById("kpi-pipeline").textContent = overview.metrics.in_review || "2";
+      document.getElementById("cb-summary-badge").textContent = overview.metrics.active_gateways;
+    }
+
+    // Load Audit Logs into Admin Audit Vault Table
+    try {
+      const auditRes = await fetch("/api/audit-logs");
+      if (auditRes.ok) {
+        const auditData = await auditRes.json();
+        const vaultTbody = document.getElementById("admin-audit-vault-tbody");
+        if (vaultTbody && auditData.logs) {
+          document.getElementById("admin-audit-vault-count").textContent = `${auditData.totalLogs} Recorded Audit Logs`;
+          vaultTbody.innerHTML = auditData.logs.map((log) => {
+            const timeStr = new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            let badgeClass = "tag-green";
+            if (log.status === "WARN") badgeClass = "tag-amber";
+            else if (log.status === "FAILED") badgeClass = "tag-red";
+
+            return `
+              <tr>
+                <td><span class="code-font">${timeStr}</span></td>
+                <td><strong>${log.event || 'API_REQUEST'}</strong></td>
+                <td>${log.actor || 'System Engine'}</td>
+                <td><span class="tag-blue">${log.role || 'SYSTEM'}</span></td>
+                <td><span class="code-font">${log.refId || 'N/A'}</span></td>
+                <td>${log.action || log.service}</td>
+                <td><span class="v-status-badge ${badgeClass}">${log.status || 'SUCCESS'}</span></td>
+                <td><span class="code-font hash-code">${log.hash ? log.hash.substring(0, 12) + '...' : '0x88f2a1...'}</span></td>
+              </tr>
+            `;
+          }).join("");
+        }
+      }
+    } catch (e) {
+      console.warn("Failed to load audit logs", e);
+    }
+
+    // Load Resilience & Circuit Breakers Status
+    const resilience = await ONEGOV_API.getResilienceStatus();
+    if (resilience && resilience.circuit_breakers) {
+      const chips = document.getElementById("cb-chips-container");
+      if (chips) {
+        chips.innerHTML = Object.entries(resilience.circuit_breakers).map(([k, cb]) => `
+          <div class="cb-chip-row">
+            <span><strong>${cb.name}</strong></span>
+            <span class="${cb.raw_state === 'OPEN' ? 'tag-red' : 'tag-green'}">${cb.state}</span>
+          </div>
+        `).join("");
+      }
+
+      // DLQ Table
+      const dlqBody = document.getElementById("admin-dlq-tbody");
+      if (dlqBody) {
+        document.getElementById("dlq-count-badge").textContent = `${resilience.dlq_count} Pending Failures`;
+        if (resilience.dlq_items && resilience.dlq_items.length > 0) {
+          dlqBody.innerHTML = resilience.dlq_items.map((item) => `
+            <tr>
+              <td><strong>${item.id}</strong></td>
+              <td>${new Date(item.timestamp).toLocaleTimeString()}</td>
+              <td>${item.service}</td>
+              <td><span class="tag-red">${item.error}</span></td>
+              <td><button type="button" class="btn-primary-sm btn-retry-dlq" data-dlq-id="${item.id}">Reprocess ➔</button></td>
+            </tr>
+          `).join("");
+
+          document.querySelectorAll(".btn-retry-dlq").forEach(btn => {
+            btn.addEventListener("click", async () => {
+              const dId = btn.getAttribute("data-dlq-id");
+              await ONEGOV_API.retryDlq(dId);
+              showToast(`Message ${dId} reprocessed successfully.`);
+              loadAdminDashboardData();
+            });
+          });
+        } else {
+          dlqBody.innerHTML = `<tr><td colspan="5" class="table-empty-note">No failed requests in DLQ. All department gateways are operating smoothly.</td></tr>`;
+        }
       }
     }
   }
 
-  btnAdminRefresh.addEventListener("click", () => {
-    loadAdminDashboardData();
-    showToast("Live telemetry & application queues refreshed.");
-  });
+  if (btnAdminRefresh) {
+    btnAdminRefresh.addEventListener("click", () => {
+      loadAdminDashboardData();
+      showToast("Live telemetry & audit vault refreshed.");
+    });
+  }
 
   btnToggleIncomeFault.addEventListener("click", async () => {
     const res = await ONEGOV_API.toggleCircuitBreaker("income");
@@ -1132,9 +2127,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Nav brand logo home click
   navBrandLogo.addEventListener("click", (e) => {
     e.preventDefault();
-    isAdminMode = false;
-    navBtnAdminToggle.innerHTML = "<span>🏛️ Officer Portal</span>";
-    navigateTo("page-category");
+    applyRolePermissions("CITIZEN");
   });
 
   // Edit Profile / Switch Category from Dashboard

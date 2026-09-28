@@ -121,29 +121,54 @@
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <span>Track Application</span>
+            <span data-i18n="nav_track">Track Application</span>
+          </button>
+
+          <!-- Consent History Button -->
+          <button type="button" class="nav-btn-consent-history" id="nav-btn-consent-history" title="View DPDP Consent Audit Trail">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span data-i18n="nav_consent_history">Consent History</span>
+          </button>
+
+          <!-- Notification Bell & Counter -->
+          <button type="button" class="nav-btn-notification" id="nav-notification-btn" title="View Notifications">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="notification-badge" id="nav-notification-badge">3</span>
           </button>
 
           <!-- Federated SSO Button -->
           <button type="button" class="nav-btn-sso" id="nav-btn-sso" title="Login with DigiLocker / MeriPehchan">
             <span class="sso-flag">🇮🇳</span>
-            <span id="nav-sso-label">DigiLocker SSO</span>
+            <span id="nav-sso-label" data-i18n="nav_sso">DigiLocker SSO</span>
             <span class="sso-verified-dot" id="nav-sso-dot" style="display:none;"></span>
           </button>
 
-          <!-- Officer / Admin Portal Switcher -->
-          <button type="button" class="nav-btn-admin-toggle" id="nav-btn-admin-toggle" title="Switch to Government Officer Portal">
-            <span>🏛️ Officer Portal</span>
-          </button>
+          <!-- Explicit Demo Role Switcher (RBAC) -->
+          <div class="demo-role-select-wrapper" title="Switch Demo System Role">
+            <span class="demo-role-label">DEMO ROLE:</span>
+            <select id="demo-role-select" class="demo-role-dropdown" aria-label="Select Demo Role">
+              <option value="CITIZEN" selected>👤 Citizen</option>
+              <option value="OFFICER">🏛️ Government Officer</option>
+              <option value="ADMINISTRATOR">⚙️ Administrator</option>
+            </select>
+          </div>
 
           <div class="stepper-nav-pill" id="global-stepper-pill" style="display: none;">
             <span class="step-indicator-text" id="step-indicator-badge">Step 1 of 2</span>
           </div>
 
-          <div class="lang-switcher" id="lang-toggle" role="button" tabindex="0" title="Switch language">
-            <span class="lang-active">EN</span>
-            <span class="lang-divider">|</span>
-            <span class="lang-option">हिंदी</span>
+          <!-- Dictionary Multi-Language Switcher (EN | தமிழ் | हिंदी) -->
+          <div class="lang-switcher-select-wrapper">
+            <select id="lang-select" class="lang-select-dropdown" aria-label="Select Language">
+              <option value="en" selected>English (EN)</option>
+              <option value="ta">Tamil (தமிழ்)</option>
+              <option value="hi">Hindi (हिंदी)</option>
+            </select>
           </div>
 
           <button class="help-btn" id="help-btn" aria-label="Help and Citizen Support" title="Help & Support">
@@ -153,11 +178,44 @@
               <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
               <line x1="12" y1="17" x2="12.01" y2="17"></line>
             </svg>
-            <span>1800-11-0040</span>
-          </button>
+    </header>
+
+    <!-- UNIFIED SUB-NAVIGATION BAR & DEMO ENVIRONMENT BANNER -->
+    <div class="subnav-bar" id="subnav-bar">
+      <div class="subnav-container">
+        <nav class="role-nav-tabs" id="role-nav-tabs" aria-label="Portal Navigation">
+          <!-- CITIZEN NAV TABS -->
+          <div class="nav-tab-group" id="nav-tabs-citizen">
+            <button type="button" class="nav-tab-item active" data-nav-target="page-category">🏠 Home & Services</button>
+            <button type="button" class="nav-tab-item" data-nav-target="page-profile">👤 Unified Profile</button>
+            <button type="button" class="nav-tab-item" data-nav-target="page-dashboard">📋 My Dashboard</button>
+            <button type="button" class="nav-tab-item" id="subnav-btn-track">⚡ Track Status</button>
+            <button type="button" class="nav-tab-item" id="subnav-btn-consent">🛡️ Consent History</button>
+          </div>
+
+          <!-- OFFICER NAV TABS -->
+          <div class="nav-tab-group" id="nav-tabs-officer" style="display: none;">
+            <button type="button" class="nav-tab-item active" data-nav-target="page-officer">🏛️ Officer Application Queue</button>
+            <button type="button" class="nav-tab-item" id="subnav-officer-refresh">🔄 Refresh Queue</button>
+          </div>
+
+          <!-- ADMINISTRATOR NAV TABS -->
+          <div class="nav-tab-group" id="nav-tabs-admin" style="display: none;">
+            <button type="button" class="nav-tab-item active" data-admin-anchor="admin-sec-overview">📊 System Overview</button>
+            <button type="button" class="nav-tab-item" data-admin-anchor="admin-sec-telemetry">⚡ Telemetry</button>
+            <button type="button" class="nav-tab-item" data-admin-anchor="admin-sec-visualizer">🌐 Technical Flow</button>
+            <button type="button" class="nav-tab-item" data-admin-anchor="admin-sec-resilience">🛡️ Resilience</button>
+            <button type="button" class="nav-tab-item" data-admin-anchor="admin-sec-audit">🔒 Audit Vault</button>
+            <button type="button" class="nav-tab-item" data-admin-anchor="admin-sec-dlq">📬 DLQ Vault</button>
+          </div>
+        </nav>
+
+        <div class="demo-environment-badge" title="National Interoperability Prototype">
+          <span class="pulse-dot-amber"></span>
+          <span>DEMO ENVIRONMENT • SIMULATED DATA</span>
         </div>
       </div>
-    </header>
+    </div>
 
     <!-- =========================================================================
          PAGE 1: CATEGORY SELECTION VIEW
@@ -883,7 +941,7 @@
           <div class="citizen-info">
             <div class="citizen-name-badge">
               <h2 id="dash-citizen-name">Aarav Sharma</h2>
-              <span class="verified-tag" id="dash-verified-tag">✓ Verified Citizen Profile</span>
+              <span class="verified-tag" id="dash-verified-tag" data-i18n="tag_verified">✓ Verified Citizen Profile (DEMO)</span>
             </div>
             <p class="citizen-subline" id="dash-citizen-subline">Students Pathway • Delhi, DL • Interoperability ID:
               IND-8842-9901</p>
@@ -891,11 +949,79 @@
         </div>
 
         <div class="dash-quick-actions">
-          <button type="button" class="btn-outline-sm" id="btn-open-inspector">🔬 Inspect OCDS & Adapters</button>
-          <button type="button" class="btn-outline-sm" id="dash-edit-profile-btn">✏️ Edit Profile</button>
-          <button type="button" class="btn-outline-sm" id="dash-change-category-btn">🔄 Switch Category</button>
+          <button type="button" class="btn-outline-sm" id="btn-open-inspector" data-i18n="btn_inspector">🔬 Inspect OCDS & Adapters</button>
+          <button type="button" class="btn-outline-sm" id="dash-edit-profile-btn" data-i18n="btn_edit_profile">✏️ Edit Profile</button>
+          <button type="button" class="btn-outline-sm" id="dash-change-category-btn" data-i18n="btn_switch_cat">🔄 Switch Category</button>
         </div>
       </div>
+
+      <!-- UNIFIED CITIZEN PROFILE / MDM VERIFICATION SOURCES CARD -->
+      <section class="mdm-profile-card" aria-labelledby="mdm-card-heading">
+        <div class="mdm-header">
+          <div class="mdm-title-row">
+            <span class="mdm-icon">👤</span>
+            <div>
+              <h3 id="mdm-card-heading" class="mdm-title" data-i18n="mdm_title">Unified Citizen Profile (Master Data Management)</h3>
+              <p class="mdm-subtitle" data-i18n="mdm_subtitle">Reused verified credentials across departments. All data marked SIMULATED DEMO DATA.</p>
+            </div>
+          </div>
+          <span class="demo-watermark-pill" data-i18n="demo_watermark">DEMO / SIMULATED IDENTITY</span>
+        </div>
+
+        <div class="mdm-grid" id="mdm-profile-grid">
+          <!-- Item 1: Identity -->
+          <div class="mdm-item-box">
+            <div class="mdm-item-header">
+              <span class="mdm-item-title" data-i18n="mdm_identity_title">Identity & Demographics</span>
+              <span class="badge-source source-id">SOURCE — IDENTITY</span>
+            </div>
+            <div class="mdm-item-val" id="mdm-val-identity">Aarav Sharma • Masked Aadhaar: XXXX-XXXX-8842</div>
+            <div class="mdm-status-row">
+              <span class="badge-verified">✓ VERIFIED — DEMO</span>
+              <span class="mdm-authority-text">Verified by UIDAI / DigiLocker OIDC</span>
+            </div>
+          </div>
+
+          <!-- Item 2: Education -->
+          <div class="mdm-item-box">
+            <div class="mdm-item-header">
+              <span class="mdm-item-title" data-i18n="mdm_edu_title">Education & Academic Record</span>
+              <span class="badge-source source-edu">SOURCE — EDUCATION</span>
+            </div>
+            <div class="mdm-item-val" id="mdm-val-education">B.Tech Computer Science (CGPA: 8.85) • Delhi Technological University</div>
+            <div class="mdm-status-row">
+              <span class="badge-verified">✓ VERIFIED — DEMO</span>
+              <span class="mdm-authority-text">Verified by Ministry of Education (ABC NAD SOAP XML)</span>
+            </div>
+          </div>
+
+          <!-- Item 3: Revenue / Income -->
+          <div class="mdm-item-box">
+            <div class="mdm-item-header">
+              <span class="mdm-item-title" data-i18n="mdm_income_title">Income & Revenue Verification</span>
+              <span class="badge-source source-revenue">SOURCE — REVENUE</span>
+            </div>
+            <div class="mdm-item-val" id="mdm-val-income">Family Income: ₹2.5L - ₹5L (Tier-1 Priority Beneficiary)</div>
+            <div class="mdm-status-row">
+              <span class="badge-verified">✓ VERIFIED — DEMO</span>
+              <span class="mdm-authority-text">Verified by Revenue Dept / CBDT Gateway</span>
+            </div>
+          </div>
+
+          <!-- Item 4: Welfare Benefits -->
+          <div class="mdm-item-box">
+            <div class="mdm-item-header">
+              <span class="mdm-item-title" data-i18n="mdm_welfare_title">Welfare & Schemes Entitlement</span>
+              <span class="badge-source source-welfare">SOURCE — WELFARE</span>
+            </div>
+            <div class="mdm-item-val" id="mdm-val-welfare">Eligible for National Merit-cum-Means Scholarship & Fee Waiver</div>
+            <div class="mdm-status-row">
+              <span class="badge-verified">✓ VERIFIED — DEMO</span>
+              <span class="mdm-authority-text">Verified by Ministry of Welfare & Social Justice</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- INTEROPERABILITY VISUAL FLOW ARCHITECTURE SECTION -->
       <section class="interop-architecture-card" aria-labelledby="interop-heading">
@@ -1002,7 +1128,80 @@
 
 
     <!-- =========================================================================
-         PAGE 4: GOVERNMENT OFFICER & ADMIN INTEROPERABILITY PORTAL
+         PAGE 4: GOVERNMENT OFFICER APPLICATION QUEUE PORTAL
+         ========================================================================= -->
+    <section class="main-content page-view" id="page-officer" style="display: none;" role="region" aria-labelledby="officer-portal-heading">
+
+      <div class="admin-banner officer-banner">
+        <div class="admin-title-group">
+          <div class="badge-pill officer-badge">
+            <span class="pulse-dot"></span>
+            <span>Government Officer Verification Portal • DEMO ROLE: OFFICER</span>
+          </div>
+          <h2 id="officer-portal-heading" class="admin-title">🏛️ Officer Application Queue</h2>
+          <p class="admin-subtitle">Process incoming citizen service applications, verify simulated department sources, and execute stage approvals or rejections.</p>
+        </div>
+        <div class="admin-actions">
+          <button type="button" class="btn-primary" id="btn-officer-refresh">🔄 Refresh Queue</button>
+        </div>
+      </div>
+
+      <!-- Officer Workspace KPI Summary Cards -->
+      <div class="officer-kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">Pending Queue</span>
+          <div class="kpi-value" id="officer-kpi-pending">2</div>
+          <span class="kpi-tag tag-blue">Awaiting Officer Action</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">In Verification</span>
+          <div class="kpi-value" id="officer-kpi-processing">2</div>
+          <span class="kpi-tag tag-amber">Stage Verification</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Approved & Sanctioned</span>
+          <div class="kpi-value" id="officer-kpi-approved">1</div>
+          <span class="kpi-tag tag-green">✓ Completed</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Rejected Applications</span>
+          <div class="kpi-value" id="officer-kpi-rejected">0</div>
+          <span class="kpi-tag tag-red">✕ Closed</span>
+        </div>
+      </div>
+
+      <!-- Officer Application Queue Table -->
+      <div class="admin-card full-width-card">
+        <div class="admin-card-header">
+          <h3>📋 Incoming Citizen Application Verification Queue</h3>
+          <span class="badge-count" id="officer-queue-count">2 Applications Pending</span>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Application ID</th>
+                <th>Citizen Demo ID</th>
+                <th>Service</th>
+                <th>Current Department</th>
+                <th>Current Stage</th>
+                <th>Status</th>
+                <th>Submitted Time</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="officer-queue-tbody">
+              <!-- Dynamically populated via script.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================================
+         PAGE 5: ADMINISTRATOR PORTAL & IMMUTABLE AUDIT VAULT
          ========================================================================= -->
     <section class="main-content page-view" id="page-admin" style="display: none;" role="region" aria-labelledby="admin-portal-heading">
 
@@ -1010,43 +1209,98 @@
         <div class="admin-title-group">
           <div class="badge-pill admin-badge">
             <span class="pulse-dot"></span>
-            <span>National Integration & Official Approval Console</span>
+            <span>System Administration & Resilience Operations Console • DEMO ROLE: ADMINISTRATOR</span>
           </div>
-          <h2 id="admin-portal-heading" class="admin-title">🏛️ Government Officer & Interoperability Admin Portal</h2>
-          <p class="admin-subtitle">Real-time cross-department verification pipeline, service level agreement (SLA) telemetry, and resilience controls.</p>
+          <h2 id="admin-portal-heading" class="admin-title">⚙️ OneGov System Monitoring & Audit Vault</h2>
+          <p class="admin-subtitle">Real-time gateway telemetry, circuit breakers, dead-letter queue (DLQ), and immutable audit logs across connected government APIs.</p>
         </div>
         <div class="admin-actions">
           <button type="button" class="btn-primary" id="btn-admin-refresh">🔄 Refresh Live State</button>
-          <button type="button" class="btn-ghost" id="btn-exit-admin">← Return to Citizen View</button>
         </div>
       </div>
 
-      <!-- KPI Overview Cards -->
-      <div class="admin-kpi-grid">
-        <div class="kpi-card">
-          <span class="kpi-label">Total Inquiries Processed</span>
-          <div class="kpi-value" id="kpi-inquiries">1,420</div>
-          <span class="kpi-tag tag-green">↑ 12% today</span>
-        </div>
-        <div class="kpi-card">
-          <span class="kpi-label">Active Applications in Pipeline</span>
-          <div class="kpi-value" id="kpi-pipeline">2</div>
-          <span class="kpi-tag tag-blue">Real-time</span>
-        </div>
-        <div class="kpi-card">
-          <span class="kpi-label">Verification Accuracy</span>
-          <div class="kpi-value">99.8%</div>
-          <span class="kpi-tag tag-green">OCDS v2.4</span>
-        </div>
-        <div class="kpi-card">
-          <span class="kpi-label">SLA Compliance Rate</span>
-          <div class="kpi-value">98.5%</div>
-          <span class="kpi-tag tag-amber">Avg 1.4s turnaround</span>
+      <!-- SECTION A: SYSTEM OVERVIEW -->
+      <div class="admin-section-anchor" id="admin-sec-overview">
+        <div class="admin-kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">Total Inquiries Processed</span>
+            <div class="kpi-value" id="kpi-inquiries">1,420</div>
+            <span class="kpi-tag tag-green">↑ 12% today (DEMO)</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Active Applications in Pipeline</span>
+            <div class="kpi-value" id="kpi-pipeline">2</div>
+            <span class="kpi-tag tag-blue">Real-time</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Verification Accuracy</span>
+            <div class="kpi-value">99.8%</div>
+            <span class="kpi-tag tag-green">OCDS v2.4 (DEMO)</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">SLA Compliance Rate</span>
+            <div class="kpi-value">98.5%</div>
+            <span class="kpi-tag tag-amber">Avg 1.4s turnaround</span>
+          </div>
         </div>
       </div>
 
-      <!-- Real-Time Telemetry & Gateway Latencies -->
-      <div class="admin-grid-2col">
+      <!-- SECTION B & C: TECHNICAL FLOW VISUALIZER & INTEGRATION MONITORING -->
+      <div class="admin-card full-width-card" id="admin-sec-visualizer" style="margin-top: 16px;">
+        <div class="admin-card-header">
+          <h3>🌐 End-to-End Interoperability Architecture Flow</h3>
+          <span class="badge-count">OCDS v2.4 Data Standard</span>
+        </div>
+        <p class="admin-card-desc">Simulated architectural pipeline converting legacy department protocols into unified citizen entitlements.</p>
+        
+        <div class="technical-pipeline-flow">
+          <div class="pipe-node-card">
+            <div class="pipe-node-icon">🏛️</div>
+            <div class="pipe-node-title">1. Government Registries</div>
+            <div class="pipe-node-sub">UIDAI e-KYC, ABC SOAP XML, CBDT SQL, EPFO REST</div>
+            <span class="tag-blue">SIMULATED DATA</span>
+          </div>
+
+          <div class="pipe-flow-arrow">➔</div>
+
+          <div class="pipe-node-card">
+            <div class="pipe-node-icon">🔌</div>
+            <div class="pipe-node-title">2. Legacy Adapters</div>
+            <div class="pipe-node-sub">SOAP 1.2 XML Parser, Tabular SQL Normalizer, REST Tokenizer</div>
+            <span class="tag-amber">Multi-Protocol</span>
+          </div>
+
+          <div class="pipe-flow-arrow">➔</div>
+
+          <div class="pipe-node-card primary-hub-node">
+            <div class="pipe-node-icon">🛡️</div>
+            <div class="pipe-node-title">3. ONEGOV Connect</div>
+            <div class="pipe-node-sub">DPDP Consent Gateway & Resilience Router</div>
+            <span class="tag-green">Core Middleware</span>
+          </div>
+
+          <div class="pipe-flow-arrow">➔</div>
+
+          <div class="pipe-node-card">
+            <div class="pipe-node-icon">📊</div>
+            <div class="pipe-node-title">4. Data Standardization</div>
+            <div class="pipe-node-sub">Common Data Model (OCDS v2.4 JSON), Schema Validation</div>
+            <span class="tag-blue">OCDS Standard</span>
+          </div>
+
+          <div class="pipe-flow-arrow">➔</div>
+
+          <div class="pipe-node-card">
+            <div class="pipe-node-icon">⚙️</div>
+            <div class="pipe-node-title">5. Workflow & Audit</div>
+            <div class="pipe-node-sub">6-Stage Department Processing, Officer Approval & Audit Vault</div>
+            <span class="tag-green">Sanctioned</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION D: REAL-TIME TELEMETRY & RESILIENCE -->
+      <div class="admin-grid-2col" id="admin-sec-telemetry" style="margin-top: 16px;">
         <div class="admin-card">
           <div class="admin-card-header">
             <h3>⚡ Live Gateway Telemetry & Response Times</h3>
@@ -1054,31 +1308,11 @@
           </div>
           <div class="telemetry-list" id="admin-telemetry-list">
             <!-- Dynamically populated -->
-            <div class="telemetry-row">
-              <span class="t-name">DigiLocker / UIDAI Identity Gateway (REST)</span>
-              <span class="t-latency tag-green">19 ms</span>
-              <span class="t-status">ONLINE</span>
-            </div>
-            <div class="telemetry-row">
-              <span class="t-name">Academic Bank of Credits (ABC SOAP/XML)</span>
-              <span class="t-latency tag-green">42 ms</span>
-              <span class="t-status">ONLINE</span>
-            </div>
-            <div class="telemetry-row">
-              <span class="t-name">CBDT / State Revenue Gateway (Direct SQL)</span>
-              <span class="t-latency tag-green">65 ms</span>
-              <span class="t-status">ONLINE</span>
-            </div>
-            <div class="telemetry-row">
-              <span class="t-name">EPFO / Skill India Gateway (REST)</span>
-              <span class="t-latency tag-green">34 ms</span>
-              <span class="t-status">ONLINE</span>
-            </div>
           </div>
         </div>
 
         <!-- Resilience & Circuit Breaker Controller -->
-        <div class="admin-card">
+        <div class="admin-card" id="admin-sec-resilience">
           <div class="admin-card-header">
             <h3>🛡️ Fault Tolerance & Circuit Breakers</h3>
             <span class="badge-count" id="cb-summary-badge">4 CLOSED (Healthy)</span>
@@ -1095,34 +1329,36 @@
         </div>
       </div>
 
-      <!-- Cross-Department Applications Review Table -->
-      <div class="admin-card full-width-card">
+      <!-- SECTION E: IMMUTABLE AUDIT VAULT -->
+      <div class="admin-card full-width-card" id="admin-sec-audit" style="margin-top: 16px;">
         <div class="admin-card-header">
-          <h3>📋 Cross-Department Interoperability Verification Queue</h3>
-          <span class="badge-count" id="admin-app-count">2 Applications</span>
+          <h3>🔒 Immutable Admin Audit Vault</h3>
+          <span class="badge-count" id="admin-audit-vault-count">0 Recorded Audit Logs</span>
         </div>
+        <p class="admin-card-desc">Cryptographically hashed system audit trail tracking all login, consent, API queries, verification, approval, rejection, and notification events across departments.</p>
         <div class="admin-table-wrapper">
           <table class="admin-table">
             <thead>
               <tr>
-                <th>Ref ID</th>
-                <th>Citizen Name</th>
-                <th>Service Name</th>
-                <th>Current Stage</th>
-                <th>Authority</th>
+                <th>Timestamp</th>
+                <th>Event Type</th>
+                <th>Actor</th>
+                <th>Role</th>
+                <th>Reference ID</th>
+                <th>Action</th>
                 <th>Status</th>
-                <th>Officer Actions</th>
+                <th>Integrity Marker</th>
               </tr>
             </thead>
-            <tbody id="admin-applications-tbody">
-              <!-- Dynamically populated from /api/admin/applications -->
+            <tbody id="admin-audit-vault-tbody">
+              <!-- Dynamically populated from /api/audit-logs -->
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Dead-Letter Queue (DLQ) Inspection -->
-      <div class="admin-card full-width-card">
+      <!-- SECTION F: DEAD-LETTER QUEUE (DLQ) VAULT -->
+      <div class="admin-card full-width-card" id="admin-sec-dlq" style="margin-top: 16px;">
         <div class="admin-card-header">
           <h3>📬 Dead-Letter Queue (DLQ) & Resilience Vault</h3>
           <span class="badge-count" id="dlq-count-badge">0 Pending Failures</span>
@@ -1146,6 +1382,7 @@
           </table>
         </div>
       </div>
+      </div>
 
     </section>
 
@@ -1153,10 +1390,9 @@
 
 
   <!-- =========================================================================
-       MODAL 1: SERVICE DETAILS & CONSENT MODAL
+       MODAL 1: CONSENT-BASED DATA SHARING & SERVICE DETAILS MODAL
        ========================================================================= -->
-  <div class="app-modal" id="service-details-modal" aria-hidden="true" role="dialog"
-    aria-labelledby="detail-modal-title">
+  <div class="app-modal" id="service-details-modal" aria-hidden="true" role="dialog" aria-labelledby="detail-modal-title">
     <div class="modal-backdrop" id="detail-modal-backdrop"></div>
     <div class="modal-card modal-card-detail">
 
@@ -1178,51 +1414,56 @@
         </button>
       </div>
 
-      <!-- Modal Body -->
+      <!-- Modal Body (DPDP Consent Parameters) -->
       <div class="tracker-content-body detail-modal-body">
-        <div class="detail-section">
-          <h4 class="detail-section-heading">Service Overview</h4>
-          <p class="detail-text" id="detail-service-desc">Single-window access to central and state scholarship schemes
-            for students across higher education institutes.</p>
+        <div class="consent-parameter-card">
+          <div class="consent-card-header">
+            <span class="consent-shield-icon">🛡️</span>
+            <div>
+              <h4 class="consent-heading" data-i18n="consent_header">Digital Personal Data Protection (DPDP) Consent Request</h4>
+              <p class="consent-subtext" data-i18n="consent_subtext">Your explicit consent is required before accessing or sharing department credentials.</p>
+            </div>
+          </div>
+
+          <div class="consent-details-table">
+            <div class="consent-row">
+              <span class="consent-label" data-i18n="consent_purpose">Purpose:</span>
+              <span class="consent-val" id="consent-val-purpose">Multi-department automated eligibility verification & direct benefit transfer determination.</span>
+            </div>
+            <div class="consent-row">
+              <span class="consent-label" data-i18n="consent_dept">Requesting Department:</span>
+              <span class="consent-val highlight" id="consent-val-dept">Ministry of Education</span>
+            </div>
+            <div class="consent-row">
+              <span class="consent-label" data-i18n="consent_data_req">Data Requested:</span>
+              <span class="consent-val" id="consent-val-data">Aadhaar e-KYC Token (UIDAI), Academic Marksheet Token (ABC NAD), Family Income Tier (CBDT)</span>
+            </div>
+            <div class="consent-row">
+              <span class="consent-label" data-i18n="consent_status_lbl">Consent Status:</span>
+              <span class="consent-val" id="consent-val-status"><span class="badge-amber">PENDING CITIZEN DECISION</span></span>
+            </div>
+            <div class="consent-row">
+              <span class="consent-label" data-i18n="consent_timestamp">Timestamp:</span>
+              <span class="consent-val code-font" id="consent-val-time">2026-09-28T18:35:00Z</span>
+            </div>
+          </div>
         </div>
 
-        <div class="detail-grid-row">
-          <div class="detail-card-box">
-            <h4 class="detail-section-heading">🎯 Eligibility & Requirements</h4>
-            <p class="detail-text-sm" id="detail-service-eligibility">Enrolled in a recognized institution with annual
-              family income criteria verified via State/Central databases.</p>
-          </div>
-          <div class="detail-card-box">
-            <h4 class="detail-section-heading">📋 Information Required</h4>
-            <p class="detail-text-sm" id="detail-service-info-req">Academic Enrollment Token, Past Qualifying Marksheet,
-              Family Income Range Declaration.</p>
-          </div>
-        </div>
-
         <div class="detail-section">
-          <h4 class="detail-section-heading">🏛️ Government Systems Involved</h4>
+          <h4 class="detail-section-heading" data-i18n="systems_involved">🏛️ Government Systems Authorized Upon Consent</h4>
           <div class="systems-involved-grid" id="detail-systems-container">
-            <!-- Injected dynamically with checkmark chips e.g. ✓ Identity System, ✓ Education System, ✓ Income System -->
-          </div>
-        </div>
-
-        <div class="consent-notice-box">
-          <div class="consent-icon">🔒</div>
-          <div class="consent-text">
-            <strong>Data will only be accessed with citizen consent.</strong>
-            <span>Only the specific verified tokens needed for this scheme will be exchanged through authorized
-              department APIs under the DPDP Act 2023.</span>
+            <!-- Injected dynamically with checkmark chips -->
           </div>
         </div>
       </div>
 
-      <!-- Modal Footer -->
+      <!-- Modal Footer with Grant Consent and Deny Buttons -->
       <div class="modal-footer-box">
         <div class="modal-footer-left">
-          <button type="button" class="btn-ghost" id="btn-cancel-detail">← Back to Services</button>
+          <button type="button" class="btn-deny-consent" id="btn-consent-deny" data-i18n="btn_deny">✕ Deny Consent</button>
         </div>
         <div class="modal-footer-right">
-          <button type="button" class="btn-primary" id="btn-consent-apply">Give Consent & Apply →</button>
+          <button type="button" class="btn-grant-consent" id="btn-consent-grant" data-i18n="btn_grant">✓ Grant Consent & Apply →</button>
         </div>
       </div>
 
@@ -1231,18 +1472,18 @@
 
 
   <!-- =========================================================================
-       MODAL 2: UNIFIED MULTI-STAGE SERVICE APPLICATION FLOW MODAL
+       MODAL 2: UNIFIED MULTI-STAGE SERVICE APPLICATION TRACKER MODAL
        ========================================================================= -->
   <div class="app-modal" id="app-tracker-modal" aria-hidden="true" role="dialog" aria-labelledby="tracker-modal-title">
     <div class="modal-backdrop" id="tracker-modal-backdrop"></div>
-    <div class="modal-card">
+    <div class="modal-card modal-card-large">
 
       <!-- Modal Header -->
       <div class="modal-header-box">
         <div>
           <span class="tracker-badge" id="tracker-service-dept">Ministry of Education</span>
           <h3 class="tracker-title" id="tracker-modal-title">National Scholarship Portal (NSP)</h3>
-          <p class="tracker-sub">Unified Multi-Department Interoperability Application</p>
+          <p class="tracker-sub" data-i18n="tracker_subtitle">Unified Multi-Department Interoperability Application Workflow</p>
         </div>
         <button type="button" class="modal-close-btn" id="btn-close-tracker" aria-label="Close Application Tracker">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
@@ -1257,15 +1498,51 @@
 
         <div class="unified-app-id-banner">
           <div class="app-id-text">
-            <span>Unified Application Reference:</span>
+            <span data-i18n="ref_id_label">Unified Application Reference ID:</span>
             <strong id="tracker-ref-id">OG-2026-IND-8842</strong>
           </div>
           <span class="app-status-tag" id="tracker-overall-status">In Verification</span>
         </div>
 
-        <!-- Multi-Department Pipeline Stepper -->
+        <!-- 5-Stage Visual Milestone Progress Bar Timeline -->
+        <div class="milestone-timeline-container">
+          <h4 class="timeline-title" data-i18n="timeline_title">Application Milestone Progress</h4>
+          <div class="milestone-timeline">
+            <div class="milestone-step completed" id="mile-step-1">
+              <div class="mile-circle">✓</div>
+              <span class="mile-label" data-i18n="mile_1">Submitted</span>
+            </div>
+            <div class="mile-line completed" id="mile-line-1"></div>
+
+            <div class="milestone-step active" id="mile-step-2">
+              <div class="mile-circle">2</div>
+              <span class="mile-label" data-i18n="mile_2">Verification</span>
+            </div>
+            <div class="mile-line" id="mile-line-2"></div>
+
+            <div class="milestone-step" id="mile-step-3">
+              <div class="mile-circle">3</div>
+              <span class="mile-label" data-i18n="mile_3">Dept Processing</span>
+            </div>
+            <div class="mile-line" id="mile-line-3"></div>
+
+            <div class="milestone-step" id="mile-step-4">
+              <div class="mile-circle">4</div>
+              <span class="mile-label" data-i18n="mile_4">Approval</span>
+            </div>
+            <div class="mile-line" id="mile-line-4"></div>
+
+            <div class="milestone-step" id="mile-step-5">
+              <div class="mile-circle">5</div>
+              <span class="mile-label" data-i18n="mile_5">Completed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6-Stage Multi-Department Detailed Verification Pipeline -->
+        <h4 class="pipeline-heading" data-i18n="pipeline_heading">Detailed Interoperability Verification Stages</h4>
         <div class="verification-pipeline" id="verification-stages-list">
-          <!-- Dynamically generated stages -->
+          <!-- Dynamically generated stages (1 to 6) -->
         </div>
 
       </div>
@@ -1273,11 +1550,11 @@
       <!-- Modal Footer & Interactive Simulation Control -->
       <div class="modal-footer-box">
         <div class="modal-footer-left">
-          <span class="security-text">🔒 1 Unified Status across 4 Ministries</span>
+          <span class="security-text" data-i18n="sec_note">🔒 Single Reference ID across connected government departments</span>
         </div>
         <div class="modal-footer-right">
-          <button type="button" class="btn-ghost" id="btn-cancel-tracker">Close View</button>
-          <button type="button" class="btn-primary" id="btn-advance-simulation">Simulate Next Verification Step ⚡</button>
+          <button type="button" class="btn-ghost" id="btn-cancel-tracker" data-i18n="btn_close">Close View</button>
+          <button type="button" class="btn-primary" id="btn-advance-simulation" data-i18n="btn_advance">Simulate Next Verification Step ⚡</button>
         </div>
       </div>
 
@@ -1466,6 +1743,323 @@
         <button type="button" class="btn-ghost" id="btn-close-inspector-footer">Close Inspector</button>
       </div>
 
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       MODAL 5: DPDP CONSENT AUDIT HISTORY MODAL
+       ========================================================================= -->
+  <div class="app-modal" id="consent-history-modal" aria-hidden="true" role="dialog" aria-labelledby="consent-modal-title">
+    <div class="modal-backdrop" id="consent-history-backdrop"></div>
+    <div class="modal-card modal-card-large">
+      <div class="modal-header-box">
+        <div>
+          <span class="tracker-badge" data-i18n="consent_audit_badge">DPDP Act 2023 Compliance Vault</span>
+          <h3 class="tracker-title" id="consent-modal-title" data-i18n="consent_history_title">📜 Citizen Data Sharing Consent Audit History</h3>
+          <p class="tracker-sub" data-i18n="consent_history_sub">Immutable session record of all granted and denied inter-department data access requests.</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-consent-history" aria-label="Close Consent History">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="tracker-content-body">
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th data-i18n="th_consent_id">Consent ID</th>
+                <th data-i18n="th_purpose">Purpose</th>
+                <th data-i18n="th_requesting_dept">Requesting Dept</th>
+                <th data-i18n="th_data_requested">Data Requested</th>
+                <th data-i18n="th_status">Status</th>
+                <th data-i18n="th_timestamp">Timestamp</th>
+              </tr>
+            </thead>
+            <tbody id="consent-history-tbody">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="modal-footer-box">
+        <button type="button" class="btn-ghost" id="btn-close-consent-history-footer" data-i18n="btn_close">Close History</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       MODAL 5: GOVERNMENT OFFICER APPLICATION DETAILS & VERIFICATION MODAL
+       ========================================================================= -->
+  <div class="app-modal" id="officer-app-details-modal" aria-hidden="true" role="dialog" aria-labelledby="officer-modal-title">
+    <div class="modal-backdrop" id="officer-modal-backdrop"></div>
+    <div class="modal-card modal-card-large">
+
+      <!-- Modal Header -->
+      <div class="modal-header-box">
+        <div>
+          <div class="detail-badge-row">
+            <span class="tracker-badge" id="officer-app-dept">Ministry of Education</span>
+            <span class="scheme-tag" id="officer-app-ref-badge">OG-2026-IND-8842</span>
+          </div>
+          <h3 class="tracker-title" id="officer-modal-title">Application Verification Console</h3>
+          <p class="tracker-sub">Government Officer Review & Stage Approval Interface</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-officer-modal" aria-label="Close Officer Details">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="tracker-content-body">
+        <div class="officer-details-grid">
+
+          <!-- Left Column: Citizen & Service Metadata -->
+          <div class="officer-details-col">
+            <div class="info-block-card">
+              <h4 class="block-title">👤 Citizen Profile (Simulated Demo Identity)</h4>
+              <div class="info-kv-row">
+                <span class="kv-label">Citizen Name:</span>
+                <strong class="kv-value" id="officer-cit-name">Aarav Sharma</strong>
+              </div>
+              <div class="info-kv-row">
+                <span class="kv-label">Citizen Demo ID:</span>
+                <span class="kv-value code-font" id="officer-cit-id">IND-8842</span>
+              </div>
+              <div class="info-kv-row">
+                <span class="kv-label">Category / Tier:</span>
+                <span class="kv-value" id="officer-cit-cat">Student • Income Tier: ₹2.5L-5L</span>
+              </div>
+            </div>
+
+            <div class="info-block-card">
+              <h4 class="block-title">📄 Application & Consent Metadata</h4>
+              <div class="info-kv-row">
+                <span class="kv-label">Requested Service:</span>
+                <span class="kv-value highlight" id="officer-app-service">National Scholarship Portal (NSP)</span>
+              </div>
+              <div class="info-kv-row">
+                <span class="kv-label">Consent Status:</span>
+                <span class="kv-value" id="officer-app-consent-status"><span class="badge-green">GRANTED (DPDP Compliant)</span></span>
+              </div>
+              <div class="info-kv-row">
+                <span class="kv-label">Consent Timestamp:</span>
+                <span class="kv-value code-font" id="officer-app-consent-time">2026-09-28T18:35:00Z</span>
+              </div>
+              <div class="info-kv-row">
+                <span class="kv-label">Requested Data:</span>
+                <span class="kv-value" id="officer-app-req-data">Aadhaar e-KYC, Academic Marksheet Token, Family Income Tier</span>
+              </div>
+              <div class="info-kv-row">
+                <span class="kv-label">Current Stage:</span>
+                <span class="kv-value bold" id="officer-app-curr-stage">Stage 3: Education Verification</span>
+              </div>
+              <div class="info-kv-row">
+                <span class="kv-label">Verification Status:</span>
+                <span class="kv-value" id="officer-app-ver-status"><span class="badge-amber">IN_PROGRESS</span></span>
+              </div>
+              <div class="info-kv-row">
+                <span class="kv-label">Last Updated:</span>
+                <span class="kv-value code-font" id="officer-app-last-updated">2026-09-28T19:00:00Z</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Data Sources & Stage Verification -->
+          <div class="officer-details-col">
+            <div class="info-block-card">
+              <h4 class="block-title">🌐 Connected Data Sources (Simulated Demo Data)</h4>
+              <div class="data-sources-grid">
+                <div class="ds-chip">
+                  <span class="ds-icon">🆔</span>
+                  <span class="ds-name">Identity (UIDAI / DigiLocker)</span>
+                  <span class="ds-status-badge">SIMULATED DEMO</span>
+                </div>
+                <div class="ds-chip">
+                  <span class="ds-icon">🎓</span>
+                  <span class="ds-name">Education (ABC SOAP XML)</span>
+                  <span class="ds-status-badge">SIMULATED DEMO</span>
+                </div>
+                <div class="ds-chip">
+                  <span class="ds-icon">💰</span>
+                  <span class="ds-name">Revenue (CBDT SQL Gateway)</span>
+                  <span class="ds-status-badge">SIMULATED DEMO</span>
+                </div>
+                <div class="ds-chip">
+                  <span class="ds-icon">🏛️</span>
+                  <span class="ds-name">Welfare (Treasury / Direct Benefit)</span>
+                  <span class="ds-status-badge">SIMULATED DEMO</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-block-card verification-action-card">
+              <h4 class="block-title">⚙️ Stage Verification & Action Controls</h4>
+              <div class="ver-control-group">
+                <label for="officer-stage-ver-select" class="control-label">Process Current Verification Stage:</label>
+                <div class="ver-select-row" style="margin-bottom: 12px; gap: 8px;">
+                  <button type="button" class="btn-success-action" id="btn-officer-verify-stage" style="flex: 1; padding: 10px 14px; background: #15803d; color: #fff; font-weight: 600; border-radius: 8px;">[ VERIFY ]</button>
+                  <button type="button" class="btn-danger-action" id="btn-officer-mark-failed" style="flex: 1; padding: 10px 14px; background: #b91c1c; color: #fff; font-weight: 600; border-radius: 8px;">[ MARK FAILED ]</button>
+                </div>
+              </div>
+
+              <div class="officer-final-actions-row" style="border-top: 1px solid #e2e8f0; pt-3; margin-top: 10px; display: flex; gap: 10px;">
+                <button type="button" class="btn-danger-action" id="btn-officer-modal-reject" style="flex: 1;">[ REJECT APPLICATION ]</button>
+                <button type="button" class="btn-success-action" id="btn-officer-modal-approve" style="flex: 1;">[ APPROVE APPLICATION ]</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 6-Stage Workflow View inside Officer Application Details -->
+        <div class="info-block-card full-width-card" style="margin-top: 16px;">
+          <h4 class="block-title">🔄 6-Stage Multi-Department Workflow State (State Machine)</h4>
+          <div id="officer-6stage-container" class="officer-workflow-stages-list">
+            <!-- Dynamically populated 6-stage workflow -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       MODAL 6: OFFICER APPROVAL CONFIRMATION DIALOG
+       ========================================================================= -->
+  <div class="app-modal" id="officer-approve-modal" aria-hidden="true" role="dialog" aria-labelledby="approve-modal-title">
+    <div class="modal-backdrop" id="approve-modal-backdrop"></div>
+    <div class="modal-card modal-card-sm">
+      <div class="modal-header-box">
+        <div>
+          <span class="badge-green">OFFICER CONFIRMATION</span>
+          <h3 class="tracker-title" id="approve-modal-title">Approve Application</h3>
+          <p class="tracker-sub" id="approve-modal-ref-id">Ref: OG-2026-IND-8842</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-approve-modal" aria-label="Close Approval Dialog">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body-padding" style="padding: 16px;">
+        <div class="info-kv-row" style="margin-bottom: 8px;">
+          <span class="kv-label">Application ID:</span>
+          <strong class="kv-value code-font" id="approve-modal-app-id">OG-2026-IND-8842</strong>
+        </div>
+        <div class="info-kv-row" style="margin-bottom: 8px;">
+          <span class="kv-label">Service:</span>
+          <span class="kv-value highlight" id="approve-modal-service">National Scholarship Portal</span>
+        </div>
+        <div class="info-kv-row" style="margin-bottom: 8px;">
+          <span class="kv-label">Current Stage:</span>
+          <span class="kv-value" id="approve-modal-stage">Stage 3: Education Verification</span>
+        </div>
+        <div class="info-kv-row" style="margin-bottom: 8px;">
+          <span class="kv-label">Officer Role:</span>
+          <span class="kv-value">Government Officer</span>
+        </div>
+        <div class="approve-confirm-box" style="margin-top: 14px; padding: 12px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;">
+          <p style="margin:0; font-weight:600; color:#166534;">Are you sure you want to approve this application?</p>
+        </div>
+      </div>
+      <div class="modal-footer-box">
+        <button type="button" class="btn-ghost" id="btn-cancel-approve">Cancel</button>
+        <button type="button" class="btn-success-action" id="btn-confirm-approve">[ Confirm Approval ]</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       MODAL 7: OFFICER REJECTION REASON DIALOG
+       ========================================================================= -->
+  <div class="app-modal" id="officer-reject-modal" aria-hidden="true" role="dialog" aria-labelledby="reject-modal-title">
+    <div class="modal-backdrop" id="reject-modal-backdrop"></div>
+    <div class="modal-card modal-card-sm">
+
+      <div class="modal-header-box">
+        <div>
+          <span class="badge-red">OFFICER ACTION</span>
+          <h3 class="tracker-title" id="reject-modal-title">Reject Citizen Application</h3>
+          <p class="tracker-sub" id="reject-modal-ref-id">Ref: OG-2026-IND-8842</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-reject-modal" aria-label="Close Rejection Dialog">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <form id="officer-reject-form">
+        <div class="modal-body-padding">
+          <label for="reject-preset-select" class="form-label">Select Rejection Reason (*Required):</label>
+          <select id="reject-preset-select" class="form-select-full">
+            <option value="Verification failed">Verification failed</option>
+            <option value="Required information unavailable">Required information unavailable</option>
+            <option value="Eligibility criteria not satisfied">Eligibility criteria not satisfied</option>
+            <option value="Department verification failed">Department verification failed</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <div class="form-group-margin" id="reject-custom-group" style="display: none; margin-top: 12px;">
+            <label for="officer-rejection-reason" class="form-label">Custom Reason Details:</label>
+            <textarea id="officer-rejection-reason" class="form-textarea-full" rows="3" placeholder="Enter detailed reason for rejection..."></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer-box">
+          <button type="button" class="btn-ghost" id="btn-cancel-reject">Cancel</button>
+          <button type="submit" class="btn-danger-action" id="btn-submit-reject">[ Confirm Rejection ]</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       DRAWER: PERSISTENT SESSION NOTIFICATION CENTER
+       ========================================================================= -->
+  <div class="notification-drawer" id="notification-drawer" aria-hidden="true" role="dialog">
+    <div class="drawer-backdrop" id="notification-drawer-backdrop"></div>
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <span class="bell-icon-lg">🔔</span>
+          <div>
+            <h3 class="drawer-title" data-i18n="notif_center_title">Notification Center</h3>
+            <span class="drawer-sub" data-i18n="notif_center_sub">Real-time workflow & consent events</span>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-notification-drawer" aria-label="Close Notifications">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-actions-bar">
+        <button type="button" class="btn-text-sm" id="btn-mark-all-read" data-i18n="btn_mark_read">✓ Mark All as Read</button>
+        <button type="button" class="btn-text-sm danger" id="btn-clear-notifications" data-i18n="btn_clear_all">Clear All</button>
+      </div>
+
+      <div class="notification-list" id="notification-items-container">
+        <!-- Dynamically rendered notification items -->
+      </div>
     </div>
   </div>
 

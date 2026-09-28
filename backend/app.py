@@ -203,7 +203,32 @@ in_memory_store = {
             "updatedAt": datetime.datetime.now(datetime.timezone.utc).isoformat()
         }
     },
-    "consents": {},
+    "consents": {
+        "CNS-881021": {
+            "consent_id": "CNS-881021",
+            "service_id": "S001",
+            "citizen_id": "IND-8842",
+            "requesting_dept": "Ministry of Education",
+            "systems_authorized": ["Identity System", "Education System", "Income System"],
+            "purpose": "National Scholarship Eligibility Verification",
+            "data_requested": "Aadhaar e-KYC, Academic Marksheet, Family Income Tier",
+            "status": "GRANTED",
+            "timestamp": (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=2)).isoformat(),
+            "legal_framework": "DPDP Act 2023 Compliant"
+        },
+        "CNS-541092": {
+            "consent_id": "CNS-541092",
+            "service_id": "S002",
+            "citizen_id": "IND-5412",
+            "requesting_dept": "Min. of Skill Development",
+            "systems_authorized": ["Identity System", "Skill System"],
+            "purpose": "PMKVY Skill Certification Enrollment",
+            "data_requested": "Identity Verification, Educational Qualification Token",
+            "status": "GRANTED",
+            "timestamp": (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=5)).isoformat(),
+            "legal_framework": "DPDP Act 2023 Compliant"
+        }
+    },
     "applications": {
         "OG-2026-IND-8842": {
             "refId": "OG-2026-IND-8842",
@@ -213,16 +238,17 @@ in_memory_store = {
             "citizenId": "IND-8842",
             "citizenName": "Aarav Sharma",
             "currentStageIndex": 2,
-            "overallStatus": "In Multi-Department Verification",
+            "overallStatus": "Stage 3: Education Verification In Progress",
             "createdAt": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "slaDeadline": (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=3)).isoformat(),
             "slaBreached": False,
             "stages": [
-                {"id": 1, "name": "Identity Verification", "status": "VERIFIED", "authority": "DigiLocker / UIDAI", "time": "Instant", "icon": "✓"},
-                {"id": 2, "name": "Academic Credential Check", "status": "VERIFIED", "authority": "Academic Bank of Credits (SOAP XML)", "time": "Live", "icon": "✓"},
-                {"id": 3, "name": "Income / Revenue Verification", "status": "IN_PROGRESS", "authority": "CBDT / State Revenue Gateway", "time": "Live", "icon": "⏳"},
-                {"id": 4, "name": "Autonomous Rules Engine", "status": "PENDING", "authority": "ONEGOV Interoperability Engine", "time": "Queued", "icon": "○"},
-                {"id": 5, "name": "Single Sign-off & Disbursement", "status": "PENDING", "authority": "National Unified Registry", "time": "Queued", "icon": "○"}
+                {"id": 1, "name": "Citizen Request", "status": "VERIFIED", "dept": "Citizen Portal", "authority": "ONEGOV Portal", "time": "Completed", "icon": "✓"},
+                {"id": 2, "name": "Identity Verification", "status": "VERIFIED", "dept": "Identity Dept", "authority": "DigiLocker / UIDAI (SIMULATED)", "time": "Completed", "icon": "✓"},
+                {"id": 3, "name": "Education Verification", "status": "IN_PROGRESS", "dept": "Education Dept", "authority": "Academic Bank of Credits (SOAP XML)", "time": "Live", "icon": "⏳"},
+                {"id": 4, "name": "Revenue Verification", "status": "PENDING", "dept": "Revenue Dept", "authority": "CBDT / State Revenue SQL Gateway", "time": "Queued", "icon": "○"},
+                {"id": 5, "name": "Rules / Eligibility Check", "status": "PENDING", "dept": "Interoperability Core", "authority": "ONEGOV Rules Engine", "time": "Queued", "icon": "○"},
+                {"id": 6, "name": "Final Processing / Disbursement", "status": "PENDING", "dept": "Welfare Dept", "authority": "National Treasury / Welfare Direct Benefit", "time": "Queued", "icon": "○"}
             ]
         },
         "OG-2026-IND-5412": {
@@ -233,16 +259,17 @@ in_memory_store = {
             "citizenId": "IND-5412",
             "citizenName": "Priya Sundaram",
             "currentStageIndex": 4,
-            "overallStatus": "Final Approval Stage",
+            "overallStatus": "Stage 5: Rules & Eligibility Check",
             "createdAt": (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=18)).isoformat(),
             "slaDeadline": (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=2)).isoformat(),
             "slaBreached": False,
             "stages": [
-                {"id": 1, "name": "Identity Verification", "status": "VERIFIED", "authority": "DigiLocker / UIDAI", "time": "Completed", "icon": "✓"},
-                {"id": 2, "name": "Academic Credential Check", "status": "VERIFIED", "authority": "ABC Registry", "time": "Completed", "icon": "✓"},
-                {"id": 3, "name": "Skill & Employment Check", "status": "VERIFIED", "authority": "NCVET / Skill India", "time": "Completed", "icon": "✓"},
-                {"id": 4, "name": "Autonomous Rules Engine", "status": "IN_PROGRESS", "authority": "ONEGOV Engine", "time": "Live", "icon": "⏳"},
-                {"id": 5, "name": "Course Allocation", "status": "PENDING", "authority": "MSDE Portal", "time": "Queued", "icon": "○"}
+                {"id": 1, "name": "Citizen Request", "status": "VERIFIED", "dept": "Citizen Portal", "authority": "ONEGOV Portal", "time": "Completed", "icon": "✓"},
+                {"id": 2, "name": "Identity Verification", "status": "VERIFIED", "dept": "Identity Dept", "authority": "DigiLocker / UIDAI (SIMULATED)", "time": "Completed", "icon": "✓"},
+                {"id": 3, "name": "Education Verification", "status": "VERIFIED", "dept": "Education Dept", "authority": "ABC Registry", "time": "Completed", "icon": "✓"},
+                {"id": 4, "name": "Revenue Verification", "status": "VERIFIED", "dept": "Revenue Dept", "authority": "CBDT SQL Gateway", "time": "Completed", "icon": "✓"},
+                {"id": 5, "name": "Rules / Eligibility Check", "status": "IN_PROGRESS", "dept": "Interoperability Core", "authority": "ONEGOV Engine", "time": "Live", "icon": "⏳"},
+                {"id": 6, "name": "Final Processing / Disbursement", "status": "PENDING", "dept": "Welfare Dept", "authority": "MSDE / Welfare Treasury", "time": "Queued", "icon": "○"}
             ]
         }
     },
@@ -300,17 +327,26 @@ courses_data = load_json_dataset("courses.json").get("courses", [])
 certs_data = load_json_dataset("certifications.json").get("certifications", [])
 benefits_data = load_json_dataset("tn_financial_benefits.json").get("financial_benefits", [])
 
-# Audit Logger Helper
+# Audit Logger Helper (Reused across Phase 1 & Phase 2)
 def record_audit_log(event, service, status, details=None):
+    details = details or {}
+    actor = details.get("actor", "System Engine")
+    role = details.get("role", "SYSTEM")
+    ref_id = details.get("refId") or details.get("consent_id") or "N/A"
+    
     entry = {
         "id": f"LOG-{random.randint(100000, 999999)}",
         "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "event": event,
+        "actor": actor,
+        "role": role,
+        "refId": ref_id,
         "service": service,
         "status": status,
-        "details": details or {},
+        "action": f"{event} executed by {actor}",
+        "details": details,
         "hash": f"0x{random.randint(0x10000000, 0xFFFFFFFF):x}{random.randint(0x10000000, 0xFFFFFFFF):x}",
-        "latencyMs": random.randint(18, 75)
+        "latencyMs": random.randint(14, 65)
     }
     in_memory_store["audit_logs"].insert(0, entry)
     if len(in_memory_store["audit_logs"]) > 200:
@@ -845,41 +881,104 @@ def admin_get_applications():
 @app.route("/api/admin/applications/<ref_id>/action", methods=["POST"])
 def admin_application_action(ref_id):
     data = request.get_json() or {}
-    action = data.get("action")  # "APPROVE_STAGE", "REJECT", "REQUEST_INFO"
+    action = data.get("action")  # "APPROVE_STAGE", "APPROVE_FINAL", "REJECT", "VERIFY_STAGE"
     officer_notes = data.get("notes", "Verified across national registry APIs.")
+    rejection_reason = data.get("reason", "Eligibility criteria not satisfied")
 
     app_record = in_memory_store["applications"].get(ref_id)
     if not app_record:
         return jsonify({"error": "Application not found"}), 404
 
-    current_idx = app_record["currentStageIndex"]
-    stages = app_record["stages"]
+    current_idx = app_record.get("currentStageIndex", 0)
+    stages = app_record.get("stages", [])
 
     if action == "APPROVE_STAGE":
         if current_idx < len(stages):
             stages[current_idx]["status"] = "VERIFIED"
             stages[current_idx]["icon"] = "✓"
-            stages[current_idx]["time"] = "Officer Approved"
+            stages[current_idx]["time"] = datetime.datetime.now(datetime.timezone.utc).strftime("%d %b %Y, %H:%M UTC")
             if current_idx + 1 < len(stages):
                 stages[current_idx + 1]["status"] = "IN_PROGRESS"
                 stages[current_idx + 1]["icon"] = "⏳"
                 stages[current_idx + 1]["time"] = "Live"
                 app_record["currentStageIndex"] = current_idx + 1
-                app_record["overallStatus"] = f"Stage {current_idx + 2} of {len(stages)} in progress"
+                app_record["overallStatus"] = f"Stage {current_idx + 2}: {stages[current_idx + 1]['name']} In Progress"
             else:
                 app_record["currentStageIndex"] = len(stages)
                 app_record["overallStatus"] = "APPROVED & SANCTIONED"
         
-        record_audit_log("OFFICER_APPROVED_STAGE", "Government Admin Portal", "SUCCESS", {
+        record_audit_log("APPROVAL", "Government Officer Portal", "SUCCESS", {
             "refId": ref_id,
-            "stage": stages[min(current_idx, len(stages)-1)]["name"],
+            "actor": "Government Officer",
+            "role": "OFFICER",
+            "stage": stages[min(current_idx, len(stages)-1)]["name"] if stages else "Approval",
+            "notes": officer_notes
+        })
+
+    elif action == "APPROVE_FINAL":
+        app_record["currentStageIndex"] = len(stages)
+        app_record["overallStatus"] = "APPROVED & SANCTIONED"
+        timestamp_now = datetime.datetime.now(datetime.timezone.utc).strftime("%d %b %Y, %H:%M UTC")
+        for st in stages:
+            st["status"] = "VERIFIED"
+            st["icon"] = "✓"
+            st["time"] = timestamp_now
+
+        record_audit_log("APPROVAL", "Government Officer Portal", "SUCCESS", {
+            "refId": ref_id,
+            "actor": "Government Officer",
+            "role": "OFFICER",
+            "action": f"Application {ref_id} approved by Government Officer",
             "notes": officer_notes
         })
 
     elif action == "REJECT":
-        app_record["overallStatus"] = "REJECTED_BY_OFFICER"
-        record_audit_log("OFFICER_REJECTED_APP", "Government Admin Portal", "WARN", {
+        app_record["overallStatus"] = f"REJECTED: {rejection_reason}"
+        timestamp_now = datetime.datetime.now(datetime.timezone.utc).strftime("%d %b %Y, %H:%M UTC")
+        if current_idx < len(stages):
+            stages[current_idx]["status"] = "FAILED"
+            stages[current_idx]["icon"] = "✕"
+            stages[current_idx]["time"] = f"Rejected: {rejection_reason} ({timestamp_now})"
+
+        record_audit_log("REJECTION", "Government Officer Portal", "FAILED", {
             "refId": ref_id,
+            "actor": "Government Officer",
+            "role": "OFFICER",
+            "reason": rejection_reason,
+            "action": f"Application {ref_id} rejected: {rejection_reason}",
+            "notes": officer_notes
+        })
+
+    elif action == "VERIFY_STAGE":
+        verify_status = data.get("status", "VERIFIED")
+        stage_name = "Stage Processing"
+        timestamp_now = datetime.datetime.now(datetime.timezone.utc).strftime("%d %b %Y, %H:%M UTC")
+        if current_idx < len(stages):
+            stage_name = stages[current_idx]["name"]
+            stages[current_idx]["status"] = verify_status
+            stages[current_idx]["icon"] = "✓" if verify_status == "VERIFIED" else ("✕" if verify_status == "FAILED" else "⏳")
+            stages[current_idx]["time"] = timestamp_now
+
+            if verify_status == "VERIFIED":
+                if current_idx + 1 < len(stages):
+                    stages[current_idx + 1]["status"] = "IN_PROGRESS"
+                    stages[current_idx + 1]["icon"] = "⏳"
+                    stages[current_idx + 1]["time"] = "Live"
+                    app_record["currentStageIndex"] = current_idx + 1
+                    app_record["overallStatus"] = f"Stage {current_idx + 2}: {stages[current_idx + 1]['name']} In Progress"
+                else:
+                    app_record["currentStageIndex"] = len(stages)
+                    app_record["overallStatus"] = "APPROVED & SANCTIONED"
+            elif verify_status == "FAILED":
+                app_record["overallStatus"] = f"FAILED: Verification Failed at {stage_name}"
+
+        record_audit_log("VERIFICATION", "Government Officer Portal", "SUCCESS" if verify_status == "VERIFIED" else "FAILED", {
+            "refId": ref_id,
+            "actor": "Government Officer",
+            "role": "OFFICER",
+            "stage": stage_name,
+            "status": verify_status,
+            "action": f"Stage '{stage_name}' marked as {verify_status} for {ref_id}",
             "notes": officer_notes
         })
 
@@ -888,6 +987,16 @@ def admin_application_action(ref_id):
         "action": action,
         "application": app_record
     })
+
+@app.route("/api/audit-logs/record", methods=["POST"])
+def post_audit_log():
+    data = request.get_json() or {}
+    event = data.get("event", "API_REQUEST")
+    service = data.get("service", "ONEGOV Platform Core")
+    status = data.get("status", "SUCCESS")
+    details = data.get("details", {})
+    entry = record_audit_log(event, service, status, details)
+    return jsonify({"success": True, "log": entry})
 
 @app.route("/api/admin/telemetry", methods=["GET"])
 def admin_telemetry():
@@ -1068,9 +1177,12 @@ def grant_consent():
     consent_record = {
         "consent_id": consent_id,
         "service_id": data.get("service_id", "S001"),
-        "citizen_id": data.get("citizen_id", "IND-CITIZEN"),
+        "citizen_id": data.get("citizen_id", "IND-8842"),
+        "requesting_dept": data.get("requesting_dept", "Ministry of Education"),
         "systems_authorized": data.get("required_systems", ["Education System", "Income System", "Identity System"]),
         "purpose": data.get("purpose", "Multi-department automated verification and entitlement determination"),
+        "data_requested": data.get("data_requested", "Aadhaar e-KYC, Academic Marksheet Token, Income Declaration"),
+        "status": "GRANTED",
         "timestamp": now.isoformat(),
         "expires_at": expires.isoformat(),
         "legal_framework": "DPDP Act 2023 Compliant",
@@ -1085,6 +1197,43 @@ def grant_consent():
 
     return jsonify({"success": True, "consent": consent_record}), 201
 
+@app.route("/api/consent/deny", methods=["POST"])
+def deny_consent():
+    data = request.get_json() or {}
+    consent_id = f"CNS-DENIED-{random.randint(100000, 999999)}"
+    now = datetime.datetime.now(datetime.timezone.utc)
+
+    consent_record = {
+        "consent_id": consent_id,
+        "service_id": data.get("service_id", "S001"),
+        "citizen_id": data.get("citizen_id", "IND-8842"),
+        "requesting_dept": data.get("requesting_dept", "Department Requesting Access"),
+        "systems_authorized": [],
+        "purpose": data.get("purpose", "Service Application Data Access"),
+        "data_requested": data.get("data_requested", "Verified Identity & Academic Credentials"),
+        "status": "DENIED",
+        "timestamp": now.isoformat(),
+        "legal_framework": "DPDP Act 2023 Compliant"
+    }
+
+    in_memory_store["consents"][consent_id] = consent_record
+    record_audit_log("CONSENT_DENIED", "ONEGOV DPDP Consent Gateway", "WARN", {
+        "consent_id": consent_id,
+        "reason": "Citizen explicitly denied consent"
+    })
+
+    return jsonify({"success": True, "consent": consent_record}), 200
+
+@app.route("/api/consent/history", methods=["GET"])
+def get_consent_history():
+    history = list(in_memory_store["consents"].values())
+    history.sort(key=lambda x: x.get("timestamp", ""), reverse=True)
+    return jsonify({
+        "success": True,
+        "total": len(history),
+        "history": history
+    })
+
 # Workflow State Machine & Application Tracking
 @app.route("/api/workflow/apply", methods=["POST"])
 def workflow_apply():
@@ -1094,11 +1243,12 @@ def workflow_apply():
     citizen_name = data.get("citizen_name", "Aarav Sharma")
 
     stages = [
-        {"id": 1, "name": "Identity Verification", "status": "VERIFIED", "authority": "DigiLocker / UIDAI (e-KYC)", "time": "Instant", "icon": "✓"},
-        {"id": 2, "name": "Academic Credential Check", "status": "IN_PROGRESS", "authority": "Academic Bank of Credits (SOAP XML)", "time": "Live", "icon": "⏳"},
-        {"id": 3, "name": "Income / Revenue Verification", "status": "PENDING", "authority": "CBDT / State Revenue SQL Gateway", "time": "Queued", "icon": "○"},
-        {"id": 4, "name": "Autonomous Rules Engine", "status": "PENDING", "authority": "ONEGOV Interoperability Engine", "time": "Queued", "icon": "○"},
-        {"id": 5, "name": "Single Sign-off & Disbursement", "status": "PENDING", "authority": "National Unified Registry", "time": "Queued", "icon": "○"}
+        {"id": 1, "name": "Citizen Request", "status": "VERIFIED", "dept": "Citizen Portal", "authority": "ONEGOV Portal", "time": "Completed", "icon": "✓"},
+        {"id": 2, "name": "Identity Verification", "status": "VERIFIED", "dept": "Identity Dept", "authority": "DigiLocker / UIDAI (SIMULATED)", "time": "Completed", "icon": "✓"},
+        {"id": 3, "name": "Education Verification", "status": "IN_PROGRESS", "dept": "Education Dept", "authority": "Academic Bank of Credits (SOAP XML)", "time": "Live", "icon": "⏳"},
+        {"id": 4, "name": "Revenue Verification", "status": "PENDING", "dept": "Revenue Dept", "authority": "CBDT / State Revenue SQL Gateway", "time": "Queued", "icon": "○"},
+        {"id": 5, "name": "Rules / Eligibility Check", "status": "PENDING", "dept": "Interoperability Core", "authority": "ONEGOV Rules Engine", "time": "Queued", "icon": "○"},
+        {"id": 6, "name": "Final Processing / Disbursement", "status": "PENDING", "dept": "Welfare Dept", "authority": "National Treasury / Welfare Direct Benefit", "time": "Queued", "icon": "○"}
     ]
 
     application = {
@@ -1108,8 +1258,8 @@ def workflow_apply():
         "dept": data.get("dept", "Ministry of Education"),
         "citizenId": citizen_id,
         "citizenName": citizen_name,
-        "currentStageIndex": 1,
-        "overallStatus": "In Multi-Department Verification",
+        "currentStageIndex": 2,
+        "overallStatus": "Stage 3: Education Verification In Progress",
         "stages": stages,
         "createdAt": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "slaDeadline": (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=3)).isoformat(),
