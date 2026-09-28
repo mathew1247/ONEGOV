@@ -3,6 +3,9 @@
  * Provides reusable localStorage abstractions, data schemas,
  * navigation helpers, and seed defaults.
  */
+// Backend API Base URL (Deployed on Render)
+const API_BASE_URL = "https://onegov-38oj.onrender.com";
+window.API_BASE_URL = API_BASE_URL;
 
 // 1. Data Storage Helpers (Future FastAPI API drop-in ready)
 function saveData(key, value) {

@@ -7,8 +7,10 @@
 // ============================================================================
 // 1. REST API Client Layer
 // ============================================================================
+const API_BASE_URL = "https://onegov-38oj.onrender.com";
+
 const ONEGOV_API = {
-  baseUrl: "/api",
+  baseUrl: `${API_BASE_URL}/api`,
 
   // POST /api/onboarding - Register or update unified citizen profile
   async saveProfile(profileData) {
@@ -1556,7 +1558,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Record Login audit log entry
-    fetch("/api/audit-logs/record", {
+    fetch(`${API_BASE_URL}/api/audit-logs/record`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -1931,7 +1933,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Load Audit Logs into Admin Audit Vault Table
     try {
-      const auditRes = await fetch("/api/audit-logs");
+      const auditRes = await fetch(`${API_BASE_URL}/api/audit-logs`);
       if (auditRes.ok) {
         const auditData = await auditRes.json();
         const vaultTbody = document.getElementById("admin-audit-vault-tbody");
@@ -2024,7 +2026,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Load Audit Logs into Admin Audit Vault Table
     try {
-      const auditRes = await fetch("/api/audit-logs");
+      const auditRes = await fetch(`${API_BASE_URL}/api/audit-logs`);
       if (auditRes.ok) {
         const auditData = await auditRes.json();
         const vaultTbody = document.getElementById("admin-audit-vault-tbody");
@@ -2136,7 +2138,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function openSanctionCertificate(refId) {
     let certData = null;
     try {
-      const res = await fetch(`/api/certificate/${refId}`);
+      const res = await fetch(`${API_BASE_URL}/api/certificate/${refId}`);
       if (res.ok) {
         const json = await res.json();
         certData = json.certificate;
@@ -2281,7 +2283,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
 
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch(`${API_BASE_URL}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
