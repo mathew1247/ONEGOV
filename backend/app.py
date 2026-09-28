@@ -1411,8 +1411,14 @@ def get_workflow_status(ref_id):
 # ============================================================================
 # UNIFIED MULTI-PAGE & STATIC RESOURCE RESOLVER (Catch-all after APIs)
 # ============================================================================
-@app.route("/<path:filename>")
+@app.route("/")
+def index():
+    index_path = FRONTEND_DIR / "index.html"
+    if index_path.is_file():
+        return send_from_directory(str(FRONTEND_DIR), "index.html")
+    return send_from_directory(str(PROJECT_DIR), "index.html")
 
+@app.route("/<path:filename>")
 def serve_any_file(filename):
     # 1. Check if file exists directly in frontend directory
     frontend_path = FRONTEND_DIR / filename
@@ -1430,6 +1436,7 @@ def serve_any_file(filename):
         return send_from_directory(str(FRONTEND_DIR), f"{filename}.html")
 
     return jsonify({"error": f"File '{filename}' not found", "status": 404}), 404
+
 
 
 if __name__ == "__main__":
