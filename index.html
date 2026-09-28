@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ONEGOV — Unified Citizen Interoperability Platform</title>
-  <meta name="description" content="India's Citizen Interoperability Platform. Connect your profile to multi-department government services through secure APIs.">
+  <meta name="description"
+    content="India's Citizen Interoperability Platform. Connect your profile to multi-department government services through secure APIs.">
   <meta name="theme-color" content="#102a45">
-  
+
   <!-- Google Fonts: Plus Jakarta Sans for ultra-clean modern typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <!-- Ambient Landscape Background Backdrop -->
   <div class="bg-scene" aria-hidden="true">
     <!-- Faint Ashoka Chakra / Geometric Motif on Right -->
     <svg class="bg-chakra" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="200" cy="200" r="190" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
-      <circle cx="200" cy="200" r="150" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
-      <circle cx="200" cy="200" r="100" stroke="currentColor" stroke-width="1.2" opacity="0.25"/>
-      <circle cx="200" cy="200" r="30" stroke="currentColor" stroke-width="2" opacity="0.5"/>
-      <circle cx="200" cy="200" r="12" fill="currentColor" opacity="0.4"/>
+      <circle cx="200" cy="200" r="190" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"
+        opacity="0.45" />
+      <circle cx="200" cy="200" r="150" stroke="currentColor" stroke-width="1.5" opacity="0.35" />
+      <circle cx="200" cy="200" r="100" stroke="currentColor" stroke-width="1.2" opacity="0.25" />
+      <circle cx="200" cy="200" r="30" stroke="currentColor" stroke-width="2" opacity="0.5" />
+      <circle cx="200" cy="200" r="12" fill="currentColor" opacity="0.4" />
       <!-- 24 Ray Spokes -->
       <g stroke="currentColor" stroke-width="1.2" opacity="0.35">
         <line x1="200" y1="50" x2="200" y2="170" />
@@ -46,11 +52,14 @@
     </svg>
 
     <!-- Subtle Landscape SVGs at Bottom / Left -->
-    <svg class="bg-landscape" viewBox="0 0 1440 320" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="bg-landscape" viewBox="0 0 1440 320" preserveAspectRatio="none" fill="none"
+      xmlns="http://www.w3.org/2000/svg">
       <!-- Soft Hills in distance -->
-      <path d="M0,220 C320,160 540,240 880,180 C1180,130 1340,210 1440,190 L1440,320 L0,320 Z" fill="#ebe7dc" opacity="0.4"/>
-      <path d="M0,250 C260,200 620,270 940,220 C1220,180 1380,240 1440,230 L1440,320 L0,320 Z" fill="#e5e0d4" opacity="0.55"/>
-      
+      <path d="M0,220 C320,160 540,240 880,180 C1180,130 1340,210 1440,190 L1440,320 L0,320 Z" fill="#ebe7dc"
+        opacity="0.4" />
+      <path d="M0,250 C260,200 620,270 940,220 C1220,180 1380,240 1440,230 L1440,320 L0,320 Z" fill="#e5e0d4"
+        opacity="0.55" />
+
       <!-- Government Building / Monument Colonnade Silhouette on Left -->
       <g opacity="0.45" fill="#d8d2c2">
         <rect x="70" y="145" width="130" height="75" rx="3" />
@@ -68,7 +77,7 @@
         <rect x="40" y="170" width="30" height="50" rx="2" />
         <rect x="200" y="170" width="30" height="50" rx="2" />
       </g>
-      
+
       <!-- Trees & Botanical Accents -->
       <g opacity="0.4" fill="#cfc8b6">
         <path d="M25,230 Q35,180 45,230 Z" />
@@ -80,7 +89,7 @@
         <circle cx="1360" cy="215" r="22" />
         <circle cx="1400" cy="228" r="14" />
       </g>
-      
+
       <!-- Subtle Clouds -->
       <g opacity="0.35" fill="#f0ece1">
         <path d="M120,60 Q135,45 155,52 Q175,40 195,54 Q210,50 220,65 L120,65 Z" />
@@ -97,7 +106,7 @@
         <a href="#page-category" class="brand-logo" id="nav-brand-logo" aria-label="ONEGOV Portal Home">
           <div class="emblem-badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
           </div>
           <div class="brand-text">
@@ -107,6 +116,26 @@
         </a>
 
         <div class="nav-actions">
+          <button type="button" class="nav-btn-track" id="nav-btn-track" title="Quickly Track Application Status">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Track Application</span>
+          </button>
+
+          <!-- Federated SSO Button -->
+          <button type="button" class="nav-btn-sso" id="nav-btn-sso" title="Login with DigiLocker / MeriPehchan">
+            <span class="sso-flag">🇮🇳</span>
+            <span id="nav-sso-label">DigiLocker SSO</span>
+            <span class="sso-verified-dot" id="nav-sso-dot" style="display:none;"></span>
+          </button>
+
+          <!-- Officer / Admin Portal Switcher -->
+          <button type="button" class="nav-btn-admin-toggle" id="nav-btn-admin-toggle" title="Switch to Government Officer Portal">
+            <span>🏛️ Officer Portal</span>
+          </button>
+
           <div class="stepper-nav-pill" id="global-stepper-pill" style="display: none;">
             <span class="step-indicator-text" id="step-indicator-badge">Step 1 of 2</span>
           </div>
@@ -118,7 +147,8 @@
           </div>
 
           <button class="help-btn" id="help-btn" aria-label="Help and Citizen Support" title="Help & Support">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"></circle>
               <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
               <line x1="12" y1="17" x2="12.01" y2="17"></line>
@@ -138,15 +168,32 @@
           <span class="pulse-dot"></span>
           <span>Interoperability Platform • Single Citizen Profile</span>
         </div>
-        
+
         <h1 class="hero-title">
           One Platform. Many Services.<br>
           <span class="title-highlight">All For You.</span>
         </h1>
-        
+
         <p class="hero-subtitle">
           Choose your profile category to discover the services that are right for you.
         </p>
+
+        <!-- Fast Public Track Application Widget -->
+        <div class="public-track-widget" id="public-track-box">
+          <div class="track-widget-left">
+            <span class="track-widget-icon">⚡</span>
+            <div>
+              <h4 class="track-widget-title">Public Unified Application Tracker</h4>
+              <p class="track-widget-sub">Inspect multi-department verification status in real-time across connected ministries.</p>
+            </div>
+          </div>
+          <form class="track-widget-form" id="quick-track-form">
+            <div class="track-input-wrapper">
+              <input type="text" id="quick-track-input" placeholder="e.g. OG-2026-IND-8842" value="OG-2026-IND-8842" required autocomplete="off">
+            </div>
+            <button type="submit" class="btn-track-submit" id="btn-quick-track-submit">Track Status →</button>
+          </form>
+        </div>
       </div>
 
       <!-- Main Category Selection Card -->
@@ -156,7 +203,8 @@
             <h2 id="category-card-heading" class="card-title">Choose Your Category</h2>
             <span class="badge-count">4 Pathways Available</span>
           </div>
-          <button type="button" class="view-all-btn" id="view-all-trigger" aria-label="View all government services catalog">
+          <button type="button" class="view-all-btn" id="view-all-trigger"
+            aria-label="View all government services catalog">
             <span>View All</span>
             <span class="arrow-icon">›</span>
           </button>
@@ -164,9 +212,10 @@
 
         <!-- 2x2 Category Grid -->
         <div class="category-grid" role="list">
-          
+
           <!-- Card 1: Students -->
-          <article class="cat-card cat-students" data-category="student" tabindex="0" role="listitem" aria-label="Students category: Explore scholarships, education schemes, skill development and more">
+          <article class="cat-card cat-students" data-category="student" tabindex="0" role="listitem"
+            aria-label="Students category: Explore scholarships, education schemes, skill development and more">
             <div class="card-decor-circle"></div>
             <div class="card-decor-dots"></div>
 
@@ -179,15 +228,19 @@
 
               <div class="cat-illustration" aria-hidden="true">
                 <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-illust">
-                  <circle cx="15" cy="20" r="3" fill="#1b64a5" opacity="0.3"/>
-                  <path d="M100 15 L102 22 L109 24 L102 26 L100 33 L98 26 L91 24 L98 22 Z" fill="#3b82f6" opacity="0.4"/>
-                  <path d="M30 68 C45 62 58 64 60 78 C62 64 75 62 90 68 L90 85 C75 79 62 81 60 92 C58 81 45 79 30 85 Z" fill="#bfdbfe" opacity="0.75" />
-                  <path d="M30 64 C45 58 58 60 60 74 C62 60 75 58 90 64 L90 81 C75 75 62 77 60 88 C58 77 45 75 30 81 Z" fill="#ffffff" />
+                  <circle cx="15" cy="20" r="3" fill="#1b64a5" opacity="0.3" />
+                  <path d="M100 15 L102 22 L109 24 L102 26 L100 33 L98 26 L91 24 L98 22 Z" fill="#3b82f6"
+                    opacity="0.4" />
+                  <path d="M30 68 C45 62 58 64 60 78 C62 64 75 62 90 68 L90 85 C75 79 62 81 60 92 C58 81 45 79 30 85 Z"
+                    fill="#bfdbfe" opacity="0.75" />
+                  <path d="M30 64 C45 58 58 60 60 74 C62 60 75 58 90 64 L90 81 C75 75 62 77 60 88 C58 77 45 75 30 81 Z"
+                    fill="#ffffff" />
                   <path d="M60 74 L60 88" stroke="#93c5fd" stroke-width="2" />
                   <polygon points="60,24 105,42 60,58 15,42" fill="#1e3a8a" />
                   <polygon points="60,26 100,42 60,56 20,42" fill="#2563eb" />
                   <path d="M38 48 C38 62 82 62 82 48" fill="#1e3a8a" />
-                  <path d="M60 42 C78 45 84 54 85 64" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                  <path d="M60 42 C78 45 84 54 85 64" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"
+                    fill="none" />
                   <circle cx="60" cy="42" r="3.5" fill="#d97706" />
                   <rect x="82" y="64" width="6" height="10" rx="2" fill="#f59e0b" />
                   <circle cx="100" cy="72" r="10" fill="#f59e0b" />
@@ -199,7 +252,9 @@
             <div class="cat-card-footer">
               <div class="action-circle-btn" aria-hidden="true">
                 <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
                 </svg>
               </div>
               <span class="card-action-text">Explore Student Schemes</span>
@@ -207,7 +262,8 @@
           </article>
 
           <!-- Card 2: Employed -->
-          <article class="cat-card cat-employed" data-category="employed" tabindex="0" role="listitem" aria-label="Employed category: Access employee benefits, skill upskilling, loans, and other government services">
+          <article class="cat-card cat-employed" data-category="employed" tabindex="0" role="listitem"
+            aria-label="Employed category: Access employee benefits, skill upskilling, loans, and other government services">
             <div class="card-decor-circle"></div>
             <div class="card-decor-dots"></div>
 
@@ -215,21 +271,27 @@
               <div class="cat-content">
                 <span class="category-label">Work & Professional</span>
                 <h3 class="cat-title">Employed</h3>
-                <p class="cat-desc">Access employee benefits, skill upskilling, loans, and other government services.</p>
+                <p class="cat-desc">Access employee benefits, skill upskilling, loans, and other government services.
+                </p>
               </div>
 
               <div class="cat-illustration" aria-hidden="true">
                 <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-illust">
-                  <circle cx="105" cy="22" r="4" fill="#ea580c" opacity="0.3"/>
+                  <circle cx="105" cy="22" r="4" fill="#ea580c" opacity="0.3" />
                   <g opacity="0.8">
-                    <rect x="75" y="14" width="36" height="26" rx="6" fill="#ffffff" stroke="#fed7aa" stroke-width="1.5" />
-                    <path d="M80 32 L88 26 L94 29 L104 19" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <polyline points="100,19 104,19 104,23" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <rect x="75" y="14" width="36" height="26" rx="6" fill="#ffffff" stroke="#fed7aa"
+                      stroke-width="1.5" />
+                    <path d="M80 32 L88 26 L94 29 L104 19" stroke="#16a34a" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <polyline points="100,19 104,19 104,23" stroke="#16a34a" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
                   </g>
-                  <path d="M46 38 C46 30 74 30 74 38" stroke="#9a3412" stroke-width="4" stroke-linecap="round" fill="none" />
+                  <path d="M46 38 C46 30 74 30 74 38" stroke="#9a3412" stroke-width="4" stroke-linecap="round"
+                    fill="none" />
                   <rect x="24" y="38" width="72" height="48" rx="8" fill="#ea580c" />
                   <path d="M24 38 L60 58 L96 38 L96 52 L60 68 L24 52 Z" fill="#c2410c" opacity="0.85" />
-                  <rect x="54" y="55" width="12" height="10" rx="2.5" fill="#fef08a" stroke="#ca8a04" stroke-width="1" />
+                  <rect x="54" y="55" width="12" height="10" rx="2.5" fill="#fef08a" stroke="#ca8a04"
+                    stroke-width="1" />
                   <circle cx="60" cy="59" r="1.5" fill="#854d0e" />
                   <path d="M24 76 Q24 86 34 86" stroke="#9a3412" stroke-width="2.5" fill="none" />
                   <path d="M96 76 Q96 86 86 86" stroke="#9a3412" stroke-width="2.5" fill="none" />
@@ -240,7 +302,9 @@
             <div class="cat-card-footer">
               <div class="action-circle-btn" aria-hidden="true">
                 <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
                 </svg>
               </div>
               <span class="card-action-text">Explore Workforce Services</span>
@@ -248,7 +312,8 @@
           </article>
 
           <!-- Card 3: Unemployed -->
-          <article class="cat-card cat-unemployed" data-category="unemployed" tabindex="0" role="listitem" aria-label="Unemployed category: Find job opportunities, training programs, financial support and more">
+          <article class="cat-card cat-unemployed" data-category="unemployed" tabindex="0" role="listitem"
+            aria-label="Unemployed category: Find job opportunities, training programs, financial support and more">
             <div class="card-decor-circle"></div>
             <div class="card-decor-dots"></div>
 
@@ -261,7 +326,7 @@
 
               <div class="cat-illustration" aria-hidden="true">
                 <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-illust">
-                  <circle cx="20" cy="25" r="3" fill="#15803d" opacity="0.3"/>
+                  <circle cx="20" cy="25" r="3" fill="#15803d" opacity="0.3" />
                   <rect x="25" y="24" width="46" height="58" rx="6" fill="#ffffff" stroke="#bbf7d0" stroke-width="2" />
                   <rect x="33" y="34" width="18" height="4" rx="2" fill="#16a34a" />
                   <rect x="33" y="42" width="30" height="3" rx="1.5" fill="#cbd5e1" />
@@ -271,7 +336,8 @@
                   <line x1="45" y1="68" x2="45" y2="76" stroke="#15803d" stroke-width="1.5" stroke-linecap="round" />
                   <circle cx="78" cy="52" r="22" fill="#dcfce7" stroke="#15803d" stroke-width="4" />
                   <circle cx="78" cy="52" r="16" fill="#ffffff" />
-                  <path d="M72 52 L76 56 L85 47" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M72 52 L76 56 L85 47" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
                   <line x1="93" y1="68" x2="108" y2="83" stroke="#15803d" stroke-width="5" stroke-linecap="round" />
                   <line x1="93" y1="68" x2="100" y2="75" stroke="#86efac" stroke-width="2" stroke-linecap="round" />
                 </svg>
@@ -281,7 +347,9 @@
             <div class="cat-card-footer">
               <div class="action-circle-btn" aria-hidden="true">
                 <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
                 </svg>
               </div>
               <span class="card-action-text">Find Jobs & Training</span>
@@ -289,7 +357,8 @@
           </article>
 
           <!-- Card 4: Common -->
-          <article class="cat-card cat-common" data-category="common" tabindex="0" role="listitem" aria-label="Common category: General services like documents, certificates, grievances and more">
+          <article class="cat-card cat-common" data-category="common" tabindex="0" role="listitem"
+            aria-label="Common category: General services like documents, certificates, grievances and more">
             <div class="card-decor-circle"></div>
             <div class="card-decor-dots"></div>
 
@@ -302,7 +371,7 @@
 
               <div class="cat-illustration" aria-hidden="true">
                 <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-illust">
-                  <circle cx="104" cy="20" r="3.5" fill="#7c3aed" opacity="0.3"/>
+                  <circle cx="104" cy="20" r="3.5" fill="#7c3aed" opacity="0.3" />
                   <rect x="22" y="28" width="62" height="42" rx="7" fill="#ffffff" stroke="#ddd6fe" stroke-width="2" />
                   <rect x="28" y="36" width="10" height="8" rx="2" fill="#fde047" stroke="#eab308" stroke-width="1" />
                   <rect x="42" y="37" width="22" height="3" rx="1.5" fill="#7c3aed" />
@@ -311,9 +380,12 @@
                   <path d="M27 66 C27 61 41 61 41 66" fill="#7c3aed" />
                   <circle cx="46" cy="57" r="3" fill="#a78bfa" />
                   <path d="M41 66 C41 62 51 62 51 66" fill="#a78bfa" />
-                  <path d="M78 42 C78 42 96 35 96 48 C96 64 78 76 78 76 C78 76 60 64 60 48 C60 35 78 42 78 42 Z" fill="#7c3aed" />
-                  <path d="M78 45 C78 45 92 39 92 49 C92 62 78 72 78 72 C78 72 64 62 64 49 C64 39 78 45 78 45 Z" fill="#8b5cf6" />
-                  <path d="M71 52 L76 57 L85 47" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M78 42 C78 42 96 35 96 48 C96 64 78 76 78 76 C78 76 60 64 60 48 C60 35 78 42 78 42 Z"
+                    fill="#7c3aed" />
+                  <path d="M78 45 C78 45 92 39 92 49 C92 62 78 72 78 72 C78 72 64 62 64 49 C64 39 78 45 78 45 Z"
+                    fill="#8b5cf6" />
+                  <path d="M71 52 L76 57 L85 47" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
                 </svg>
               </div>
             </div>
@@ -321,7 +393,9 @@
             <div class="cat-card-footer">
               <div class="action-circle-btn" aria-hidden="true">
                 <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
                 </svg>
               </div>
               <span class="card-action-text">Access Citizen Certificates</span>
@@ -342,7 +416,7 @@
             <span class="tag-item">Citizen First</span>
           </p>
         </div>
-        
+
         <div class="trust-badges">
           <div class="trust-pill">
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
@@ -356,7 +430,7 @@
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
               <polyline points="22 4 12 14.01 9 11.01"></polyline>
             </svg>
-            <span>Direct API Consent Based Sharing</span>
+            <span>Direct API Consent Based Sharing (DPDP 2023)</span>
           </div>
         </div>
       </footer>
@@ -367,8 +441,8 @@
          PAGE 2: PROGRESSIVE PROFILE INFORMATION VIEW
          ========================================================================= -->
     <section class="main-content page-view" id="page-profile" role="region" aria-labelledby="profile-heading">
-      
-      <!-- Stepper Breadcrumb Header (Basic Details -> Category Details -> Services) -->
+
+      <!-- Stepper Breadcrumb Header -->
       <div class="form-stepper-header">
         <div class="stepper-track">
           <div class="step-node active" id="step-node-1">
@@ -390,7 +464,7 @@
 
       <!-- Progressive Form Card -->
       <div class="profile-card-container">
-        
+
         <div class="profile-header-group">
           <div class="selected-cat-pill" id="profile-cat-pill">
             <span id="pill-icon">🎓</span>
@@ -401,20 +475,21 @@
         </div>
 
         <form id="citizen-profile-form" novalidate>
-          
+
           <!-- STEP 1: COMMON BASIC DETAILS (ALL CITIZENS) -->
           <div class="form-step-section active" id="form-step-1">
             <div class="form-section-title">
               <span class="section-bullet"></span>
               <h3>Basic Citizen Details</h3>
-              <span class="privacy-note">🔒 Only the information required for service discovery and eligibility matching is requested.</span>
+              <span class="privacy-note">🔒 Protected under DPDP Act 2023. Used only for authorized scheme matching.</span>
             </div>
 
             <div class="form-grid">
               <!-- Full Name (2 cols) -->
               <div class="form-field full-width">
                 <label for="input-fullname">Full Name <span class="req">*</span></label>
-                <input type="text" id="input-fullname" name="fullName" placeholder="e.g. Aarav Sharma" required autocomplete="name">
+                <input type="text" id="input-fullname" name="fullName" placeholder="e.g. Aarav Sharma" required
+                  autocomplete="name">
                 <span class="field-error" id="err-fullname"></span>
               </div>
 
@@ -430,7 +505,8 @@
                 <label for="input-mobile">Mobile Number <span class="req">*</span></label>
                 <div class="input-with-prefix">
                   <span class="input-prefix">+91</span>
-                  <input type="tel" id="input-mobile" name="mobile" placeholder="9876543210" pattern="[6-9][0-9]{9}" maxlength="10" required autocomplete="tel">
+                  <input type="tel" id="input-mobile" name="mobile" placeholder="9876543210" pattern="[6-9][0-9]{9}"
+                    maxlength="10" required autocomplete="tel">
                 </div>
                 <span class="field-error" id="err-mobile"></span>
               </div>
@@ -438,7 +514,8 @@
               <!-- Email (1 col) -->
               <div class="form-field">
                 <label for="input-email">Email Address <span class="req">*</span></label>
-                <input type="email" id="input-email" name="email" placeholder="aarav.sharma@example.gov.in" required autocomplete="email">
+                <input type="email" id="input-email" name="email" placeholder="aarav.sharma@example.gov.in" required
+                  autocomplete="email">
                 <span class="field-error" id="err-email"></span>
               </div>
 
@@ -471,7 +548,8 @@
               <!-- Pincode (1 col) -->
               <div class="form-field">
                 <label for="input-pincode">Pincode <span class="req">*</span></label>
-                <input type="text" id="input-pincode" name="pincode" placeholder="110001" pattern="[0-9]{6}" maxlength="6" required autocomplete="postal-code">
+                <input type="text" id="input-pincode" name="pincode" placeholder="110001" pattern="[0-9]{6}"
+                  maxlength="6" required autocomplete="postal-code">
                 <span class="field-error" id="err-pincode"></span>
               </div>
             </div>
@@ -480,7 +558,8 @@
             <div class="form-action-bar">
               <div class="left-actions">
                 <button type="button" class="btn-ghost" id="btn-back-to-category">← Change Category</button>
-                <button type="button" class="btn-demo-autofill" id="btn-demo-fill">⚡ Auto-Fill Demo Profile</button>
+                <button type="button" class="btn-demo-autofill" id="btn-demo-fill">⚡ Auto-Fill Demo</button>
+                <button type="button" class="btn-sso-autofill" id="btn-sso-fill">🇮🇳 Verify via DigiLocker</button>
               </div>
               <button type="button" class="btn-primary" id="btn-step-1-continue">Continue to Category Details →</button>
             </div>
@@ -489,7 +568,7 @@
 
           <!-- STEP 2: CATEGORY-SPECIFIC DETAILS -->
           <div class="form-step-section" id="form-step-2">
-            
+
             <!-- Category Specific Container: STUDENT -->
             <div class="cat-specific-block" id="cat-block-student">
               <div class="form-section-title">
@@ -521,7 +600,8 @@
 
                 <div class="form-field">
                   <label for="stud-specialization">Specialization</label>
-                  <input type="text" id="stud-specialization" name="specialization" placeholder="e.g. Artificial Intelligence, Data Science">
+                  <input type="text" id="stud-specialization" name="specialization"
+                    placeholder="e.g. Artificial Intelligence, Data Science">
                 </div>
 
                 <div class="form-field">
@@ -552,12 +632,14 @@
 
                 <div class="form-field">
                   <label for="stud-skills">Skills</label>
-                  <input type="text" id="stud-skills" name="studentSkills" placeholder="e.g. Python, Web Development, SQL">
+                  <input type="text" id="stud-skills" name="studentSkills"
+                    placeholder="e.g. Python, Web Development, SQL">
                 </div>
 
                 <div class="form-field">
                   <label for="stud-interests">Areas of Interest</label>
-                  <input type="text" id="stud-interests" name="studentInterests" placeholder="e.g. AI Research, Cyber Security, Robotics">
+                  <input type="text" id="stud-interests" name="studentInterests"
+                    placeholder="e.g. AI Research, Cyber Security, Robotics">
                 </div>
 
                 <div class="form-field">
@@ -634,18 +716,21 @@
 
                 <div class="form-field">
                   <label for="emp-qual">Highest Qualification <span class="req">*</span></label>
-                  <input type="text" id="emp-qual" name="highestQualification" placeholder="e.g. B.Tech / MBA / Masters">
+                  <input type="text" id="emp-qual" name="highestQualification"
+                    placeholder="e.g. B.Tech / MBA / Masters">
                   <span class="field-error" id="err-emp-qual"></span>
                 </div>
 
                 <div class="form-field">
                   <label for="emp-skills">Skills</label>
-                  <input type="text" id="emp-skills" name="empSkills" placeholder="e.g. Cloud Infrastructure, System Design">
+                  <input type="text" id="emp-skills" name="empSkills"
+                    placeholder="e.g. Cloud Infrastructure, System Design">
                 </div>
 
                 <div class="form-field">
                   <label for="emp-interests">Areas of Interest</label>
-                  <input type="text" id="emp-interests" name="empInterests" placeholder="e.g. Upskilling, MSME Expansion Loans">
+                  <input type="text" id="emp-interests" name="empInterests"
+                    placeholder="e.g. Upskilling, MSME Expansion Loans">
                 </div>
 
                 <div class="form-field">
@@ -683,12 +768,14 @@
 
                 <div class="form-field">
                   <label for="unemp-course">Degree / Course</label>
-                  <input type="text" id="unemp-course" name="unempCourse" placeholder="e.g. B.Sc Electronics / B.Com / ITI Fitter">
+                  <input type="text" id="unemp-course" name="unempCourse"
+                    placeholder="e.g. B.Sc Electronics / B.Com / ITI Fitter">
                 </div>
 
                 <div class="form-field">
                   <label for="unemp-skills">Skills</label>
-                  <input type="text" id="unemp-skills" name="unempSkills" placeholder="e.g. Technical Support, Python, Tally">
+                  <input type="text" id="unemp-skills" name="unempSkills"
+                    placeholder="e.g. Technical Support, Python, Tally">
                 </div>
 
                 <div class="form-field">
@@ -702,17 +789,20 @@
 
                 <div class="form-field">
                   <label for="unemp-prev-role">Previous Job Role</label>
-                  <input type="text" id="unemp-prev-role" name="prevRole" placeholder="e.g. Sales Associate / Support Intern">
+                  <input type="text" id="unemp-prev-role" name="prevRole"
+                    placeholder="e.g. Sales Associate / Support Intern">
                 </div>
 
                 <div class="form-field">
                   <label for="unemp-pref-role">Preferred Job Role</label>
-                  <input type="text" id="unemp-pref-role" name="prefRole" placeholder="e.g. Junior Developer / System Specialist">
+                  <input type="text" id="unemp-pref-role" name="prefRole"
+                    placeholder="e.g. Junior Developer / System Specialist">
                 </div>
 
                 <div class="form-field">
                   <label for="unemp-location">Preferred Location</label>
-                  <input type="text" id="unemp-location" name="prefLocation" placeholder="e.g. Delhi NCR, Bengaluru, or Home District">
+                  <input type="text" id="unemp-location" name="prefLocation"
+                    placeholder="e.g. Delhi NCR, Bengaluru, or Home District">
                 </div>
 
                 <div class="form-field">
@@ -752,7 +842,9 @@
                 <div class="common-info-icon">👥</div>
                 <div class="common-info-text">
                   <h4>Your basic profile is enough to explore common citizen services.</h4>
-                  <p>Only the information required for service discovery and eligibility matching is requested. Proceed directly to explore universal government services, certificates, document vaults, and grievance portals.</p>
+                  <p>Only the information required for service discovery and eligibility matching is requested. Proceed
+                    directly to explore universal government services, certificates, document vaults, and grievance
+                    portals.</p>
                 </div>
               </div>
             </div>
@@ -769,9 +861,12 @@
 
       <div class="consent-strip">
         <svg viewBox="0 0 20 20" width="16" height="16" fill="#15803D">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd" />
         </svg>
-        <span>Data is protected under the Digital Personal Data Protection (DPDP) Act. Used only for authorized scheme eligibility matching.</span>
+        <span>Data is protected under the Digital Personal Data Protection (DPDP) Act. Used only for authorized scheme
+          eligibility matching.</span>
       </div>
     </section>
 
@@ -780,7 +875,7 @@
          PAGE 3: PERSONALIZED SERVICES DASHBOARD & INTEROPERABILITY HUB
          ========================================================================= -->
     <section class="main-content page-view" id="page-dashboard" role="region" aria-labelledby="dashboard-heading">
-      
+
       <!-- Citizen Header Bar -->
       <div class="dashboard-banner">
         <div class="citizen-meta">
@@ -788,13 +883,15 @@
           <div class="citizen-info">
             <div class="citizen-name-badge">
               <h2 id="dash-citizen-name">Aarav Sharma</h2>
-              <span class="verified-tag">✓ Verified Citizen Profile</span>
+              <span class="verified-tag" id="dash-verified-tag">✓ Verified Citizen Profile</span>
             </div>
-            <p class="citizen-subline" id="dash-citizen-subline">Students Pathway • Delhi, DL • Interoperability ID: IND-8842-9901</p>
+            <p class="citizen-subline" id="dash-citizen-subline">Students Pathway • Delhi, DL • Interoperability ID:
+              IND-8842-9901</p>
           </div>
         </div>
 
         <div class="dash-quick-actions">
+          <button type="button" class="btn-outline-sm" id="btn-open-inspector">🔬 Inspect OCDS & Adapters</button>
           <button type="button" class="btn-outline-sm" id="dash-edit-profile-btn">✏️ Edit Profile</button>
           <button type="button" class="btn-outline-sm" id="dash-change-category-btn">🔄 Switch Category</button>
         </div>
@@ -812,7 +909,7 @@
 
         <!-- Clean Visual Network Diagram -->
         <div class="network-diagram-container">
-          
+
           <!-- Node 1: Citizen -->
           <div class="net-node node-citizen">
             <div class="node-icon-circle">👤</div>
@@ -843,17 +940,17 @@
 
           <!-- Node 3: Connected Government Departments -->
           <div class="departments-grid">
-            
+
             <div class="dept-chip dept-edu active" id="dept-chip-edu">
               <span class="dept-dot"></span>
               <span class="dept-name">Education System</span>
-              <span class="dept-api">NSP / DigiLocker</span>
+              <span class="dept-api">ABC Registry (SOAP XML)</span>
             </div>
 
             <div class="dept-chip dept-income active" id="dept-chip-inc">
               <span class="dept-dot"></span>
               <span class="dept-name">Income System</span>
-              <span class="dept-api">CBDT / IT Gateway</span>
+              <span class="dept-api">CBDT (Direct SQL Table)</span>
             </div>
 
             <div class="dept-chip dept-emp active" id="dept-chip-emp">
@@ -865,7 +962,7 @@
             <div class="dept-chip dept-id active" id="dept-chip-id">
               <span class="dept-dot"></span>
               <span class="dept-name">Identity System</span>
-              <span class="dept-api">UIDAI / Aadhaar e-KYC</span>
+              <span class="dept-api">UIDAI / DigiLocker e-KYC</span>
             </div>
 
             <div class="dept-chip dept-skill active" id="dept-chip-skill">
@@ -880,7 +977,7 @@
 
         <div class="interop-footer-note">
           <span class="live-pulse-green"></span>
-          <span>5 of 5 Department Gateway Endpoints Connected & Responding (Avg latency: 42ms)</span>
+          <span id="gateway-status-text">5 of 5 Department Gateway Endpoints Connected & Responding (Avg latency: 32ms)</span>
         </div>
       </section>
 
@@ -891,7 +988,8 @@
             <span class="section-tag-badge" id="dash-services-badge">Recommended for Students</span>
             <h3 id="services-section-heading" class="section-h3">Services For You</h3>
           </div>
-          <p class="section-lead">Services are organized based on your profile, category, and eligibility information.</p>
+          <p class="section-lead">Services are organized based on your profile, category, and eligibility information.
+          </p>
         </div>
 
         <!-- Dynamic Service Cards Grid -->
@@ -902,16 +1000,166 @@
 
     </section>
 
+
+    <!-- =========================================================================
+         PAGE 4: GOVERNMENT OFFICER & ADMIN INTEROPERABILITY PORTAL
+         ========================================================================= -->
+    <section class="main-content page-view" id="page-admin" style="display: none;" role="region" aria-labelledby="admin-portal-heading">
+
+      <div class="admin-banner">
+        <div class="admin-title-group">
+          <div class="badge-pill admin-badge">
+            <span class="pulse-dot"></span>
+            <span>National Integration & Official Approval Console</span>
+          </div>
+          <h2 id="admin-portal-heading" class="admin-title">🏛️ Government Officer & Interoperability Admin Portal</h2>
+          <p class="admin-subtitle">Real-time cross-department verification pipeline, service level agreement (SLA) telemetry, and resilience controls.</p>
+        </div>
+        <div class="admin-actions">
+          <button type="button" class="btn-primary" id="btn-admin-refresh">🔄 Refresh Live State</button>
+          <button type="button" class="btn-ghost" id="btn-exit-admin">← Return to Citizen View</button>
+        </div>
+      </div>
+
+      <!-- KPI Overview Cards -->
+      <div class="admin-kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">Total Inquiries Processed</span>
+          <div class="kpi-value" id="kpi-inquiries">1,420</div>
+          <span class="kpi-tag tag-green">↑ 12% today</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Active Applications in Pipeline</span>
+          <div class="kpi-value" id="kpi-pipeline">2</div>
+          <span class="kpi-tag tag-blue">Real-time</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Verification Accuracy</span>
+          <div class="kpi-value">99.8%</div>
+          <span class="kpi-tag tag-green">OCDS v2.4</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">SLA Compliance Rate</span>
+          <div class="kpi-value">98.5%</div>
+          <span class="kpi-tag tag-amber">Avg 1.4s turnaround</span>
+        </div>
+      </div>
+
+      <!-- Real-Time Telemetry & Gateway Latencies -->
+      <div class="admin-grid-2col">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>⚡ Live Gateway Telemetry & Response Times</h3>
+            <span class="badge-count">4 Adapters Active</span>
+          </div>
+          <div class="telemetry-list" id="admin-telemetry-list">
+            <!-- Dynamically populated -->
+            <div class="telemetry-row">
+              <span class="t-name">DigiLocker / UIDAI Identity Gateway (REST)</span>
+              <span class="t-latency tag-green">19 ms</span>
+              <span class="t-status">ONLINE</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="t-name">Academic Bank of Credits (ABC SOAP/XML)</span>
+              <span class="t-latency tag-green">42 ms</span>
+              <span class="t-status">ONLINE</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="t-name">CBDT / State Revenue Gateway (Direct SQL)</span>
+              <span class="t-latency tag-green">65 ms</span>
+              <span class="t-status">ONLINE</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="t-name">EPFO / Skill India Gateway (REST)</span>
+              <span class="t-latency tag-green">34 ms</span>
+              <span class="t-status">ONLINE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resilience & Circuit Breaker Controller -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>🛡️ Fault Tolerance & Circuit Breakers</h3>
+            <span class="badge-count" id="cb-summary-badge">4 CLOSED (Healthy)</span>
+          </div>
+          <p class="admin-card-desc">Inject simulated outages into departmental APIs to test automatic Circuit Breaker tripping and Dead-Letter Queue (DLQ) fallback.</p>
+          <div class="cb-controls-grid">
+            <button type="button" class="btn-fault-toggle" id="btn-toggle-income-fault">💥 Toggle Revenue Gateway Outage</button>
+            <button type="button" class="btn-fault-toggle" id="btn-toggle-edu-fault">💥 Toggle ABC SOAP XML Outage</button>
+            <button type="button" class="btn-outline-sm" id="btn-reset-breakers">🔄 Reset All Breakers</button>
+          </div>
+          <div class="cb-status-chips" id="cb-chips-container">
+            <!-- Dynamically rendered -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Cross-Department Applications Review Table -->
+      <div class="admin-card full-width-card">
+        <div class="admin-card-header">
+          <h3>📋 Cross-Department Interoperability Verification Queue</h3>
+          <span class="badge-count" id="admin-app-count">2 Applications</span>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Ref ID</th>
+                <th>Citizen Name</th>
+                <th>Service Name</th>
+                <th>Current Stage</th>
+                <th>Authority</th>
+                <th>Status</th>
+                <th>Officer Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-applications-tbody">
+              <!-- Dynamically populated from /api/admin/applications -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dead-Letter Queue (DLQ) Inspection -->
+      <div class="admin-card full-width-card">
+        <div class="admin-card-header">
+          <h3>📬 Dead-Letter Queue (DLQ) & Resilience Vault</h3>
+          <span class="badge-count" id="dlq-count-badge">0 Pending Failures</span>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>DLQ ID</th>
+                <th>Timestamp</th>
+                <th>Target Service</th>
+                <th>Failure Reason</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-dlq-tbody">
+              <tr>
+                <td colspan="5" class="table-empty-note">No failed requests in DLQ. All department gateways are operating smoothly.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
   </div>
 
 
   <!-- =========================================================================
-       STAGE 4.1: SERVICE DETAILS & CONSENT MODAL
+       MODAL 1: SERVICE DETAILS & CONSENT MODAL
        ========================================================================= -->
-  <div class="app-modal" id="service-details-modal" aria-hidden="true" role="dialog" aria-labelledby="detail-modal-title">
+  <div class="app-modal" id="service-details-modal" aria-hidden="true" role="dialog"
+    aria-labelledby="detail-modal-title">
     <div class="modal-backdrop" id="detail-modal-backdrop"></div>
     <div class="modal-card modal-card-detail">
-      
+
       <!-- Modal Header -->
       <div class="modal-header-box">
         <div>
@@ -934,17 +1182,20 @@
       <div class="tracker-content-body detail-modal-body">
         <div class="detail-section">
           <h4 class="detail-section-heading">Service Overview</h4>
-          <p class="detail-text" id="detail-service-desc">Single-window access to central and state scholarship schemes for students across higher education institutes.</p>
+          <p class="detail-text" id="detail-service-desc">Single-window access to central and state scholarship schemes
+            for students across higher education institutes.</p>
         </div>
 
         <div class="detail-grid-row">
           <div class="detail-card-box">
             <h4 class="detail-section-heading">🎯 Eligibility & Requirements</h4>
-            <p class="detail-text-sm" id="detail-service-eligibility">Enrolled in a recognized institution with annual family income criteria verified via State/Central databases.</p>
+            <p class="detail-text-sm" id="detail-service-eligibility">Enrolled in a recognized institution with annual
+              family income criteria verified via State/Central databases.</p>
           </div>
           <div class="detail-card-box">
             <h4 class="detail-section-heading">📋 Information Required</h4>
-            <p class="detail-text-sm" id="detail-service-info-req">Academic Enrollment Token, Past Qualifying Marksheet, Family Income Range Declaration.</p>
+            <p class="detail-text-sm" id="detail-service-info-req">Academic Enrollment Token, Past Qualifying Marksheet,
+              Family Income Range Declaration.</p>
           </div>
         </div>
 
@@ -959,7 +1210,8 @@
           <div class="consent-icon">🔒</div>
           <div class="consent-text">
             <strong>Data will only be accessed with citizen consent.</strong>
-            <span>Only the specific verified tokens needed for this scheme will be exchanged through authorized department APIs under the DPDP Act.</span>
+            <span>Only the specific verified tokens needed for this scheme will be exchanged through authorized
+              department APIs under the DPDP Act 2023.</span>
           </div>
         </div>
       </div>
@@ -979,12 +1231,12 @@
 
 
   <!-- =========================================================================
-       STAGE 4.2: UNIFIED MULTI-STAGE SERVICE APPLICATION FLOW MODAL
+       MODAL 2: UNIFIED MULTI-STAGE SERVICE APPLICATION FLOW MODAL
        ========================================================================= -->
   <div class="app-modal" id="app-tracker-modal" aria-hidden="true" role="dialog" aria-labelledby="tracker-modal-title">
     <div class="modal-backdrop" id="tracker-modal-backdrop"></div>
     <div class="modal-card">
-      
+
       <!-- Modal Header -->
       <div class="modal-header-box">
         <div>
@@ -1002,7 +1254,7 @@
 
       <!-- Application Tracking Stepper & Live Stages -->
       <div class="tracker-content-body">
-        
+
         <div class="unified-app-id-banner">
           <div class="app-id-text">
             <span>Unified Application Reference:</span>
@@ -1013,67 +1265,7 @@
 
         <!-- Multi-Department Pipeline Stepper -->
         <div class="verification-pipeline" id="verification-stages-list">
-          
-          <!-- Stage 1 -->
-          <div class="v-stage stage-completed" id="v-stage-1">
-            <div class="v-stage-icon">✓</div>
-            <div class="v-stage-info">
-              <div class="v-stage-title-row">
-                <h4>Identity Verification</h4>
-                <span class="v-status-badge badge-green">✓ Verified via DigiLocker</span>
-              </div>
-              <p class="v-stage-desc">Citizen demographic and biometric token verified securely with zero credential exposure.</p>
-            </div>
-          </div>
-
-          <!-- Stage 2 -->
-          <div class="v-stage stage-completed" id="v-stage-2">
-            <div class="v-stage-icon">✓</div>
-            <div class="v-stage-info">
-              <div class="v-stage-title-row">
-                <h4>Education Verification</h4>
-                <span class="v-status-badge badge-green">✓ Verified via Academic Bank of Credits</span>
-              </div>
-              <p class="v-stage-desc">Enrollment record and qualification certificates verified directly from Institution database.</p>
-            </div>
-          </div>
-
-          <!-- Stage 3 -->
-          <div class="v-stage stage-progress" id="v-stage-3">
-            <div class="v-stage-icon">⏳</div>
-            <div class="v-stage-info">
-              <div class="v-stage-title-row">
-                <h4>Income / Employment Verification</h4>
-                <span class="v-status-badge badge-amber" id="v-badge-3">⏳ In Progress (CBDT Gateway)</span>
-              </div>
-              <p class="v-stage-desc">Automated cross-check with IT Department & State Revenue records for quota eligibility.</p>
-            </div>
-          </div>
-
-          <!-- Stage 4 -->
-          <div class="v-stage stage-pending" id="v-stage-4">
-            <div class="v-stage-icon">○</div>
-            <div class="v-stage-info">
-              <div class="v-stage-title-row">
-                <h4>Eligibility Check</h4>
-                <span class="v-status-badge badge-gray" id="v-badge-4">○ Pending Verification</span>
-              </div>
-              <p class="v-stage-desc">Autonomous rules engine checks scheme guidelines and calculates entitlement amount.</p>
-            </div>
-          </div>
-
-          <!-- Stage 5 -->
-          <div class="v-stage stage-pending" id="v-stage-5">
-            <div class="v-stage-icon">○</div>
-            <div class="v-stage-info">
-              <div class="v-stage-title-row">
-                <h4>Application Submitted</h4>
-                <span class="v-status-badge badge-gray" id="v-badge-5">○ Final Submission</span>
-              </div>
-              <p class="v-stage-desc">Final single sign-off submitted to Ministry with instant e-Receipt generation.</p>
-            </div>
-          </div>
-
+          <!-- Dynamically generated stages -->
         </div>
 
       </div>
@@ -1093,13 +1285,198 @@
   </div>
 
 
+  <!-- =========================================================================
+       MODAL 3: DIGILOCKER / MERIPEHCHAN FEDERATED SSO MODAL
+       ========================================================================= -->
+  <div class="app-modal" id="digilocker-sso-modal" aria-hidden="true" role="dialog" aria-labelledby="sso-modal-title">
+    <div class="modal-backdrop" id="sso-modal-backdrop"></div>
+    <div class="modal-card sso-modal-card">
+
+      <div class="sso-modal-header">
+        <div class="sso-logo-pill">
+          <span class="sso-flag-large">🇮🇳</span>
+          <div class="sso-title-stack">
+            <h3 id="sso-modal-title">MeriPehchan / DigiLocker National SSO</h3>
+            <span class="sso-subtitle">Single Sign-On Authentication for Citizen Digital Services</span>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-sso" aria-label="Close SSO Modal">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="sso-modal-body">
+        <div class="sso-protocol-badge">
+          <span>Protocol: OpenID Connect (OIDC 2.0) • RS256 JWT Signed Claims</span>
+        </div>
+
+        <p class="sso-prompt-text">Select a verified test digital identity or authenticate with Aadhaar e-KYC credentials:</p>
+
+        <div class="sso-citizen-options">
+          <div class="sso-citizen-card selected" data-citizen="student">
+            <div class="sso-card-avatar">🎓</div>
+            <div class="sso-card-info">
+              <div class="sso-c-name">Aarav Sharma <span class="sso-tag">Student</span></div>
+              <div class="sso-c-meta">Aadhaar: XXXX-XXXX-8842 • DTU Delhi (B.Tech IT) • ABC Credential: ABC-8832-9912</div>
+            </div>
+            <span class="sso-check">✓</span>
+          </div>
+
+          <div class="sso-citizen-card" data-citizen="employed">
+            <div class="sso-card-avatar">💼</div>
+            <div class="sso-card-info">
+              <div class="sso-c-name">Sunita Verma <span class="sso-tag">Employed</span></div>
+              <div class="sso-c-meta">Aadhaar: XXXX-XXXX-3321 • Pune, Maharashtra • EPFO UAN: 101928374655</div>
+            </div>
+            <span class="sso-check">✓</span>
+          </div>
+
+          <div class="sso-citizen-card" data-citizen="unemployed">
+            <div class="sso-card-avatar">🔍</div>
+            <div class="sso-card-info">
+              <div class="sso-c-name">Priya Sundaram <span class="sso-tag">Upskilling</span></div>
+              <div class="sso-c-meta">Aadhaar: XXXX-XXXX-5412 • Chennai, Tamil Nadu • Skill India Candidate</div>
+            </div>
+            <span class="sso-check">✓</span>
+          </div>
+        </div>
+
+        <div class="sso-claims-box">
+          <span class="sso-claims-title">🔒 Scopes Authorized for Interoperability:</span>
+          <div class="sso-scopes-chips">
+            <span class="sso-scope">openid</span>
+            <span class="sso-scope">profile</span>
+            <span class="sso-scope">identity.aadhaar_kyc</span>
+            <span class="sso-scope">academic.abc_nad</span>
+            <span class="sso-scope">income.cbdt</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer-box">
+        <button type="button" class="btn-ghost" id="btn-cancel-sso">Cancel</button>
+        <button type="button" class="btn-primary" id="btn-confirm-sso">Authorize & Issue OIDC JWT Token →</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       MODAL 4: LEGACY ADAPTERS & OCDS SCHEMA INSPECTOR
+       ========================================================================= -->
+  <div class="app-modal" id="adapter-inspector-modal" aria-hidden="true" role="dialog" aria-labelledby="inspector-modal-title">
+    <div class="modal-backdrop" id="inspector-modal-backdrop"></div>
+    <div class="modal-card modal-card-large">
+
+      <div class="modal-header-box">
+        <div>
+          <span class="tracker-badge">Interoperability Architecture</span>
+          <h3 class="tracker-title" id="inspector-modal-title">Multi-Protocol Adapter & OCDS Schema Inspector</h3>
+          <p class="tracker-sub">Live conversion of legacy SOAP 1.2 XML & Direct SQL Table rows into the ONEGOV Common Data Standard (OCDS v2.4).</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-inspector" aria-label="Close Schema Inspector">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="tracker-content-body">
+        <div class="inspector-tabs">
+          <button type="button" class="inspector-tab active" data-tab="soap">1. SOAP 1.2 / XML Adapter (ABC)</button>
+          <button type="button" class="inspector-tab" data-tab="sql">2. Legacy SQL Tabular (CBDT)</button>
+          <button type="button" class="inspector-tab" data-tab="ocds">3. Normalized OCDS Standard</button>
+        </div>
+
+        <div class="inspector-panel active" id="tab-content-soap">
+          <div class="code-header">
+            <span>Raw Inbound Protocol: SOAP 1.2 XML Envelope from Academic Depository</span>
+            <span class="tag-blue">Auto-Normalized</span>
+          </div>
+          <pre class="code-view"><code id="code-soap-view">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Body&gt;
+    &lt;GetAcademicRecordResponse&gt;
+      &lt;InstitutionName&gt;Delhi Technological University&lt;/InstitutionName&gt;
+      &lt;DegreeCourse&gt;B.Tech Computer Science&lt;/DegreeCourse&gt;
+      &lt;CumulativeScore&gt;8.85&lt;/CumulativeScore&gt;
+      &lt;EnrollmentStatus&gt;ACTIVE&lt;/EnrollmentStatus&gt;
+      &lt;AbcCredentialId&gt;ABC-8832-9912&lt;/AbcCredentialId&gt;
+    &lt;/GetAcademicRecordResponse&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+        </div>
+
+        <div class="inspector-panel" id="tab-content-sql" style="display:none;">
+          <div class="code-header">
+            <span>Raw Inbound Protocol: Legacy Direct SQL Row from State Revenue Gateway</span>
+            <span class="tag-amber">Auto-Mapped</span>
+          </div>
+          <pre class="code-view"><code id="code-sql-view">{
+  "INC_CERT_NUM": "INC-DL-2025-0091",
+  "ANN_INC_VAL": 180000,
+  "INC_TIER_CD": "LOW_INCOME_TIER_1",
+  "EXPIRY_DT": "2026-03-31",
+  "REV_VILL_CD": "DL-01-CENTRAL"
+}</code></pre>
+        </div>
+
+        <div class="inspector-panel" id="tab-content-ocds" style="display:none;">
+          <div class="code-header">
+            <span>Standardized Output: ONEGOV Common Data Standard (OCDS v2.4 JSON)</span>
+            <span class="tag-green">Standardized & Validated</span>
+          </div>
+          <pre class="code-view"><code id="code-ocds-view">{
+  "standard_version": "OCDS-v2.4",
+  "citizen_id": "IND-8842",
+  "verified_identity": {
+    "legal_name": "Aarav Sharma",
+    "dob": "2003-08-14",
+    "state": "Delhi",
+    "identity_verified": true
+  },
+  "academic_records": {
+    "institution": "Delhi Technological University",
+    "program": "B.Tech Computer Science",
+    "academic_score": "8.85",
+    "status": "ACTIVE",
+    "source_protocol": "SOAP_1.2_XML"
+  },
+  "socio_economic": {
+    "family_annual_income": 180000,
+    "income_verified": true,
+    "eligibility_tier": "Tier-1 Priority Beneficiary",
+    "source_protocol": "LEGACY_SQL_TABLE_SYNC"
+  },
+  "transformation_metrics": {
+    "execution_time_ms": 28,
+    "validation_checksum": "PASS_100_PERCENT"
+  }
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="modal-footer-box">
+        <button type="button" class="btn-primary" id="btn-run-adapter-test">⚡ Execute Live Adapter Benchmark</button>
+        <button type="button" class="btn-ghost" id="btn-close-inspector-footer">Close Inspector</button>
+      </div>
+
+    </div>
+  </div>
+
+
   <!-- Transition Loading Overlay -->
   <div class="transition-loader" id="transition-loader" aria-hidden="true" role="status">
     <div class="loader-content">
       <div class="spinner-ring"></div>
       <div class="loader-emblem">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1e3a8a" stroke-width="2.2">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
         </svg>
       </div>
       <p class="loader-text" id="loader-message">Connecting to Government Gateway...</p>
@@ -1111,4 +1488,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
