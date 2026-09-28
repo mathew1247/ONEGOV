@@ -670,7 +670,6 @@ def retry_dlq_item(item_id):
         "remaining_dlq_count": len(in_memory_store["dead_letter_queue"])
     })
 
-
 # ============================================================================
 # 3. INTEROPERABILITY MIDDLEWARE & ADAPTERS
 # ============================================================================
@@ -1040,6 +1039,11 @@ def health_check():
             "groq_ai_profiler": "ONLINE" if groq_client else "FALLBACK_RULE_ENGINE"
         }
     })
+
+@app.route("/api/health", methods=["GET"])
+def api_health_check():
+    return health_check()
+
 
 # AI Assistant Chat (Multilingual: English, Hindi, Tamil)
 @app.route("/api/chat", methods=["POST"])
